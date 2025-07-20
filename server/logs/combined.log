@@ -1,0 +1,14 @@
+[2025-07-19T17:32:41.221Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T17:33:10.388Z] INFO: GET / 200 28 - 1.753 ms
+[2025-07-19T17:33:10.440Z] INFO: GET /favicon.ico 404 150 - 2.558 ms
+[2025-07-19T17:33:20.301Z] INFO: GET / 304 - - 0.453 ms
+[2025-07-19T17:33:21.701Z] INFO: GET / 304 - - 0.276 ms
+[2025-07-19T18:29:23.994Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:37:54.109Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:45:55.001Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:46:06.850Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:54:03.541Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:57:05.623Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-19T18:57:17.689Z] INFO: GET / 304 - - 2.573 ms
+[2025-07-19T18:57:17.739Z] INFO: GET /favicon.ico 404 150 - 1.753 ms
+[2025-07-20T05:40:33.905Z] INFO: 🚀 Edgenius backend running at http://localhost:8000

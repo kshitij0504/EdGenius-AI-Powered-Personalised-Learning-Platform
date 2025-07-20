@@ -1,0 +1,165 @@
+<svg viewBox="0 0 450 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Premium gradient for main symbol -->
+    <linearGradient id="premiumGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4682A9;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#749BC2;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#91C8E4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFBDE;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Vibrant accent gradient -->
+    <radialGradient id="accentGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFBDE;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#91C8E4;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#4682A9;stop-opacity:0.5" />
+    </radialGradient>
+    
+    <!-- Text gradient with shine effect -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4682A9;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#749BC2;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#4682A9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#749BC2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Metallic shine -->
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFBDE;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#91C8E4;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#FFFBDE;stop-opacity:0.8" />
+    </linearGradient>
+    
+    <!-- Advanced glow effect -->
+    <filter id="premiumGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feOffset dx="0" dy="0" result="offsetBlur"/>
+      <feFlood flood-color="#91C8E4" flood-opacity="0.4"/>
+      <feComposite in2="offsetBlur" operator="in"/>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Premium drop shadow -->
+    <filter id="premiumShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#4682A9" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#749BC2" flood-opacity="0.4"/>
+    </filter>
+    
+    <!-- Inner shadow for depth -->
+    <filter id="innerShadow">
+      <feOffset dx="0" dy="2"/>
+      <feGaussianBlur stdDeviation="2" result="offset-blur"/>
+      <feFlood flood-color="#4682A9" flood-opacity="0.3"/>
+      <feComposite in2="offset-blur" operator="in"/>
+    </filter>
+  </defs>
+  
+  <!-- Background halo -->
+  <circle cx="75" cy="70" r="55" fill="url(#accentGradient)" opacity="0.3" filter="url(#premiumGlow)"/>
+  
+  <!-- Main logo symbol -->
+  <g transform="translate(75, 70)" filter="url(#premiumShadow)">
+    
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="35" fill="none" stroke="url(#premiumGradient)" stroke-width="3" opacity="0.6"/>
+    
+    <!-- Inner geometric pattern -->
+    <g fill="url(#premiumGradient)">
+      <!-- Central hexagon -->
+      <polygon points="0,-15 13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5" opacity="0.9"/>
+      
+      <!-- Surrounding triangular elements -->
+      <polygon points="0,-25 8,-15 -8,-15" opacity="0.8"/>
+      <polygon points="22,-12 15,0 22,12" opacity="0.8"/>
+      <polygon points="22,12 8,15 15,0" opacity="0.8"/>
+      <polygon points="0,25 -8,15 8,15" opacity="0.8"/>
+      <polygon points="-22,12 -15,0 -22,-12" opacity="0.8"/>
+      <polygon points="-22,-12 -8,-15 -15,0" opacity="0.8"/>
+    </g>
+    
+    <!-- Central core with shine -->
+    <circle cx="0" cy="0" r="8" fill="url(#premiumGradient)"/>
+    <circle cx="0" cy="0" r="6" fill="url(#shine)" opacity="0.7"/>
+    <circle cx="-2" cy="-2" r="2" fill="#FFFBDE" opacity="0.9"/>
+    
+    <!-- Dynamic connecting lines -->
+    <g stroke="url(#premiumGradient)" stroke-width="2" fill="none" opacity="0.7">
+      <path d="M 0,-15 Q 15,-20 25,-15" stroke-linecap="round"/>
+      <path d="M 13,7.5 Q 20,15 15,25" stroke-linecap="round"/>
+      <path d="M -13,7.5 Q -20,15 -15,25" stroke-linecap="round"/>
+      <path d="M 0,-15 Q -15,-20 -25,-15" stroke-linecap="round"/>
+      <path d="M 13,-7.5 Q 20,-15 25,-5" stroke-linecap="round"/>
+      <path d="M -13,-7.5 Q -20,-15 -25,-5" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Orbiting elements -->
+    <g opacity="0.8">
+      <circle cx="30" cy="0" r="3" fill="url(#accentGradient)">
+        <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="0" cy="-30" r="2.5" fill="url(#accentGradient)">
+        <animateTransform attributeName="transform" type="rotate" values="0 0 0;-360 0 0" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-25" cy="20" r="2" fill="url(#accentGradient)">
+        <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="10s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- Company name with premium styling -->
+  <g transform="translate(170, 50)">
+    <!-- Main text with gradient and shadow -->
+    <text x="0" y="30" font-family="'Arial Black', 'Helvetica', sans-serif" font-size="38" font-weight="900" fill="url(#textGradient)" filter="url(#premiumShadow)">
+      Edgenius
+    </text>
+    
+    <!-- Shine overlay on text -->
+    <text x="0" y="30" font-family="'Arial Black', 'Helvetica', sans-serif" font-size="38" font-weight="900" fill="url(#shine)" opacity="0.3">
+      Edgenius
+    </text>
+    
+    <!-- Tagline with elegant styling -->
+    <text x="0" y="50" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" font-weight="600" fill="#749BC2" opacity="0.9" letter-spacing="1.2px">
+      AI-POWERED LEARNING REVOLUTION
+    </text>
+    
+    <!-- Decorative underline -->
+    <line x1="0" y1="55" x2="180" y2="55" stroke="url(#premiumGradient)" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Premium decorative elements -->
+  <g opacity="0.6">
+    <!-- Floating particles -->
+    <circle cx="380" cy="35" r="3" fill="#91C8E4">
+      <animate attributeName="cy" values="35;25;35" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="395" cy="45" r="2" fill="#749BC2">
+      <animate attributeName="cy" values="45;35;45" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="410" cy="30" r="2.5" fill="#4682A9">
+      <animate attributeName="cy" values="30;20;30" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Elegant accent lines -->
+    <path d="M 350,70 Q 380,65 400,70 Q 420,75 440,70" stroke="url(#premiumGradient)" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+    
+    <!-- Corner accent -->
+    <g transform="translate(420, 95)">
+      <path d="M 0,0 L 15,0 Q 20,0 20,5 L 20,10" stroke="#91C8E4" stroke-width="2" fill="none" opacity="0.3" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="2" fill="#91C8E4" opacity="0.5"/>
+    </g>
+  </g>
+  
+  <!-- Dynamic pulse effect -->
+  <circle cx="75" cy="70" r="8" fill="none" stroke="#FFFBDE" stroke-width="2" opacity="0.7">
+    <animate attributeName="r" values="8;25;8" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="stroke-width" values="2;0.5;2" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>
