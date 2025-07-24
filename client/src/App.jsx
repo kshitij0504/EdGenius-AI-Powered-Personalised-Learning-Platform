@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Brain, BookOpen, Users, MessageCircle, Target, Zap, ArrowRight, Play, Check, Star, TrendingUp, Award, Clock, BarChart3 } from "lucide-react";
-
+// import EdgeniusFlow from "./components/EdgeniusFlow";
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
@@ -222,7 +222,6 @@ function App() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="px-6 lg:px-8 py-12 bg-slate-50 border-t border-slate-200">
           <div className="max-w-7xl mx-auto text-center">
             <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
