@@ -2,15 +2,20 @@ const bcrypt = require("bcryptjs");
 const prisma = require("../config/prisma");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
-const { sendVerificationEmail } = require("../utils/sendEmail");
+const { sendVerificationEmail, sendPasswordResetEmail } = require("../utils/sendEmail");
+const { OAuth2Client } = require("google-auth-library");
 const {
   generateEmailVerificationToken,
   verifyEmailVerificationToken,
   generateSiginToken,
+  generatePasswordResetToken,
+  verifyPasswordResetToken,
 } = require("../utils/tokenUtils");
 
-const signup = async (email, password, interests) => {
-  console.log("Signup Service:", { email, interests });
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+const signup = async (name, email, password, interests) => {
+  console.log("Signup Service:", { name, email, interests });
 
   const existingUser = await prisma.user.findUnique({
     where: { email },
@@ -33,6 +38,7 @@ const signup = async (email, password, interests) => {
   const createdUser = await prisma.$transaction(async (tx) => {
     const user = await tx.user.create({
       data: {
+        name,
         email,
         password: hashedPassword,
         interests,
@@ -108,31 +114,41 @@ const verifyEmail = async (token) => {
   return { redirectUrl: `${process.env.FRONTEND_URL}/login?message=verified` };
 };
 
-const signin = async (email, password) => {
+const signin = async (email, password, res) => {
   const user = await prisma.user.findUnique({
     where: { email },
   });
 
   if (!user) {
-    throw new ApiError(404, "User not found");
+    return res
+      .status(404)
+      .json(new ApiError(404, "User not found"));
   }
 
   if (!user.isVerified) {
-    throw new ApiError(403, "Email not verified");
+    return res
+      .status(403)
+      .json(new ApiError(403, "Email not verified"));
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    throw new ApiError(401, "Invalid password");
+    return res
+      .status(401)
+      .json(new ApiError(401, "Invalid email or password"));
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new ApiError(401, "Invalid password");
+    return res
+      .status(401)
+      .json(new ApiError(401, "Invalid email or password"));
   }
 
-  if(!user.isVerified) {
-    throw new ApiError(403, "Email not verified");
+  if (!user.isVerified) {
+     return res
+      .status(403)
+      .json(new ApiError(403, "Email not verified"));
   }
 
   const token = generateSiginToken(user);
@@ -149,6 +165,89 @@ const signin = async (email, password) => {
     token,
     response: new ApiResponse(200, { user: userData }, "Login successful"),
   };
-}
+};
 
-module.exports = { signup, verifyEmail, signin };
+const googleLoginService = async (credential) => {
+  let ticket;
+  try {
+    ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+  } catch (err) {
+    throw new ApiError(401, "Invalid Google token");
+  }
+
+  const payload = ticket.getPayload();
+  const { email, name, picture } = payload;
+
+  let user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        isVerified: true,
+        isGoogleUser: true,
+        interests: [],
+        profilePhoto: picture || process.env.DEFAULT_PROFILE_PIC,
+      },
+    });
+  }
+
+  const token = jwt.sign(
+    { id: user.id, email: user.email },
+    process.env.JWT_ACCESS_SECRET,
+    { expiresIn: "7d" }
+  );
+
+  return { user, token };
+};
+
+const resetPassworService = async (token, newPassword) => {
+  const payload = verifyPasswordResetToken(token);
+
+  const record = await prisma.passwordResetToken.findUnique({
+    where: { token },
+  });
+
+  if (!record || record.expiresAt < new Date()) {
+    throw new ApiError(400, "Invalid or expired token");
+  }
+
+  const hashed = await bcrypt.hash(newPassword, 12);
+
+  await prisma.user.update({
+    where: { id: payload.userId },
+    data: { password: hashed },
+  });
+
+  await prisma.passwordResetToken.delete({ where: { token } });
+
+  return { message: "Password reset successful" };
+};
+
+const forgetPasswordService = async (email) => {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) throw new ApiError(404, "User not found");
+
+  const token = generatePasswordResetToken(user.id);
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+  await prisma.passwordResetToken.create({
+    data: { userId: user.id, token, expiresAt },
+  });
+
+  await sendPasswordResetEmail(user.email, token);
+  return { message: "Reset link sent to email" };
+};
+
+module.exports = {
+  signup,
+  verifyEmail,
+  signin,
+  googleLoginService,
+  resetPassworService,
+  forgetPasswordService,
+};

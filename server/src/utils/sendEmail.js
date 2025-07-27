@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const { ApiError } = require("./ApiError");
 
 const sendVerificationEmail = async (email, token) => {
   const baseUrl = process.env.APP_BASE_URL || "http://localhost:8000";
@@ -7,10 +8,10 @@ const sendVerificationEmail = async (email, token) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
-    secure: true, 
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      pass: process.env.EMAIL_PASS,
     },
   });
 
@@ -61,17 +62,59 @@ const sendVerificationEmail = async (email, token) => {
 
   try {
     await transporter.sendMail({
-      from: '"Edgenius" <no-reply@edgenius.com>', 
+      from: '"Edgenius" <no-reply@edgenius.com>',
       to: email,
       subject: "Verify Your Edgenius Email",
       html: emailTemplate,
-      text: `Welcome to Edgenius! Please verify your email by visiting this link: ${verifyUrl}\n\nIf you did not sign up, please ignore this email.`, 
+      text: `Welcome to Edgenius! Please verify your email by visiting this link: ${verifyUrl}\n\nIf you did not sign up, please ignore this email.`,
     });
     console.log(`Verification email sent to ${email}`);
   } catch (error) {
     console.error(`Failed to send verification email to ${email}:`, error);
-    return res.status(400).json(new ApiError(400, "Failed to send verification email"));
+    return res
+      .status(400)
+      .json(new ApiError(400, "Failed to send verification email"));
   }
 };
 
-module.exports = { sendVerificationEmail };
+const sendPasswordResetEmail = async (email, token) => {
+  const resetLink = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const htmlContent = `
+    <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+      <h2 style="color: #333;">Reset Your Password</h2>
+      <p>Hello,</p>
+      <p>We received a request to reset your password. Click the button below to proceed:</p>
+      <a href="${resetLink}" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #4f46e5; color: #fff; text-decoration: none; border-radius: 6px;">Reset Password</a>
+      <p style="margin-top: 20px;">If you didn’t request this, you can ignore this email.</p>
+      <p style="color: #888;">This link will expire in 1 hour.</p>
+      <hr style="margin-top: 30px;" />
+      <p style="font-size: 12px; color: #aaa;">© ${new Date().getFullYear()} Edgenius. All rights reserved.</p>
+    </div>
+  `;
+
+  try {
+    await transporter.sendMail({
+      from: '"Edgenius" <no-reply@edgenius.com>',
+      to: email,
+      subject: "Reset Your Edgenius Password",
+      html: htmlContent,
+    });
+    console.log(`Reset Password email sent to ${email}`);
+  } catch (error) {
+    console.error(`Failed to send reset password email to ${email}:`, error);
+    throw new ApiError(400, "Failed to send reset password email ");
+  }
+};
+
+module.exports = { sendVerificationEmail, sendPasswordResetEmail };

@@ -4,15 +4,13 @@ const { ApiResponse } = require("../utils/ApiResponse");
 
 const signup = async (req, res) => {
   try {
-    const { email, password, interests } = req.body;
+    const { name, email, password, interests } = req.body;
 
-    if (!email || !password || !interests) {
+    if (!name || !email || !password || !interests) {
       return res.status(400).json(new ApiError("All fields are required"));
     }
 
-    console.log("Signup Request:", { email, interests });
-
-    const result = await authService.signup(email, password, interests);
+    const result = await authService.signup(name, email, password, interests);
 
     return res
       .status(201)
@@ -56,7 +54,7 @@ const verifyEmail = async (req, res) => {
 const signin = async (req, res) => {
   const { email, password } = req.body;
 
-  const result = await authService.signin(email, password);
+  const result = await authService.signin(email, password, res);
 
   res
     .cookie("token", result.token, {
@@ -67,6 +65,31 @@ const signin = async (req, res) => {
     .status(200)
     .json(result.response);
 };
+
+const googleSignin = async (req, res) => {
+ const { credential } = req.body;
+
+  if (!credential) {
+    return next(new ApiError(400, "Missing Google token"));
+  }
+
+  try {
+    const { user, token } = await googleLoginService(credential);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, { user }, "Google login successful"));
+  } catch (error) {
+    next(error);
+  }
+}
 
 const logout = async (req, res) => {
   res
@@ -79,4 +102,24 @@ const logout = async (req, res) => {
     .json({ success: true, message: "Logged out successfully" });
 };
 
-module.exports = { signup, verifyEmail, signin, logout };
+const forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const result = await authService.forgetPasswordService(email);
+    res.status(200).json(new ApiResponse(200, result, "Email sent"));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const resetPassword = async (req, res, next) => {
+  try {
+    const { token, newPassword } = req.body;
+    const result = await authService.resetPassworService(token, newPassword);
+    res.status(200).json(new ApiResponse(200, result, "Password reset"));
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { signup, verifyEmail, signin, logout, googleSignin, forgotPassword, resetPassword };
