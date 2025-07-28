@@ -2,7 +2,6 @@ from fastapi import FastAPI, Query, HTTPException, Body
 from typing import List, Dict, Any
 from app.services.quiz_generator import generate_quiz
 from app.services.quiz_analysis import analyze_quiz
-from app.services.doc_generator import generate_personalized_docs
 
 app = FastAPI()
 

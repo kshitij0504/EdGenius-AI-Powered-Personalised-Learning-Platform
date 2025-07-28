@@ -172,3 +172,11 @@
 [2025-07-27T07:35:07.952Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-27T07:35:12.967Z] INFO: POST /api/auth/signin 401 84 - 882.157 ms
 [2025-07-27T07:35:28.317Z] INFO: POST /api/auth/signin 200 218 - 607.210 ms
+[2025-07-28T02:04:25.367Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-28T02:12:05.125Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-28T02:12:42.964Z] INFO: 🚀 Edgenius backend running at http://localhost:6000
+[2025-07-28T02:14:13.046Z] INFO: 🚀 Edgenius backend running at http://localhost:6000
+[2025-07-28T02:14:34.404Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-07-28T02:14:46.181Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-07-28T02:14:51.753Z] INFO: GET / 200 28 - 1.412 ms
+[2025-07-28T02:14:51.802Z] INFO: GET /favicon.ico 404 150 - 2.268 ms
