@@ -128,47 +128,23 @@
 [2025-07-24T03:36:13.333Z] INFO: GET /api/auth/protected 200 187 - 3.300 ms
 [2025-07-24T03:36:28.801Z] INFO: POST /api/auth/signout 200 52 - 0.721 ms
 [2025-07-24T03:36:35.750Z] INFO: GET /api/auth/protected 401 1340 - 2.413 ms
-[2025-07-27T06:49:37.156Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T06:50:35.900Z] INFO: POST /api/auth/signup 201 614 - 5704.127 ms
-[2025-07-27T06:50:53.636Z] INFO: GET /api/auth/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTM1OTkwMzEsImV4cCI6MTc1MzY4NTQzMX0.AxUwlqf6DwOAjGXdHPO3-ZksU5GRksFSLYeTE8QbJec 302 73 - 666.325 ms
-[2025-07-27T06:50:59.403Z] INFO: POST /api/auth/signin 200 218 - 569.908 ms
-[2025-07-27T07:07:21.033Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:07:21.213Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:12:59.601Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:13:08.504Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:13:10.524Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:13:12.380Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:23:03.444Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:23:25.952Z] INFO: POST /api/auth/forget-password 404 164 - 1.569 ms
-[2025-07-27T07:24:03.673Z] INFO: POST /api/auth/forgot-password 500 694 - 1136.805 ms
-[2025-07-27T07:24:57.919Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:25:01.774Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:25:02.003Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:25:05.785Z] INFO: POST /api/auth/forgot-password 500 544 - 1009.852 ms
-[2025-07-27T07:26:22.085Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:26:28.691Z] INFO: POST /api/auth/forgot-password 500 549 - 791.408 ms
-[2025-07-27T07:26:34.693Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:26:39.816Z] INFO: POST /api/auth/forgot-password 400 553 - 757.374 ms
-[2025-07-27T07:27:07.601Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:27:27.323Z] INFO: POST /api/auth/forgot-password 400 554 - 782.634 ms
-[2025-07-27T07:28:15.729Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:28:17.604Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:28:24.942Z] INFO: POST /api/auth/forgot-password 200 102 - 4714.754 ms
-[2025-07-27T07:30:53.468Z] INFO: POST /api/auth/reset-password 200 107 - 797.562 ms
-[2025-07-27T07:30:59.445Z] INFO: POST /api/auth/signin 401 389 - 318.128 ms
-[2025-07-27T07:33:31.771Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:33:52.078Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:01.834Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:03.257Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:10.348Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:11.603Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:16.167Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:17.441Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:22.308Z] INFO: POST /api/auth/signin 500 399 - 921.733 ms
-[2025-07-27T07:34:32.818Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:44.084Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:34:47.530Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:35:05.940Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:35:07.952Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
-[2025-07-27T07:35:12.967Z] INFO: POST /api/auth/signin 401 84 - 882.157 ms
-[2025-07-27T07:35:28.317Z] INFO: POST /api/auth/signin 200 218 - 607.210 ms
+[2025-07-21T05:22:54.823Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:21:58.812Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:25:21.864Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:25:41.448Z] INFO: POST /api/auth/signup 400 102 - 16.135 ms
+[2025-07-27T08:26:07.279Z] INFO: POST /api/auth/signup 400 101 - 7.040 ms
+[2025-07-27T08:27:25.770Z] INFO: POST /api/auth/signup 400 102 - 4.124 ms
+[2025-07-27T08:31:22.190Z] INFO: POST /api/auth/signup 400 102 - 1.685 ms
+[2025-07-27T08:33:36.682Z] INFO: POST /api/auth/signup 400 159 - 2.682 ms
+[2025-07-27T08:42:46.513Z] INFO: POST /api/auth/signup 400 102 - 1.861 ms
+[2025-07-27T08:44:35.554Z] INFO: POST /api/auth/signup 400 101 - 1.852 ms
+[2025-07-27T08:45:52.366Z] INFO: POST /api/auth/signup 400 101 - 1.815 ms
+[2025-07-27T08:50:16.579Z] INFO: POST /api/auth/signup 400 101 - 3.839 ms
+[2025-07-27T08:54:59.727Z] INFO: POST /api/auth/signup 400 99 - 2.075 ms
+[2025-07-27T09:18:46.062Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:11:36.987Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:12:57.827Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:12:59.266Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:13:27.888Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T12:14:11.641Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:38.543Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
