@@ -10,7 +10,7 @@ import MyCoursesPage from "./components/student/StudentCourse/Mycourse.jsx";
 import ContactPage from "./components/student/Contact/conatct.jsx";
 import AllCoursesPage from "./components/student/Allcourse/Allcourse.jsx";
 import MyProgress from "./components/student/Myprogress/Myprogress.jsx";
-import QuizPage from "./components/temp.jsx"
+import QuizPage from "./components/temp.jsx";
 import EdgeniusQuiz from "./components/student/Quiz/Studentquiz.jsx";
 function App() {
   return (

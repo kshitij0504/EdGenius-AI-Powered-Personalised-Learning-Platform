@@ -6,9 +6,9 @@ const httpLogger = require("./config/morgan");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
 const courseRoutes = require("./routes/course.route");
-const moduleRoutes = require("./routes/module.route")
-const lessonRoutes = require("./routes/lesson.routes")
-const paymentRoutes = require('./routes/enroll.route');
+const moduleRoutes = require("./routes/module.route");
+const lessonRoutes = require("./routes/lesson.routes");
+const paymentRoutes = require("./routes/enroll.route");
 dotenv.config();
 
 const app = express();
@@ -26,9 +26,9 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
-app.use("/api/module", moduleRoutes)
-app.use("/api/lesson", lessonRoutes)
-app.use('/api/payment', paymentRoutes);
+app.use("/api/module", moduleRoutes);
+app.use("/api/lesson", lessonRoutes);
+app.use("/api/payment", paymentRoutes);
 
 app.get("/", (_req, res) => {
   res.send("Welcome to Edgenius API 🚀");
