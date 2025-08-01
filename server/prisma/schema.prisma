@@ -23,19 +23,130 @@ model User {
   role         Role     @default(USER)
   isVerified   Boolean  @default(false)
   isGoogleUser Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  verificationToken VerificationToken?
-  PasswordResetToken PasswordResetToken[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  verificationToken    VerificationToken?
+  passwordResetTokens  PasswordResetToken[]
+  coursesEnrolled      Enrollment[]
+  coursesCreated       Course[]     @relation("InstructorCourses")
+  lessonCompletions    LessonProgress[]
+  Payment Payment[]
+  CartItem CartItem[]
 }
 
-model VerificationToken {
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String
+  thumbnail   String
+  category    String
+  price       Float    @default(0)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  instructor   User     @relation("InstructorCourses", fields: [instructorId], references: [id])
+  instructorId String
+
+  modules      Module[]
+  enrollments  Enrollment[]
+
+  Payment Payment[] @relation("PaymentCourses")
+
+  CartItem CartItem[]
+}
+
+model Module {
   id        String   @id @default(uuid())
-  token     String   @unique
-  userId    String   @unique
+  title     String
+  order     Int
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  lessons   Lesson[]
+}
+
+model Lesson {
+  id        String   @id @default(uuid())
+  title     String
+  content   String   // Markdown or HTML
+  videoUrl  String?
+  order     Int
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  String
+
+  quizzes   Quiz[]
+  completions LessonProgress[]
+}
+
+model Enrollment {
+  id           String   @id @default(cuid())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  course       Course   @relation(fields: [courseId], references: [id])
+  courseId     String
+  paymentId    String?  // Razorpay Payment ID (if paid)
+  enrolledAt   DateTime @default(now())
+}
+
+
+
+model CartItem {
+  id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
-  expiresAt DateTime
+  userId    String
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  String
   createdAt DateTime @default(now())
+
+  @@unique([userId, courseId]) // Prevent duplicate cart items
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String
+  courseId        String
+  razorpayOrderId String
+  razorpayPaymentId String?
+  amount          Int
+  currency        String   @default("INR")
+  status          String   @default("PENDING") // PENDING, SUCCESS, FAILED
+  createdAt       DateTime @default(now())
+
+  Course Course[] @relation("PaymentCourses")
+}
+
+
+
+model LessonProgress {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId  String
+  completed Boolean  @default(false)
+  completedAt DateTime?
+}
+
+model Quiz {
+  id        String   @id @default(uuid())
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId  String
+  questions Question[]
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  quizId    String
+  text      String
+  options   String[] // e.g. ["A", "B", "C", "D"]
+  correct   String
 }
 
 model PasswordResetToken {
@@ -47,6 +158,14 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
 }
 
+model VerificationToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
 
 enum Role {
   USER
