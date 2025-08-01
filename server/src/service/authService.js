@@ -159,6 +159,7 @@ const signin = async (email, password, res) => {
     isVerified: user.isVerified,
     interests: user.interests,
     role: user.role,
+    redirectTo: user.role === "INSTRUCTOR" ? "/instructor/dashboard" : "/user/home"
   };
 
   return {

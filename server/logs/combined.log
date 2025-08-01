@@ -180,3 +180,109 @@
 [2025-07-28T02:14:46.181Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
 [2025-07-28T02:14:51.753Z] INFO: GET / 200 28 - 1.412 ms
 [2025-07-28T02:14:51.802Z] INFO: GET /favicon.ico 404 150 - 2.268 ms
+[2025-07-31T12:08:00.472Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T16:56:02.220Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T16:56:21.785Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T16:56:38.970Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T16:57:59.697Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:03:07.018Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:03:12.712Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:03:13.784Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:03:43.530Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:04:09.204Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:04:38.985Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:04:51.904Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:01.117Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:05.041Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:25.941Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:37.025Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:44.446Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:55.804Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:58.112Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:06:02.204Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:06:11.175Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:06:15.573Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:06:31.381Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:06:52.537Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:07:07.575Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:07:26.136Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:08:06.221Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:09:34.074Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:12:51.700Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:19:49.417Z] INFO: POST /api/auth/signin 200 244 - 2091.718 ms
+[2025-07-31T17:21:57.740Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:22:47.884Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:34:39.696Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:39:22.515Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:39:38.421Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:42:18.020Z] INFO: POST /api/course 404 150 - 5.282 ms
+[2025-07-31T17:42:42.843Z] INFO: POST /api/courses 500 2701 - 4226.880 ms
+[2025-07-31T17:43:10.239Z] INFO: POST /api/courses 500 2703 - 2968.284 ms
+[2025-07-31T17:44:11.490Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:44:19.518Z] INFO: POST /api/courses 201 629 - 4119.993 ms
+[2025-07-31T17:45:21.365Z] INFO: GET /api/courses 200 63 - 246.123 ms
+[2025-07-31T17:46:05.338Z] INFO: GET /api/courses 200 884 - 310.291 ms
+[2025-07-31T17:47:13.518Z] INFO: POST /api/courses/mastering-javascript-from-beginner-to-advanced 404 198 - 4.489 ms
+[2025-07-31T17:47:25.589Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 200 895 - 390.737 ms
+[2025-07-31T18:13:30.378Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:13:37.575Z] INFO: POST /api/courses 409 497 - 3223.547 ms
+[2025-07-31T18:13:45.524Z] INFO: GET /api/courses 200 884 - 302.491 ms
+[2025-07-31T18:14:07.206Z] INFO: POST /api/module/cce8c496-975b-4235-82f4-42dfdc610712 403 78 - 2.952 ms
+[2025-07-31T18:14:36.101Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:14:39.497Z] INFO: POST /api/module/cce8c496-975b-4235-82f4-42dfdc610712 403 78 - 12.265 ms
+[2025-07-31T18:15:37.328Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:15:47.880Z] INFO: POST /api/auth/signin 200 261 - 2471.853 ms
+[2025-07-31T18:15:56.686Z] INFO: POST /api/module/cce8c496-975b-4235-82f4-42dfdc610712 201 284 - 625.014 ms
+[2025-07-31T18:17:29.683Z] INFO: GET /api/module/cce8c496-975b-4235-82f4-42dfdc610712 200 279 - 295.868 ms
+[2025-07-31T18:18:42.194Z] INFO: POST /api/module/update/cce8c496-975b-4235-82f4-42dfdc610712 404 194 - 1.250 ms
+[2025-07-31T18:18:47.200Z] INFO: PUT /api/module/update/cce8c496-975b-4235-82f4-42dfdc610712 404 476 - 221.620 ms
+[2025-07-31T18:19:12.014Z] INFO: PUT /api/module/update/cce8c496-975b-4235-82f4-42dfdc610712 404 476 - 148.469 ms
+[2025-07-31T18:19:50.128Z] INFO: PUT /api/module/update/1ab2ce28-206b-4f05-a901-2f5205ee029f 200 291 - 291.842 ms
+[2025-07-31T18:25:08.898Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:25:28.330Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:25:40.826Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:25:54.310Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:26:11.316Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:26:22.340Z] INFO: GET /api/module/cce8c496-975b-4235-82f4-42dfdc61071 200 75 - 1158.206 ms
+[2025-07-31T18:26:44.148Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:26:57.726Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:27:03.807Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:27:18.349Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:27:20.261Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:27:24.358Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:31:14.575Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:31:15.885Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:31:42.446Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:31:52.815Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:32:08.175Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:32:26.197Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:32:39.221Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:34:50.664Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:35:02.253Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:35:20.297Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:36:01.340Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:36:18.723Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:36:58.192Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:37:01.751Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:37:14.770Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:37:45.500Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:37:58.256Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:39:04.864Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:43:43.512Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T18:44:41.980Z] INFO: GET /api/module/cce8c496-975b-4235-82f4-42dfdc610712 200 286 - 1319.879 ms
+[2025-07-31T18:46:51.849Z] INFO: POST /api/lesson/create 201 401 - 12273.389 ms
+[2025-07-31T19:01:53.456Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:02:12.019Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:02:37.413Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:02:52.114Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:03:04.431Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:03:10.818Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:03:18.199Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:03:25.997Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:04:03.108Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:04:34.643Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:06:03.506Z] INFO: POST /api/lesson/1ab2ce28-206b-4f05-a901-2f5205ee029f 404 187 - 6.320 ms
+[2025-07-31T19:06:11.028Z] INFO: GET /api/lesson/1ab2ce28-206b-4f05-a901-2f5205ee029f 200 404 - 1360.927 ms
+[2025-07-31T19:07:30.191Z] INFO: PUT /api/lesson/51157a5b-20d6-45c4-981b-f9eab7a5eab5 200 400 - 616.542 ms
+[2025-07-31T19:11:28.288Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T19:12:21.836Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 200 1480 - 1172.421 ms
