@@ -1,64 +1,79 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 // For icons, you'll need to install lucide-react: npm install lucide-react
-import { Star } from 'lucide-react';
+import { Star } from "lucide-react";
 
 // --- Testimonial Data ---
 const testimonials = [
   {
     name: "Sarah L.",
     role: "Software Engineer @ TechCorp",
-    quote: "Edgenius completely changed how I learn new frameworks. The personalized path saved me weeks of sifting through generic tutorials. A true game-changer.",
+    quote:
+      "Edgenius completely changed how I learn new frameworks. The personalized path saved me weeks of sifting through generic tutorials. A true game-changer.",
     avatar: "https://i.pravatar.cc/150?img=1",
   },
   {
     name: "David Chen",
     role: "Data Science Student",
-    quote: "The 24/7 AI mentor is incredible. I was stuck on a complex algorithm, and it gave me a clear, step-by-step explanation at 2 AM. I aced my exam because of it.",
+    quote:
+      "The 24/7 AI mentor is incredible. I was stuck on a complex algorithm, and it gave me a clear, step-by-step explanation at 2 AM. I aced my exam because of it.",
     avatar: "https://i.pravatar.cc/150?img=3",
   },
   {
     name: "Maria Garcia",
     role: "UX Designer & Team Lead",
-    quote: "As an instructor, the analytics dashboard is invaluable. I can see exactly where my team is struggling and provide targeted support. Onboarding has never been faster.",
+    quote:
+      "As an instructor, the analytics dashboard is invaluable. I can see exactly where my team is struggling and provide targeted support. Onboarding has never been faster.",
     avatar: "https://i.pravatar.cc/150?img=5",
   },
   {
     name: "Alex Johnson",
     role: "Aspiring Mobile Developer",
-    quote: "I went from knowing zero Swift to building my first iOS app in a month. The curriculum was perfectly paced and the adaptive quizzes kept me motivated.",
+    quote:
+      "I went from knowing zero Swift to building my first iOS app in a month. The curriculum was perfectly paced and the adaptive quizzes kept me motivated.",
     avatar: "https://i.pravatar.cc/150?img=7",
   },
   {
     name: "Priya Patel",
     role: "Product Manager",
-    quote: "We use Edgenius to upskill our entire product team. The platform's ability to create custom learning paths for different roles is simply unmatched.",
+    quote:
+      "We use Edgenius to upskill our entire product team. The platform's ability to create custom learning paths for different roles is simply unmatched.",
     avatar: "https://i.pravatar.cc/150?img=8",
   },
 ];
 
 // --- Reusable Testimonial Card Component ---
 const TestimonialCard = ({ name, role, quote, avatar }) => (
-    <div className="relative flex-shrink-0 w-[400px] h-auto p-8 bg-white rounded-2xl shadow-lg border border-gray-200/80 mx-5 flex flex-col">
-        <div className="flex text-yellow-400 mb-4">
-            {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" className="w-5 h-5" />)}
-        </div>
-        <p className="text-base text-[#4A6989] leading-relaxed mb-6 flex-grow">"{quote}"</p>
-        <div className="flex items-center">
-            <img 
-                src={avatar} 
-                alt={name} 
-                className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
-                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/EBF4FF/34495E?text=User'; }}
-            />
-            <div className="ml-4">
-                <h4 className="text-md font-bold text-[#34495E]">{name}</h4>
-                <p className="text-sm text-[#5585AC]">{role}</p>
-            </div>
-        </div>
+  <div className="relative flex-shrink-0 w-[400px] h-auto p-8 bg-[var(--card-bg)] rounded-2xl shadow-lg border border-[var(--border-light)] mx-5 flex flex-col">
+    <div className="flex text-yellow-400 mb-4">
+      {[...Array(5)].map((_, i) => (
+        <Star key={i} fill="currentColor" className="w-5 h-5" />
+      ))}
     </div>
+    <p className="text-base text-[var(--color-landing-text-slate)] leading-relaxed mb-6 flex-grow">
+      "{quote}"
+    </p>
+    <div className="flex items-center">
+      <img
+        src={avatar}
+        alt={name}
+        className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "https://placehold.co/150x150/EBF4FF/34495E?text=User";
+        }}
+      />
+      <div className="ml-4">
+        <h4 className="text-md font-bold text-[var(--color-landing-text-navy)]">
+          {name}
+        </h4>
+        <p className="text-sm text-[var(--color-landing-accent-medium)]">
+          {role}
+        </p>
+      </div>
+    </div>
+  </div>
 );
-
 
 // --- Main InfiniteScroll Component ---
 export default function InfiniteTestimonialScroll() {
@@ -66,7 +81,7 @@ export default function InfiniteTestimonialScroll() {
 
   const marqueeVariants = {
     animate: {
-      x: [0, -2150], 
+      x: [0, -2150],
       transition: {
         x: {
           repeat: Infinity,
@@ -79,14 +94,15 @@ export default function InfiniteTestimonialScroll() {
   };
 
   return (
-    <section className="w-full py-28"> 
+    <section className="w-full py-28">
       <div className="max-w-7xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-black text-[#34495E] mb-4">
-              Loved by Learners & Professionals
-          </h2>
-          <p className="text-lg text-[#4A6989] max-w-2xl mx-auto">
-              See how Edgenius is empowering individuals and teams to achieve their learning goals faster.
-          </p>
+        <h2 className="text-4xl md:text-5xl font-black text-[var(--color-landing-text-navy)] mb-4">
+          Loved by Learners & Professionals
+        </h2>
+        <p className="text-lg text-[var(--color-landing-text-slate)] max-w-2xl mx-auto">
+          See how Edgenius is empowering individuals and teams to achieve their
+          learning goals faster.
+        </p>
       </div>
       <div className="relative w-full overflow-hidden group">
         <motion.div
@@ -99,10 +115,10 @@ export default function InfiniteTestimonialScroll() {
             <TestimonialCard key={index} {...testimonial} />
           ))}
         </motion.div>
-        
-        {/* The gradients now fade into the section's background color seamlessly */}
-        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#FFFBF0] to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#FFFBF0] to-transparent pointer-events-none"></div>
+
+        {/* Updated gradients to use theme variables */}
+        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[var(--color-landing-bg-cream)] to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[var(--color-landing-bg-cream)] to-transparent pointer-events-none"></div>
       </div>
     </section>
   );

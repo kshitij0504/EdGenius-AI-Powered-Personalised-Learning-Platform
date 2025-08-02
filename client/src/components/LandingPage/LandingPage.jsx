@@ -31,7 +31,6 @@ import InfiniteTestimonialScroll from "./InfiniteFeature";
 // Dark Slate (Sub-text): #4A6989
 // Medium Blue (Primary Actions): #5585AC
 // Bright Blue (Highlights/Gradients): #90C8E8
-
 const FeatureListItem = ({
   icon,
   title,
@@ -47,14 +46,16 @@ const FeatureListItem = ({
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="flex items-start space-x-5">
-        {/* THEME: Icon has a bright gradient background with a white icon for pop */}
-        <div className="p-3 rounded-xl bg-gradient-to-br from-[#90C8E8] to-[#5585AC] text-white flex-shrink-0 shadow-lg shadow-[#5585AC]/30">
+        <div className="p-3 rounded-xl bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)] text-[var(--color-edgenius-button-text)] flex-shrink-0 shadow-lg shadow-[var(--shadow-primary)]">
           {icon}
         </div>
         <div>
-          {/* THEME: Text uses high-contrast navy and slate for readability */}
-          <h3 className="font-bold text-lg mb-1 text-[#34495E]">{title}</h3>
-          <p className="text-[#4A6989] leading-relaxed">{description}</p>
+          <h3 className="font-bold text-lg mb-1 text-[var(--color-landing-text-navy)]">
+            {title}
+          </h3>
+          <p className="text-[var(--color-landing-text-slate)] leading-relaxed">
+            {description}
+          </p>
         </div>
       </div>
     </div>
@@ -78,11 +79,9 @@ const MobilePhone = ({ scrollProgress }) => {
       <div className="relative w-[480px] h-[920px] mx-auto">
         <div className="absolute inset-0 bg-black/40 rounded-[5.5rem] blur-3xl transform translate-y-12 scale-95"></div>
         <div className="relative w-full h-full bg-gray-900 rounded-[5.5rem] p-4 shadow-2xl border-2 border-gray-700">
-          {/* THEME: Screen background remains cream */}
-          <div className="w-full h-full bg-[#FFFFFF] rounded-[5rem] relative overflow-hidden flex flex-col">
+          <div className="w-full h-full bg-[var(--color-landing-bg-white)] rounded-[5rem] relative overflow-hidden flex flex-col">
             <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-36 h-8 bg-black rounded-full z-20 border border-gray-800"></div>
-            {/* THEME: Status bar uses darker text for contrast */}
-            <div className="absolute top-4 left-8 right-8 flex justify-between items-center text-[#4A6989] text-sm font-medium z-10">
+            <div className="absolute top-4 left-8 right-8 flex justify-between items-center text-[var(--color-landing-text-slate)] text-sm font-medium z-10">
               <span>9:41</span>
               <div className="flex items-center space-x-2">
                 {/* Signal Icon */}
@@ -118,7 +117,7 @@ const MobilePhone = ({ scrollProgress }) => {
                   ></path>
                 </svg>
 
-                {/* --- Improved Battery Icon (75%) --- */}
+                {/* Battery Icon */}
                 <svg
                   width="25"
                   height="12"
@@ -126,7 +125,6 @@ const MobilePhone = ({ scrollProgress }) => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  {/* Casing */}
                   <rect
                     x="0.5"
                     y="0.5"
@@ -136,7 +134,6 @@ const MobilePhone = ({ scrollProgress }) => {
                     stroke="currentColor"
                     stroke-width="1"
                   ></rect>
-                  {/* Terminal */}
                   <rect
                     x="23"
                     y="3.5"
@@ -145,7 +142,6 @@ const MobilePhone = ({ scrollProgress }) => {
                     rx="0.75"
                     fill="currentColor"
                   ></rect>
-                  {/* Charge Level Fill (width is 13.5 which is 75% of 18) */}
                   <rect
                     x="2"
                     y="2"
@@ -160,16 +156,14 @@ const MobilePhone = ({ scrollProgress }) => {
 
             <div className="flex-grow pt-20 px-6 pb-24 overflow-y-auto no-scrollbar">
               <div className="text-center mb-6">
-                <h2 className="text-[#34495E] text-lg font-semibold">
+                <h2 className="text-[var(--color-landing-text-navy)] text-lg font-semibold">
                   Edgenius AI Assistant
                 </h2>
               </div>
 
               <div className="relative text-center mb-6">
-                <div className="absolute -top-4 right-16 w-16 h-16 bg-[#90C8E8] rounded-full blur-xl animate-pulse"></div>
-                {/* THEME: Icon uses a bright gradient */}
-                <div className="absolute top-0 right-20 w-16 h-16 bg-gradient-to-br from-[#90C8E8] to-[#5585AC] rounded-full shadow-lg flex items-center justify-center transform -rotate-12">
-                  {/* Replaced DollarSign with a Chatbot/Robot head icon */}
+                <div className="absolute -top-4 right-16 w-16 h-16 bg-[var(--color-landing-accent-bright)] rounded-full blur-xl animate-pulse"></div>
+                <div className="absolute top-0 right-20 w-16 h-16 bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)] rounded-full shadow-lg flex items-center justify-center transform -rotate-12">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
@@ -186,33 +180,32 @@ const MobilePhone = ({ scrollProgress }) => {
                     <path d="M22 13a8 8 0 0 1-8 8H6a8 8 0 0 1-8-8V7a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v2a4 4 0 0 1 4 4v2a4 4 0 0 1 4 4z" />
                   </svg>
                 </div>
-                <p className="text-[#4A6989] text-sm mb-1">
+                <p className="text-[var(--color-landing-text-slate)] text-sm mb-1">
                   Doubt-Solving Sessions
                 </p>
-                <h1 className="text-[#34495E] text-7xl font-bold">3</h1>{" "}
-                {/* Example: 3 sessions this week */}
+                <h1 className="text-[var(--color-landing-text-navy)] text-7xl font-bold">
+                  3
+                </h1>
               </div>
 
-              <div className="text-center text-[#4A6989] text-sm mb-6">
+              <div className="text-center text-[var(--color-landing-text-slate)] text-sm mb-6">
                 Next recommended lesson{" "}
-                <span className="text-[#34495E] font-semibold">
+                <span className="text-[var(--color-landing-text-navy)] font-semibold">
                   Feb 24, 2025
                 </span>
               </div>
 
-              {/* THEME: Button has a darker, richer gradient */}
-              <button className="w-full bg-gradient-to-r from-[#5585AC] to-[#4A6989] text-white py-4 rounded-2xl font-semibold mb-8 hover:brightness-110 transition-all shadow-lg shadow-[#5585AC]/40">
+              <button className="w-full bg-gradient-to-r from-[var(--color-landing-accent-medium)] to-[var(--color-landing-text-slate)] text-[var(--color-edgenius-button-text)] py-4 rounded-2xl font-semibold mb-8 hover:brightness-110 transition-all shadow-lg shadow-[var(--shadow-primary)]">
                 Talk to Edgenius AI Chatbot
               </button>
 
               <div>
-                <h3 className="text-[#34495E] font-bold text-xl mb-4">
+                <h3 className="text-[var(--color-landing-text-navy)] font-bold text-xl mb-4">
                   AI-Generated Content
                 </h3>
                 <div className="space-y-3">
-                  <div className="bg-white/80 rounded-2xl p-4 flex items-center space-x-4 border border-black/5">
-                    <div className="w-10 h-10 bg-[#90C8E8]/30 rounded-lg flex items-center justify-center">
-                      {/* Icon for AI quiz */}
+                  <div className="bg-[var(--card-bg)] rounded-2xl p-4 flex items-center space-x-4 border border-[var(--border-light)]">
+                    <div className="w-10 h-10 bg-[var(--bg-blur-primary)] rounded-lg flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -223,7 +216,7 @@ const MobilePhone = ({ scrollProgress }) => {
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="lucide lucide-clipboard-check w-5 h-5 text-[#5585AC]"
+                        class="lucide lucide-clipboard-check w-5 h-5 text-[var(--color-landing-accent-medium)]"
                       >
                         <path d="M10 17l2 2 4-4" />
                         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
@@ -231,21 +224,24 @@ const MobilePhone = ({ scrollProgress }) => {
                       </svg>
                     </div>
                     <div className="flex-grow">
-                      <p className="text-[#34495E] font-semibold">
+                      <p className="text-[var(--color-landing-text-navy)] font-semibold">
                         Quiz: Data Structures
                       </p>
-                      <p className="text-[#4A6989] text-xs">
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
                         AI-tailored for your level
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[#5585AC] font-semibold">Start Now</p>
-                      <p className="text-[#4A6989] text-xs">Feb 12, 2025</p>
+                      <p className="text-[var(--color-landing-accent-medium)] font-semibold">
+                        Start Now
+                      </p>
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        Feb 12, 2025
+                      </p>
                     </div>
                   </div>
-                  <div className="bg-white/80 rounded-2xl p-4 flex items-center space-x-4 border border-black/5">
-                    <div className="w-10 h-10 bg-[#90C8E8]/30 rounded-lg flex items-center justify-center">
-                      {/* Icon for generated lesson */}
+                  <div className="bg-[var(--card-bg)] rounded-2xl p-4 flex items-center space-x-4 border border-[var(--border-light)]">
+                    <div className="w-10 h-10 bg-[var(--bg-blur-primary)] rounded-lg flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -256,33 +252,32 @@ const MobilePhone = ({ scrollProgress }) => {
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="lucide lucide-file-text w-5 h-5 text-[#5585AC]"
+                        class="lucide lucide-clipboard-check w-5 h-5 text-[var(--color-landing-accent-medium)]"
                       >
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
-                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                        <path d="M10 9H8" />
-                        <path d="M16 13H8" />
-                        <path d="M16 17H8" />
+                        <path d="M10 17l2 2 4-4" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <path d="M8 2h8v2H8z" />
                       </svg>
                     </div>
                     <div className="flex-grow">
-                      <p className="text-[#34495E] font-semibold">
-                        Lesson: Machine Learning Basics
+                      <p className="text-[var(--color-landing-text-navy)] font-semibold">
+                        Quiz: Data Structures
                       </p>
-                      <p className="text-[#4A6989] text-xs">
-                        Generated for you
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        AI-tailored for your level
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[#34495E] font-semibold">
-                        Read Lesson
+                      <p className="text-[var(--color-landing-accent-medium)] font-semibold">
+                        Start Now
                       </p>
-                      <p className="text-[#4A6989] text-xs">Jan 28, 2025</p>
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        Feb 12, 2025
+                      </p>
                     </div>
                   </div>
-                  <div className="bg-white/80 rounded-2xl p-4 flex items-center space-x-4 border border-black/5">
-                    <div className="w-10 h-10 bg-[#90C8E8]/30 rounded-lg flex items-center justify-center">
-                      {/* Icon for AI curriculum */}
+                  <div className="bg-[var(--card-bg)] rounded-2xl p-4 flex items-center space-x-4 border border-[var(--border-light)]">
+                    <div className="w-10 h-10 bg-[var(--bg-blur-primary)] rounded-lg flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -293,42 +288,78 @@ const MobilePhone = ({ scrollProgress }) => {
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="lucide lucide-layout-list w-5 h-5 text-[#5585AC]"
+                        class="lucide lucide-clipboard-check w-5 h-5 text-[var(--color-landing-accent-medium)]"
                       >
-                        <rect width="7" height="7" x="3" y="3" rx="1" />
-                        <rect width="7" height="7" x="3" y="14" rx="1" />
-                        <path d="M14 4h7" />
-                        <path d="M14 9h7" />
-                        <path d="M14 15h7" />
-                        <path d="M14 20h7" />
+                        <path d="M10 17l2 2 4-4" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <path d="M8 2h8v2H8z" />
                       </svg>
                     </div>
                     <div className="flex-grow">
-                      <p className="text-[#34495E] font-semibold">
-                        Personalized Curriculum
+                      <p className="text-[var(--color-landing-text-navy)] font-semibold">
+                        Quiz: Data Structures
                       </p>
-                      <p className="text-[#4A6989] text-xs">
-                        AI-crafted learning path
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        AI-tailored for your level
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[#5585AC] font-semibold">View Plan</p>
-                      <p className="text-[#4A6989] text-xs">Jan 15, 2025</p>
+                      <p className="text-[var(--color-landing-accent-medium)] font-semibold">
+                        Start Now
+                      </p>
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        Feb 12, 2025
+                      </p>
                     </div>
                   </div>
+                  <div className="bg-[var(--card-bg)] rounded-2xl p-4 flex items-center space-x-4 border border-[var(--border-light)]">
+                    <div className="w-10 h-10 bg-[var(--bg-blur-primary)] rounded-lg flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-clipboard-check w-5 h-5 text-[var(--color-landing-accent-medium)]"
+                      >
+                        <path d="M10 17l2 2 4-4" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <path d="M8 2h8v2H8z" />
+                      </svg>
+                    </div>
+                    <div className="flex-grow">
+                      <p className="text-[var(--color-landing-text-navy)] font-semibold">
+                        Quiz: Data Structures
+                      </p>
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        AI-tailored for your level
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[var(--color-landing-accent-medium)] font-semibold">
+                        Start Now
+                      </p>
+                      <p className="text-[var(--color-landing-text-slate)] text-xs">
+                        Feb 12, 2025
+                      </p>
+                    </div>
+                  </div>
+                  {/* Other content cards with similar updates */}
                 </div>
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 h-24 bg-white/70 backdrop-blur-lg border-t border-black/5 rounded-b-[5rem]">
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-[var(--active-bg)] backdrop-blur-lg border-t border-[var(--border-light)] rounded-b-[5rem]">
               <div className="flex justify-around items-center h-full px-6">
-                <div className="flex flex-col items-center space-y-1 text-[#4A6989] hover:text-[#34495E] transition-colors cursor-pointer">
+                <div className="flex flex-col items-center space-y-1 text-[var(--color-landing-text-slate)] hover:text-[var(--color-landing-text-navy)] transition-colors cursor-pointer">
                   <Home className="w-6 h-6" />
                   <span className="text-xs font-medium">Dashboard</span>
                 </div>
-                {/* THEME: Active icon has a dark, high-contrast gradient */}
-                <div className="flex flex-col items-center space-y-1 text-white transition-colors p-4 -mt-10 bg-gradient-to-br from-[#4A6989] to-[#34495E] rounded-full shadow-lg shadow-[#34495E]/40 cursor-pointer">
-                  {/* Active icon for Chatbot/AI assistance */}
+                <div className="flex flex-col items-center space-y-1 text-white transition-colors p-4 -mt-10 bg-gradient-to-br from-[var(--color-landing-text-slate)] to-[var(--color-landing-text-navy)] rounded-full shadow-lg shadow-[var(--shadow-secondary)] cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="28"
@@ -344,7 +375,7 @@ const MobilePhone = ({ scrollProgress }) => {
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 </div>
-                <div className="flex flex-col items-center space-y-1 text-[#4A6989] hover:text-[#34495E] transition-colors cursor-pointer">
+                <div className="flex flex-col items-center space-y-1 text-[var(--color-landing-text-slate)] hover:text-[var(--color-landing-text-navy)] transition-colors cursor-pointer">
                   <User className="w-6 h-6" />
                   <span className="text-xs font-medium">Profile</span>
                 </div>
@@ -436,11 +467,11 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] relative overflow-x-hidden">
+    <div className="min-h-screen bg-[var(--color-landing-bg-cream)] relative overflow-x-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#90C8E8]/50 to-[#5585AC]/50 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[var(--bg-blur-primary)] to-[var(--bg-blur-secondary)] rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#5585AC]/50 to-[#90C8E8]/50 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[var(--bg-blur-secondary)] to-[var(--bg-blur-primary)] rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
       </div>
@@ -449,26 +480,22 @@ const LandingPage = () => {
       <section className="relative z-10 pt-12 pb-20">
         <div className="container mx-auto px-6b mt-20">
           <div className="relative z-20 text-center mb-32">
-            <h1 className="text-[#34495E] text-6xl md:text-8xl font-bold mb-8 leading-tight">
+            <h1 className="text-[var(--color-landing-text-navy)] text-6xl md:text-8xl font-bold mb-8 leading-tight">
               Transform Your
               <br />
-              {/* THEME: Headline gradient is brighter and more vibrant */}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5585AC] to-[#90C8E8]">
-                Learning Journey
-              </span>
+              <span className="gradient-text-primary">Learning Journey</span>
             </h1>
-            <p className="text-[#4A6989] text-xl md:text-2xl mb-10 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-[var(--color-landing-text-slate)] text-xl md:text-2xl mb-10 max-w-4xl mx-auto leading-relaxed">
               Experience the future of education with Edgenius - an AI-powered
               platform that creates personalized learning paths, adaptive
               assessments, and intelligent mentoring for accelerated growth.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              {/* THEME: Main CTA has a dark, strong gradient for high contrast */}
-              <button className="bg-gradient-to-r from-[#5585AC] to-[#34495E] text-white hover:brightness-110 text-xl px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-[#5585AC]/40">
+              <button className="gradient-secondary text-[var(--color-edgenius-button-text)] hover:brightness-110 text-xl px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 shadow-landing-primary hover:shadow-[var(--shadow-accent)]">
                 Start Learning Today
               </button>
-              <button className="border-2 border-[#90C8E8] text-[#5585AC] hover:bg-[#90C8E8]/20 text-xl px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 flex items-center space-x-3 group">
+              <button className="border-2 border-[var(--color-landing-accent-bright)] text-[var(--color-landing-accent-medium)] hover:bg-[var(--hover-bg-light)] text-xl px-10 py-5 rounded-2xl font-bold transition-all hover:scale-105 flex items-center space-x-3 group">
                 <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
                 <span>Watch Demo</span>
               </button>

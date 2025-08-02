@@ -1,9 +1,23 @@
-import React, { useState } from "react";
-import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Menu, X, ChevronDown, ArrowUpRight, Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+
+  // Sync dark mode with body class
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -25,16 +39,6 @@ const Navbar = () => {
       scale: 1.03,
       backgroundColor: "#6b92b9",
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    },
-    tap: { scale: 0.97 },
-  };
-
-  const secondaryButtonVariants = {
-    hover: {
-      scale: 1.03,
-      borderColor: "#749BC2",
-      color: "#749BC2",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.05)",
     },
     tap: { scale: 0.97 },
   };
@@ -70,6 +74,7 @@ const Navbar = () => {
     <>
       <style>
         {`
+        /* Your existing CSS variables remain same */
         :root {
           --color-edgenius-light-cream: #FFFBDE;
           --color-edgenius-light-blue: #91C8E4;
@@ -78,27 +83,9 @@ const Navbar = () => {
         }
 
         .bg-edgenius-light-cream { background-color: var(--color-edgenius-light-cream); }
-        .text-edgenius-light-cream { color: var(--color-edgenius-light-cream); }
-        .border-edgenius-light-cream { border-color: var(--color-edgenius-light-cream); }
-
         .bg-edgenius-light-blue { background-color: var(--color-edgenius-light-blue); }
-        .text-edgenius-light-blue { color: var(--color-edgenius-light-blue); }
-        .border-edgenius-light-blue { border-color: var(--color-edgenius-light-blue); }
-        .focus\\:ring-edgenius-light-blue:focus { --tw-ring-color: var(--color-edgenius-light-blue); }
-        .group-hover\\:text-edgenius-light-blue:hover { color: var(--color-edgenius-light-blue); }
-        .scrollbar-thumb-edgenius-light-blue::-webkit-scrollbar-thumb { background-color: var(--color-edgenius-light-blue); }
-
         .bg-edgenius-medium-blue { background-color: var(--color-edgenius-medium-blue); }
-        .text-edgenius-medium-blue { color: var(--color-edgenius-medium-blue); }
-        .border-edgenius-medium-blue { border-color: var(--color-edgenius-medium-blue); }
-        .hover\\:bg-edgenius-medium-blue:hover { background-color: var(--color-edgenius-medium-blue); }
-        .focus\\:ring-edgenius-medium-blue:focus { --tw-ring-color: var(--color-edgenius-medium-blue); }
-        .group-hover\\:text-edgenius-medium-blue:hover { color: var(--color-edgenius-medium-blue); }
-
         .bg-edgenius-dark-blue { background-color: var(--color-edgenius-dark-blue); }
-        .text-edgenius-dark-blue { color: var(--color-edgenius-dark-blue); }
-        .border-edgenius-dark-blue { border-color: var(--color-edgenius-dark-blue); }
-        .hover\\:bg-edgenius-dark-blue:hover { background-color: var(--color-edgenius-dark-blue); }
 
         .navbar-container {
           position: sticky;
@@ -114,6 +101,11 @@ const Navbar = () => {
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
           background-color: rgba(255, 255, 255, 0.8);
+          transition: background-color 0.3s ease;
+        }
+
+        body.dark .navbar-container {
+          background-color: rgba(18, 18, 18, 0.85);
         }
 
         @media (min-width: 768px) {
@@ -135,7 +127,8 @@ const Navbar = () => {
             <span className="text-2xl font-bold text-[#4682A9]">EdGenius</span>
           </motion.div>
 
-          <div className="hidden md:flex space-x-8 items-center">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6 items-center">
             {navLinks.slice(0, 5).map((link) => (
               <motion.a
                 key={link.name}
@@ -146,14 +139,23 @@ const Navbar = () => {
                 whileTap="tap"
               >
                 {link.name}
-                {link.name === "Features" ||
-                link.name === "Solutions" ||
-                link.name === "Resources" ||
-                link.name === "Pricing" ? (
-                  <ChevronDown className="w-4 h-4 ml-1 text-[#749BC2] group-hover:text-[#91C8E4] transition-transform duration-200 group-hover:rotate-180" />
-                ) : null}
               </motion.a>
             ))}
+
+            {/* Dark Mode Button */}
+            <motion.button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </motion.button>
+
             <motion.a
               href="/signup"
               className="px-6 py-2 bg-[#4682A9] text-white rounded-full font-medium flex items-center space-x-2 transition-all duration-300"
@@ -166,7 +168,21 @@ const Navbar = () => {
             </motion.a>
           </div>
 
-          <div className="md:hidden">
+          {/* Mobile Toggle */}
+          <div className="md:hidden flex space-x-2">
+            <motion.button
+              onClick={() => setDarkMode((prev) => !prev)}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </motion.button>
+
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="focus:outline-none p-2 rounded-full bg-edgenius-light-cream"
@@ -182,10 +198,11 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="md:hidden px-4 pb-4 space-y-2 bg-white rounded-b-xl shadow-lg"
+              className="md:hidden px-4 pb-4 space-y-2 bg-white dark:bg-[#1e1e1e] rounded-b-xl shadow-lg"
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -202,7 +219,6 @@ const Navbar = () => {
                   {link.name}
                 </motion.a>
               ))}
-              {/* I've changed this from a button to an anchor tag and added an href */}
               <motion.a
                 href="/signin"
                 className="block w-full text-center px-4 py-2 bg-[#4682A9] text-white rounded-md hover:bg-[#749BC2] transition"
@@ -211,7 +227,6 @@ const Navbar = () => {
               >
                 Login
               </motion.a>
-              {/* I've also changed the Sign Up button to a link */}
               <motion.a
                 href="/signup"
                 className="block w-full text-center px-4 py-2 bg-[#91C8E4] text-white rounded-md hover:bg-[#749BC2] transition flex items-center justify-center space-x-2"

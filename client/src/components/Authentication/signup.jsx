@@ -38,7 +38,12 @@ export default function SignUpComponent() {
   };
 
   const LeftPanel = () => (
-    <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#91C8E4] to-[#749BC2] relative overflow-hidden rounded-l-3xl">
+    <div
+      className="hidden lg:flex lg:w-1/2 relative overflow-hidden rounded-l-3xl"
+      style={{
+        background: `linear-gradient(to bottom right, var(--auth-left-panel-gradient-from), var(--auth-left-panel-gradient-to))`,
+      }}
+    >
       <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
       <div className="absolute bottom-20 right-10 w-16 h-16 bg-white/15 rounded-full"></div>
       <div className="absolute top-1/2 right-20 w-8 h-8 bg-[#FFFBDE]/30 rounded-full"></div>
@@ -52,6 +57,7 @@ export default function SignUpComponent() {
       </div>
     </div>
   );
+
   const RightPanel = ({
     handleNext,
     isLoading,
@@ -77,13 +83,13 @@ export default function SignUpComponent() {
       <div className="w-full lg:w-1/2 p-8 lg:p-12 flex items-center justify-center">
         <div className="w-full max-w-md">
           <div className="text-right mb-8">
-            <select className="text-sm text-gray-500 bg-transparent border-none outline-none cursor-pointer">
+            <select className="text-sm text-[var(--auth-text-secondary)] bg-transparent border-none outline-none cursor-pointer">
               <option>English (USA)</option>
             </select>
           </div>
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            <h1 className="text-3xl font-bold text-[var(--auth-text-primary)] mb-2">
               Create Account
             </h1>
           </div>
@@ -94,7 +100,7 @@ export default function SignUpComponent() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full Name"
-              className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
+              className="w-full px-4 py-4 bg-[var(--auth-input-bg)] border border-[var(--auth-input-border)] rounded-xl focus:ring-2 focus:ring-[var(--auth-input-focus-ring)] focus:border-transparent outline-none transition-all duration-300 hover:bg-[var(--auth-input-hover-bg)]"
             />
 
             <input
@@ -102,7 +108,7 @@ export default function SignUpComponent() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
+              className="w-full px-4 py-4 bg-[var(--auth-input-bg)] border border-[var(--auth-input-border)] rounded-xl focus:ring-2 focus:ring-[var(--auth-input-focus-ring)] focus:border-transparent outline-none transition-all duration-300 hover:bg-[var(--auth-input-hover-bg)]"
             />
 
             <div className="relative">
@@ -111,7 +117,7 @@ export default function SignUpComponent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full px-4 py-4 pr-12 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
+                className="w-full px-4 py-4 pr-12 bg-[var(--auth-input-bg)] border border-[var(--auth-input-border)] rounded-xl focus:ring-2 focus:ring-[var(--auth-input-focus-ring)] focus:border-transparent outline-none transition-all duration-300 hover:bg-[var(--auth-input-hover-bg)]"
               />
               <button
                 type="button"
@@ -132,7 +138,7 @@ export default function SignUpComponent() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password"
-                className="w-full px-4 py-4 pr-12 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
+                className="w-full px-4 py-4 pr-12 bg-[var(--auth-input-bg)] border border-[var(--auth-input-border)] rounded-xl focus:ring-2 focus:ring-[var(--auth-input-focus-ring)] focus:border-transparent outline-none transition-all duration-300 hover:bg-[var(--auth-input-hover-bg)]"
               />
               <button
                 type="button"
@@ -151,20 +157,23 @@ export default function SignUpComponent() {
               <input
                 type="checkbox"
                 id="terms"
-                className="mt-1 w-4 h-4 text-[#4682A9] bg-gray-100 border-gray-300 rounded focus:ring-[#91C8E4] focus:ring-2"
+                className="mt-1 w-4 h-4 text-[var(--auth-primary-button)] bg-gray-100 border-gray-300 rounded focus:ring-[var(--auth-input-focus-ring)] focus:ring-2"
               />
-              <label htmlFor="terms" className="text-sm text-gray-600">
+              <label
+                htmlFor="terms"
+                className="text-sm text-[var(--auth-text-secondary)]"
+              >
                 I agree to the{" "}
                 <a
                   href="#"
-                  className="text-[#4682A9] hover:text-[#749BC2] underline"
+                  className="text-[var(--auth-link-color)] hover:text-[var(--auth-link-hover)] underline"
                 >
                   terms of service
                 </a>{" "}
                 and{" "}
                 <a
                   href="#"
-                  className="text-[#4682A9] hover:text-[#749BC2] underline"
+                  className="text-[var(--auth-link-color)] hover:text-[var(--auth-link-hover)] underline"
                 >
                   privacy policy
                 </a>
@@ -175,7 +184,7 @@ export default function SignUpComponent() {
               onClick={handleSubmit}
               type="submit"
               disabled={isLoading}
-              className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg bg-[#4682A9] text-white hover:bg-[#749BC2] shadow-lg ${
+              className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg bg-[var(--auth-primary-button)] text-white hover:bg-[var(--auth-primary-button-hover)] shadow-lg ${
                 isLoading ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
@@ -192,17 +201,17 @@ export default function SignUpComponent() {
 
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200"></div>
+              <div className="w-full border-t border-[var(--auth-divider)]"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">
+              <span className="px-4 bg-[var(--auth-container-bg)] text-[var(--auth-text-secondary)]">
                 Or Sign Up With
               </span>
             </div>
           </div>
 
           <div className="flex justify-center space-x-4 mb-8">
-            <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
+            <button className="w-12 h-12 bg-[var(--auth-social-bg)] border border-[var(--auth-social-border)] rounded-lg hover:bg-[var(--auth-social-hover)] transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
               <svg className="w-5 h-5" viewBox="0 0 48 48">
                 <path
                   fill="#EA4335"
@@ -223,7 +232,7 @@ export default function SignUpComponent() {
               </svg>
             </button>
 
-            <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
+            <button className="w-12 h-12 bg-[var(--auth-social-bg)] border border-[var(--auth-social-border)] rounded-lg hover:bg-[var(--auth-social-hover)] transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
               <svg
                 className="w-5 h-5 text-blue-600"
                 fill="currentColor"
@@ -233,7 +242,7 @@ export default function SignUpComponent() {
               </svg>
             </button>
 
-            <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
+            <button className="w-12 h-12 bg-[var(--auth-social-bg)] border border-[var(--auth-social-border)] rounded-lg hover:bg-[var(--auth-social-hover)] transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
               <svg
                 className="w-5 h-5 text-pink-500"
                 fill="currentColor"
@@ -243,7 +252,7 @@ export default function SignUpComponent() {
               </svg>
             </button>
 
-            <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
+            <button className="w-12 h-12 bg-[var(--auth-social-bg)] border border-[var(--auth-social-border)] rounded-lg hover:bg-[var(--auth-social-hover)] transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
               <svg
                 className="w-5 h-5 text-blue-400"
                 fill="currentColor"
@@ -253,7 +262,7 @@ export default function SignUpComponent() {
               </svg>
             </button>
 
-            <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
+            <button className="w-12 h-12 bg-[var(--auth-social-bg)] border border-[var(--auth-social-border)] rounded-lg hover:bg-[var(--auth-social-hover)] transition-all duration-300 flex items-center justify-center transform hover:scale-110 shadow-sm hover:shadow-md">
               <svg
                 className="w-5 h-5 text-blue-700"
                 fill="currentColor"
@@ -265,10 +274,12 @@ export default function SignUpComponent() {
           </div>
 
           <div className="text-center">
-            <span className="text-gray-600">Already Have an account? </span>
+            <span className="text-[var(--auth-text-secondary)]">
+              Already Have an account?{" "}
+            </span>
             <a
               href="/signin"
-              className="text-[#4682A9] hover:text-[#749BC2] font-medium transition-colors duration-300 hover:underline"
+              className="text-[var(--auth-link-color)] hover:text-[var(--auth-link-hover)] font-medium transition-colors duration-300 hover:underline"
             >
               Sign In
             </a>
@@ -279,9 +290,9 @@ export default function SignUpComponent() {
   };
 
   return (
-    <div className="min-h-screen ml-60 bg-gray-50 flex">
+    <div className="min-h-screen ml-60 bg-[var(--auth-bg)] flex">
       <div
-        className={`w-full max-w-7xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden transition-all duration-1000 ease-out ${
+        className={`w-full max-w-7xl mx-auto bg-[var(--auth-container-bg)] rounded-3xl shadow-2xl overflow-hidden transition-all duration-1000 ease-out ${
           mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         } lg:flex lg:m-8`}
       >
@@ -303,39 +314,6 @@ export default function SignUpComponent() {
           setShowConfirmPassword={setShowConfirmPassword}
         />
       </div>
-
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(15px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-slideIn {
-          animation: slideIn 0.8s ease-out;
-        }
-
-        .animate-fadeInUp {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
     </div>
   );
 }

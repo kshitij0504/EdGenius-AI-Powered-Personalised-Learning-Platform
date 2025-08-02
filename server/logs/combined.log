@@ -309,3 +309,28 @@
 [2025-07-31T19:07:30.191Z] INFO: PUT /api/lesson/51157a5b-20d6-45c4-981b-f9eab7a5eab5 200 400 - 616.542 ms
 [2025-07-31T19:11:28.288Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-31T19:12:21.836Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 200 1480 - 1172.421 ms
+=======
+[2025-07-21T05:22:54.823Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:21:58.812Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:25:21.864Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-27T08:25:41.448Z] INFO: POST /api/auth/signup 400 102 - 16.135 ms
+[2025-07-27T08:26:07.279Z] INFO: POST /api/auth/signup 400 101 - 7.040 ms
+[2025-07-27T08:27:25.770Z] INFO: POST /api/auth/signup 400 102 - 4.124 ms
+[2025-07-27T08:31:22.190Z] INFO: POST /api/auth/signup 400 102 - 1.685 ms
+[2025-07-27T08:33:36.682Z] INFO: POST /api/auth/signup 400 159 - 2.682 ms
+[2025-07-27T08:42:46.513Z] INFO: POST /api/auth/signup 400 102 - 1.861 ms
+[2025-07-27T08:44:35.554Z] INFO: POST /api/auth/signup 400 101 - 1.852 ms
+[2025-07-27T08:45:52.366Z] INFO: POST /api/auth/signup 400 101 - 1.815 ms
+[2025-07-27T08:50:16.579Z] INFO: POST /api/auth/signup 400 101 - 3.839 ms
+[2025-07-27T08:54:59.727Z] INFO: POST /api/auth/signup 400 99 - 2.075 ms
+[2025-07-27T09:18:46.062Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:11:36.987Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:12:57.827Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:12:59.266Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T05:13:27.888Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T12:14:11.641Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:05:38.543Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-07-31T17:16:28.157Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-01T02:41:56.952Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-02T04:29:54.971Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+>>>>>>> e99f99e (Instructor)

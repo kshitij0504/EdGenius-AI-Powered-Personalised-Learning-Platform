@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
-// import StudentDashboard from "./components/student/Studentdash.jsx";
+import DarkModeToggle from "./components/DarkModeToggle.jsx";
 import SignUpComponent from "./components/Authentication/signup.jsx";
 import SignUpInterests from "./components/Authentication/SignUpInterests.jsx";
 import Signin from "./components/Authentication/signin.jsx";

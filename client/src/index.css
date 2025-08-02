@@ -6,9 +6,12 @@ body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #f8f9fa;
   color: #212529;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Light theme variables */
 :root {
+  /* Original Edgenius colors */
   --color-edgenius-bg-lightest: #fffbf0;
   --color-edgenius-accent-light: #91c8e4;
   --color-edgenius-accent-medium: #749bc2;
@@ -16,8 +19,237 @@ body {
   --color-edgenius-text-primary: #333333;
   --color-edgenius-text-secondary: #555555;
   --color-edgenius-button-text: #ffffff;
+
+  /* Auth component specific colors */
+  --auth-left-panel-gradient-from: #91c8e4;
+  --auth-left-panel-gradient-to: #749bc2;
+  --auth-primary-button: #4682a9;
+  --auth-primary-button-hover: #749bc2;
+  --auth-link-color: #4682a9;
+  --auth-link-hover: #749bc2;
+  --auth-input-focus-ring: #91c8e4;
+  --auth-input-bg: #f0f2f5;
+  --auth-input-border: #e0e3e7;
+  --auth-input-hover-bg: #f8f9fa;
+  --auth-container-bg: #ffffff;
+  --auth-text-primary: #333333;
+  --auth-text-secondary: #555555;
+  --auth-social-bg: #ffffff;
+  --auth-social-border: #e0e3e7;
+  --auth-social-hover: #f0f2f5;
+  --auth-divider: #e0e3e7;
+
+  --auth-bg: #f8f9fa;
+  --auth-container-bg: #ffffff;
+  --auth-text-primary: #333333;
+  --auth-text-secondary: #555555;
+  --auth-input-bg: #f0f2f5;
+  --auth-input-border: #e0e3e7;
+  --auth-input-focus: #91c8e4;
+  --auth-accent: #4682a9;
+  --auth-accent-hover: #749bc2;
+  --auth-divider: #e0e3e7;
+  --auth-social-bg: #ffffff;
+  --auth-social-border: #e0e3e7;
+  --auth-social-hover: #f0f2f5;
+
+  --testimonial-card-bg: rgba(255, 255, 255, 0.8);
+  --testimonial-card-border: rgba(0, 0, 0, 0.05);
+  --testimonial-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Landing Page specific colors */
+  --color-landing-bg-cream: #fffbf0;
+  --color-landing-bg-white: #ffffff;
+  --color-landing-text-navy: #34495e;
+  --color-landing-text-slate: #4a6989;
+  --color-landing-accent-medium: #5585ac;
+  --color-landing-accent-bright: #90c8e8;
+
+  /* Gradient combinations */
+  --gradient-primary: linear-gradient(135deg, #90c8e8 0%, #5585ac 100%);
+  --gradient-secondary: linear-gradient(90deg, #5585ac 0%, #34495e 100%);
+  --gradient-accent: linear-gradient(90deg, #34495e 0%, #4a6989 100%);
+  --gradient-highlight: linear-gradient(90deg, #5585ac 0%, #90c8e8 100%);
+  --gradient-reverse: linear-gradient(90deg, #90c8e8 0%, #5585ac 100%);
+
+  /* Shadow colors */
+  --shadow-primary: rgba(74, 130, 169, 0.3);
+  --shadow-secondary: rgba(51, 51, 51, 0.4);
+  --shadow-accent: rgba(144, 200, 232, 0.4);
+
+  /* Background blur effects */
+  --bg-blur-primary: rgba(145, 200, 228, 0.5);
+  --bg-blur-secondary: rgba(74, 130, 169, 0.5);
+
+  /* Interactive states */
+  --hover-bg-light: rgba(144, 200, 232, 0.2);
+  --active-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.7);
+
+  /* Border colors */
+  --border-light: rgba(0, 0, 0, 0.05);
+  --border-medium: rgba(0, 0, 0, 0.1);
 }
 
+/* Dark theme overrides */
+body.dark {
+  background-color: #121212;
+  color: #e4e4e4;
+
+  /* Original Edgenius dark colors */
+  --color-edgenius-bg-lightest: #1e1e1e;
+  --color-edgenius-accent-light: #5fa8d3;
+  --color-edgenius-accent-medium: #4a90b0;
+  --color-edgenius-accent-dark: #35728f;
+  --color-edgenius-text-primary: #f5f5f5;
+  --color-edgenius-text-secondary: #c0c0c0;
+  --color-edgenius-button-text: #121212;
+
+  /* Landing Page dark theme colors */
+  --color-landing-bg-cream: #1a1a1a;
+  --color-landing-bg-white: #2a2a2a;
+  --color-landing-text-navy: #e8e8e8;
+  --color-landing-text-slate: #b8b8b8;
+  --color-landing-accent-medium: #6ba3d0;
+  --color-landing-accent-bright: #7bb3d3;
+
+  --auth-bg: #121212;
+  --auth-container-bg: #1e1e1e;
+  --auth-text-primary: #f5f5f5;
+  --auth-text-secondary: #c0c0c0;
+  --auth-input-bg: #2a2a2a;
+  --auth-input-border: #3a3a3a;
+  --auth-input-focus: #5fa8d3;
+  --auth-accent: #4a90b0;
+  --auth-accent-hover: #6ba3d0;
+  --auth-divider: #3a3a3a;
+  --auth-social-bg: #2a2a2a;
+  --auth-social-border: #3a3a3a;
+  --auth-social-hover: #3a3a3a;
+
+  /* Auth component dark theme colors */
+  --auth-left-panel-gradient-from: #5fa8d3;
+  --auth-left-panel-gradient-to: #4a90b0;
+  --auth-primary-button: #4a90b0;
+  --auth-primary-button-hover: #6ba3d0;
+  --auth-link-color: #5fa8d3;
+  --auth-link-hover: #7bb3d3;
+  --auth-input-focus-ring: #5fa8d3;
+  --auth-input-bg: #2a2a2a;
+  --auth-input-border: #3a3a3a;
+  --auth-input-hover-bg: #3a3a3a;
+  --auth-container-bg: #1e1e1e;
+  --auth-text-primary: #f5f5f5;
+  --auth-text-secondary: #c0c0c0;
+  --auth-social-bg: #2a2a2a;
+  --auth-social-border: #3a3a3a;
+  --auth-social-hover: #3a3a3a;
+  --auth-divider: #3a3a3a;
+
+  /* Dark theme gradients */
+  --gradient-primary: linear-gradient(135deg, #7bb3d3 0%, #6ba3d0 100%);
+  --gradient-secondary: linear-gradient(90deg, #6ba3d0 0%, #e8e8e8 100%);
+  --gradient-accent: linear-gradient(90deg, #e8e8e8 0%, #b8b8b8 100%);
+  --gradient-highlight: linear-gradient(90deg, #6ba3d0 0%, #7bb3d3 100%);
+  --gradient-reverse: linear-gradient(90deg, #7bb3d3 0%, #6ba3d0 100%);
+
+  --testimonial-card-bg: rgba(42, 42, 42, 0.8);
+  --testimonial-card-border: rgba(255, 255, 255, 0.1);
+  --testimonial-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
+
+  /* Dark theme shadows */
+  --shadow-primary: rgba(107, 163, 208, 0.3);
+  --shadow-secondary: rgba(232, 232, 232, 0.2);
+  --shadow-accent: rgba(123, 179, 211, 0.3);
+
+  /* Dark theme background blur effects */
+  --bg-blur-primary: rgba(123, 179, 211, 0.3);
+  --bg-blur-secondary: rgba(107, 163, 208, 0.3);
+
+  /* Dark theme interactive states */
+  --hover-bg-light: rgba(123, 179, 211, 0.2);
+  --active-bg: rgba(42, 42, 42, 0.8);
+  --card-bg: rgba(42, 42, 42, 0.7);
+
+  /* Dark theme border colors */
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.2);
+}
+
+/* Utility classes for common patterns */
+.bg-landing-primary {
+  background: var(--color-landing-bg-cream);
+}
+
+.bg-landing-secondary {
+  background: var(--color-landing-bg-white);
+}
+
+.text-landing-primary {
+  color: var(--color-landing-text-navy);
+}
+
+.text-landing-secondary {
+  color: var(--color-landing-text-slate);
+}
+
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.gradient-text-primary {
+  background: var(--gradient-highlight);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-reverse {
+  background: var(--gradient-reverse);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shadow-landing-primary {
+  box-shadow: 0 10px 25px -5px var(--shadow-primary);
+}
+
+.shadow-landing-secondary {
+  box-shadow: 0 10px 25px -5px var(--shadow-secondary);
+}
+
+.bg-blur-primary {
+  background-color: var(--bg-blur-primary);
+}
+
+.bg-blur-secondary {
+  background-color: var(--bg-blur-secondary);
+}
+
+.card-bg {
+  background-color: var(--card-bg);
+}
+
+.border-landing {
+  border-color: var(--border-light);
+}
+
+.hover-bg-landing:hover {
+  background-color: var(--hover-bg-light);
+}
+
+/* Animations (unchanged) */
 @keyframes fadeInUp {
   0% {
     opacity: 0;

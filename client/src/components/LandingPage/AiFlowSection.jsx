@@ -6,15 +6,7 @@ import RandomBezierEdge from "./RandomBezierEdge";
 import { Player } from "@lottiefiles/react-lottie-player";
 import animationData from "././../../assets/brainanimation.json";
 
-// THEME PALETTE:
-// Cream (Background): #FFFBF0
-// Deep Navy (Headlines/Text): #34495E
-// Dark Slate (Sub-text): #4A6989
-// Medium Blue (Primary Actions): #5585AC
-// Bright Blue (Highlights/Gradients): #90C8E8
-
-// --- Custom Node Components (Re-themed for Edgenius) ---
-
+// Custom Node Components with theme variables
 const ProblemNode = ({ data }) => (
   <div className="relative">
     <motion.div
@@ -29,10 +21,10 @@ const ProblemNode = ({ data }) => (
         <span className="text-2xl">{data.emoji}</span>
       </div>
       <div className="flex-1">
-        <div className="font-bold text-xl text-[#34495E] mb-2">
+        <div className="font-bold text-xl text-[var(--color-landing-text-navy)] mb-2">
           {data.title}
         </div>
-        <div className="text-sm text-[#4A6989] leading-relaxed">
+        <div className="text-sm text-[var(--color-landing-text-slate)] leading-relaxed">
           {data.description}
         </div>
       </div>
@@ -41,8 +33,8 @@ const ProblemNode = ({ data }) => (
       type="source"
       position={Position.Right}
       style={{
-        background: "#5585AC",
-        border: `2px solid #FFFBF0`,
+        background: "var(--color-landing-accent-medium)",
+        border: `2px solid var(--color-landing-bg-cream)`,
         width: 12,
         height: 12,
         right: -6,
@@ -57,8 +49,8 @@ const SolutionNode = ({ data }) => (
       type="target"
       position={Position.Left}
       style={{
-        background: "#5585AC",
-        border: `2px solid #FFFBF0`,
+        background: "var(--color-landing-accent-medium)",
+        border: `2px solid var(--color-landing-bg-cream)`,
         width: 12,
         height: 12,
         left: -6,
@@ -76,68 +68,16 @@ const SolutionNode = ({ data }) => (
         <span className="text-xl">{data.emoji}</span>
       </div>
       <div className="flex-1">
-        <div className="font-bold text-lg text-[#34495E] mb-1">
+        <div className="font-bold text-lg text-[var(--color-landing-text-navy)] mb-1">
           {data.title}
         </div>
-        <div className="text-sm text-[#4A6989]">{data.description}</div>
+        <div className="text-sm text-[var(--color-landing-text-slate)]">
+          {data.description}
+        </div>
       </div>
     </motion.div>
   </div>
 );
-
-// const BrainNode = () => (
-//   <div className="relative">
-//     <Handle
-//       type="target"
-//       position={Position.Left}
-//       style={{
-//         background: "#5585AC",
-//         border: `2px solid #FFFBF0`,
-//         width: 14,
-//         height: 14,
-//         left: -7,
-//       }}
-//     />
-//     <Handle
-//       type="source"
-//       position={Position.Right}
-//       style={{
-//         background: "#5585AC",
-//         border: `2px solid #FFFBF0`,
-//         width: 14,
-//         height: 14,
-//         right: -7,
-//       }}
-//     />
-
-//     <motion.div
-//       animate={{ scale: [1, 1.03, 1], rotate: [0, 1.5, 0] }}
-//       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-//       className="text-center relative"
-//     >
-//       <div className="absolute -inset-8 bg-gradient-to-r from-[#90C8E8] via-[#5585AC] to-[#90C8E8] rounded-full opacity-30 blur-2xl animate-pulse"></div>
-
-//       <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-10 border-2 border-[#90C8E8]/50 shadow-2xl">
-//         {/* Replace the emoji with Lottie */}
-//         <div className="mb-6 flex justify-center">
-//           <Player
-//             autoplay
-//             loop
-//             src={animationData}
-//             style={{ height: "150px", width: "150px" }}
-//           />
-//         </div>
-
-//         <div className="font-black text-3xl bg-gradient-to-r from-[#34495E] via-[#4A6989] to-[#5585AC] bg-clip-text text-transparent mb-3">
-//           EDGENIUS
-//         </div>
-//         <div className="text-base font-bold text-[#4A6989] uppercase tracking-wider">
-//           AI ENGINE
-//         </div>
-//       </div>
-//     </motion.div>
-//   </div>
-// );
 
 const BrainNode = () => (
   <div className="relative">
@@ -145,8 +85,8 @@ const BrainNode = () => (
       type="target"
       position={Position.Left}
       style={{
-        background: "#5585AC",
-        border: `2px solid #FFFBF0`,
+        background: "var(--color-landing-accent-medium)",
+        border: `2px solid var(--color-landing-bg-cream)`,
         width: 14,
         height: 14,
         left: -7,
@@ -156,25 +96,23 @@ const BrainNode = () => (
       type="source"
       position={Position.Right}
       style={{
-        background: "#5585AC",
-        border: `2px solid #FFFBF0`,
+        background: "var(--color-landing-accent-medium)",
+        border: `2px solid var(--color-landing-bg-cream)`,
         width: 14,
         height: 14,
         right: -7,
       }}
     />
-
-    {/* Only the Lottie animation player, without any extra backgrounds or text */}
     <motion.div
       animate={{ scale: [1, 1.03, 1], rotate: [0, 1.5, 0] }}
       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      className="flex justify-center items-center" // Center the Lottie player
+      className="flex justify-center items-center"
     >
       <Player
         autoplay
         loop
-        src={animationData} // Make sure this is correctly pointing to your Lottie JSON
-        style={{ height: "300px", width: "250px" }} // Adjust size as needed
+        src={animationData}
+        style={{ height: "300px", width: "250px" }}
       />
     </motion.div>
   </div>
@@ -199,16 +137,17 @@ const nodes = [
       title: "Overwhelmed Learners",
       description: "Generic learning paths lack personalization",
       emoji: "😵",
-      iconBg: "bg-gradient-to-br from-[#90C8E8] to-[#5585AC]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 0.2,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
       borderRadius: 24,
-      border: "1px solid #90C8E8",
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(144, 200, 232, 0.1), 0 8px 10px -6px rgba(144, 200, 232, 0.1)",
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
       minWidth: 380,
       minHeight: 120,
     },
@@ -221,16 +160,17 @@ const nodes = [
       title: "No Progress Tracking",
       description: "Limited insights into learning journey",
       emoji: "📉",
-      iconBg: "bg-gradient-to-br from-[#90C8E8] to-[#5585AC]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 0.4,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
       borderRadius: 24,
-      border: "1px solid #90C8E8",
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(144, 200, 232, 0.1), 0 8px 10px -6px rgba(144, 200, 232, 0.1)",
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
       minWidth: 380,
       minHeight: 120,
     },
@@ -243,16 +183,17 @@ const nodes = [
       title: "Stuck Without Help",
       description: "No instant support when needed most",
       emoji: "❓",
-      iconBg: "bg-gradient-to-br from-[#90C8E8] to-[#5585AC]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 0.6,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
       borderRadius: 24,
-      border: "1px solid #90C8E8",
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(144, 200, 232, 0.1), 0 8px 10px -6px rgba(144, 200, 232, 0.1)",
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
       minWidth: 380,
       minHeight: 120,
     },
@@ -280,20 +221,22 @@ const nodes = [
       title: "Personalized Paths",
       description: "AI-curated curriculum",
       emoji: "🎯",
-      iconBg: "bg-gradient-to-br from-[#5585AC] to-[#34495E]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 0.8,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
-      borderRadius: 20,
-      border: "1px solid #5585AC",
+      borderRadius: 24,
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(85, 133, 172, 0.1), 0 8px 10px -6px rgba(85, 133, 172, 0.1)",
-      minWidth: 320,
-      minHeight: 100,
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
+      minWidth: 380,
+      minHeight: 120,
     },
   },
+
   {
     id: "solution2",
     type: "solutionNode",
@@ -302,18 +245,19 @@ const nodes = [
       title: "Smart Analytics",
       description: "Progress insights",
       emoji: "📊",
-      iconBg: "bg-gradient-to-br from-[#5585AC] to-[#34495E]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 1.0,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
-      borderRadius: 20,
-      border: "1px solid #5585AC",
+      borderRadius: 24,
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(85, 133, 172, 0.1), 0 8px 10px -6px rgba(85, 133, 172, 0.1)",
-      minWidth: 320,
-      minHeight: 100,
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
+      minWidth: 380,
+      minHeight: 120,
     },
   },
   {
@@ -324,18 +268,19 @@ const nodes = [
       title: "24/7 AI Mentor",
       description: "Instant support",
       emoji: "🤖",
-      iconBg: "bg-gradient-to-br from-[#5585AC] to-[#34495E]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 1.2,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
-      borderRadius: 20,
-      border: "1px solid #5585AC",
+      borderRadius: 24,
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(85, 133, 172, 0.1), 0 8px 10px -6px rgba(85, 133, 172, 0.1)",
-      minWidth: 320,
-      minHeight: 100,
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
+      minWidth: 380,
+      minHeight: 120,
     },
   },
   {
@@ -346,18 +291,19 @@ const nodes = [
       title: "Adaptive Quizzes",
       description: "Smart assessment",
       emoji: "⚡",
-      iconBg: "bg-gradient-to-br from-[#5585AC] to-[#34495E]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 1.4,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
-      borderRadius: 20,
-      border: "1px solid #5585AC",
+      borderRadius: 24,
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(85, 133, 172, 0.1), 0 8px 10px -6px rgba(85, 133, 172, 0.1)",
-      minWidth: 320,
-      minHeight: 100,
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
+      minWidth: 380,
+      minHeight: 120,
     },
   },
   {
@@ -368,18 +314,19 @@ const nodes = [
       title: "Intelligent LMS",
       description: "Content delivery",
       emoji: "📚",
-      iconBg: "bg-gradient-to-br from-[#5585AC] to-[#34495E]",
+      iconBg:
+        "bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)]",
       delay: 1.6,
     },
     style: {
-      background: "linear-gradient(135deg, white 0%, #f7faff 100%)",
+      background: "var(--card-bg)",
       padding: 0,
-      borderRadius: 20,
-      border: "1px solid #5585AC",
+      borderRadius: 24,
+      border: "1px solid var(--color-landing-accent-bright)",
       boxShadow:
-        "0 10px 25px -5px rgba(85, 133, 172, 0.1), 0 8px 10px -6px rgba(85, 133, 172, 0.1)",
-      minWidth: 320,
-      minHeight: 100,
+        "0 10px 25px -5px var(--shadow-primary), 0 8px 10px -6px var(--shadow-primary)",
+      minWidth: 380,
+      minHeight: 120,
     },
   },
 ];
