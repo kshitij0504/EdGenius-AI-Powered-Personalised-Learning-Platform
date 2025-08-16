@@ -10,7 +10,8 @@ import MyCoursesPage from "./components/student/StudentCourse/Mycourse.jsx";
 import ContactPage from "./components/student/Contact/conatct.jsx";
 import AllCoursesPage from "./components/student/Allcourse/Allcourse.jsx";
 import MyProgress from "./components/student/Myprogress/Myprogress.jsx";
-
+import QuizPage from "./components/temp.jsx"
+import EdgeniusQuiz from "./components/student/Quiz/Studentquiz.jsx";
 function App() {
   return (
     <Router>
@@ -21,11 +22,12 @@ function App() {
         <Route path="/signup/interests" element={<SignUpInterests />} />
         <Route path="/studentdash" element={<StudentDashboard />} />
         <Route path="/studentfirstquiz" element={<Studentquiz />} />
-        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/quiz" element={<EdgeniusQuiz />} />
         <Route path="/mycourse" element={<MyCoursesPage />} />
         <Route path="/allcourses" element={<AllCoursesPage />} />
         <Route path="/myprogress" element={<MyProgress />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
       </Routes>
     </Router>
   );
