@@ -45,6 +45,7 @@ export default function SignInComponent() {
       </div>
     </div>
   );
+
   const RightPanel = () => {
     return (
       <div className="w-full lg:w-1/2 p-8 lg:p-12 flex items-center justify-center">
@@ -63,22 +64,31 @@ export default function SignInComponent() {
           </div>
 
           <div className="space-y-6">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email Address"
-              className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
-            />
+            {/* Email Input with fix */}
+            <div className="group">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address"
+                className="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-xl
+             transition-all duration-300 outline-none
+             hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent"
+              />
+            </div>
 
-            <div className="relative">
+            {/* Password Input with fix */}
+            <div className="relative group">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full px-4 py-4 pr-12 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent outline-none transition-all duration-300 hover:bg-gray-100"
+                className="w-full px-4 py-4 pr-12 bg-gray-50 border border-gray-200 rounded-xl
+             transition-all duration-300 outline-none
+             hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-[#91C8E4] focus:border-transparent"
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -253,7 +263,6 @@ export default function SignInComponent() {
     </div>
   );
 }
-
 // import React, { useState, useEffect } from "react";
 // import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 // import { useNavigate } from "react-router-dom";

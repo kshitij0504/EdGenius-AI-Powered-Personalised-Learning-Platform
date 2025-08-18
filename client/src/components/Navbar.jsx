@@ -37,7 +37,7 @@ const Navbar = () => {
   const primaryButtonVariants = {
     hover: {
       scale: 1.03,
-      backgroundColor: "#6b92b9",
+      backgroundColor: "#1a73e8",
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     },
     tap: { scale: 0.97 },
@@ -77,9 +77,9 @@ const Navbar = () => {
         /* Your existing CSS variables remain same */
         :root {
           --color-edgenius-light-cream: #FFFBDE;
-          --color-edgenius-light-blue: #91C8E4;
-          --color-edgenius-medium-blue: #749BC2;
-          --color-edgenius-dark-blue: #4682A9;
+          --color-edgenius-light-blue:rgb(61, 128, 214);
+          --color-edgenius-medium-blue: #1a73e8;
+          --color-edgenius-dark-blue: #1a73e8;
         }
 
         .bg-edgenius-light-cream { background-color: var(--color-edgenius-light-cream); }
@@ -124,7 +124,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 10 }}
           >
-            <span className="text-2xl font-bold text-[#4682A9]">EdGenius</span>
+            <span className="text-2xl font-bold text-[#1a73e8]">EdGenius</span>
           </motion.div>
 
           {/* Desktop Menu */}
@@ -133,7 +133,7 @@ const Navbar = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-[#4682A9] flex items-center group font-medium"
+                className="text-[#1a73e8] flex items-center group font-medium"
                 variants={linkVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -158,7 +158,7 @@ const Navbar = () => {
 
             <motion.a
               href="/signup"
-              className="px-6 py-2 bg-[#4682A9] text-white rounded-full font-medium flex items-center space-x-2 transition-all duration-300"
+              className="px-6 py-2 bg-[#1b6fdd] text-white rounded-full font-medium flex items-center space-x-2 transition-all duration-300"
               variants={primaryButtonVariants}
               whileHover="hover"
               whileTap="tap"
@@ -190,9 +190,9 @@ const Navbar = () => {
               whileTap={{ scale: 0.9 }}
             >
               {isOpen ? (
-                <X className="w-6 h-6 text-[#4682A9]" />
+                <X className="w-6 h-6 text-[#1a73e8]" />
               ) : (
-                <Menu className="w-6 h-6 text-[#4682A9]" />
+                <Menu className="w-6 h-6 text-[#1a73e8]" />
               )}
             </motion.button>
           </div>
@@ -212,7 +212,7 @@ const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="block text-[#4682A9] py-2 px-3 rounded-md hover:bg-[#FFFBDE] transition"
+                  className="block text-[#1a73e8] py-2 px-3 rounded-md hover:bg-[#FFFBDE] transition"
                   variants={mobileMenuItemVariants}
                   onClick={() => setIsOpen(false)}
                 >
@@ -221,7 +221,7 @@ const Navbar = () => {
               ))}
               <motion.a
                 href="/signin"
-                className="block w-full text-center px-4 py-2 bg-[#4682A9] text-white rounded-md hover:bg-[#749BC2] transition"
+                className="block w-full text-center px-4 py-2 bg-[#1a73e8] text-white rounded-md hover:bg-[#749BC2] transition"
                 variants={mobileMenuItemVariants}
                 onClick={() => setIsOpen(false)}
               >
@@ -229,7 +229,7 @@ const Navbar = () => {
               </motion.a>
               <motion.a
                 href="/signup"
-                className="block w-full text-center px-4 py-2 bg-[#91C8E4] text-white rounded-md hover:bg-[#749BC2] transition flex items-center justify-center space-x-2"
+                className="block w-full text-center px-4 py-2 bg-[#1a73e8] text-white rounded-md hover:bg-[#749BC2] transition flex items-center justify-center space-x-2"
                 variants={mobileMenuItemVariants}
                 onClick={() => setIsOpen(false)}
               >

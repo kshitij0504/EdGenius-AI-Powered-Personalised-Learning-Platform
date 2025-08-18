@@ -3,9 +3,9 @@
 // import { Target, TestTubeDiagonal, Route } from "lucide-react";
 
 // const VisualStep1 = () => (
-//   <div className="w-5/6 p-3 bg-white rounded-lg shadow-inner border border-gray-200 text-left text-sm text-[#4A6989]">
+//   <div className="w-5/6 p-3 bg-[var(--card-bg)] rounded-lg shadow-inner border border-[var(--border-light)] text-left text-sm text-[var(--color-landing-text-slate)]">
 //     I want to master{" "}
-//     <span className="font-semibold text-[#5585AC]">
+//     <span className="font-semibold text-[var(--color-landing-accent-medium)]">
 //       React for building enterprise apps...
 //     </span>
 //   </div>
@@ -13,14 +13,14 @@
 
 // const VisualStep2 = () => (
 //   <div className="w-full text-left p-2">
-//     <p className="text-sm font-bold text-[#34495E] mb-2">
+//     <p className="text-sm font-bold text-[var(--color-landing-text-navy)] mb-2">
 //       What is a React Hook?
 //     </p>
 //     <div className="space-y-2 text-sm">
-//       <div className="p-2 bg-gradient-to-r from-blue-50 to-white rounded-md border border-[#90C8E8] text-[#4A6989] font-medium">
+//       <div className="p-2 bg-gradient-to-r from-blue-50 to-white rounded-md border border-[var(--color-landing-accent-bright)] text-[var(--color-landing-text-slate)] font-medium">
 //         A function to 'hook into' React state...
 //       </div>
-//       <div className="p-2 bg-gray-100 rounded-md text-gray-500">
+//       <div className="p-2 bg-[var(--hover-bg-light)] rounded-md text-[var(--color-landing-text-slate)]">
 //         A type of lifecycle method...
 //       </div>
 //     </div>
@@ -47,15 +47,13 @@
 //     />
 //     <defs>
 //       <linearGradient id="journey-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-//         <stop offset="0%" stopColor="#5585AC" />
-//         <stop offset="100%" stopColor="#90C8E8" />
+//         <stop offset="0%" stopColor="var(--color-landing-accent-medium)" />
+//         <stop offset="100%" stopColor="var(--color-landing-accent-bright)" />
 //       </linearGradient>
 //     </defs>
 //   </motion.svg>
 // );
 
-// // --- Data-Driven Content ---
-// // Storing content here makes it easy to update or reorder steps without changing the component logic.
 // const JOURNEY_STEPS = [
 //   {
 //     icon: Target,
@@ -80,8 +78,6 @@
 //   },
 // ];
 
-// // --- Animation Variants ---
-// // Defined outside components for performance and reusability.
 // const containerVariants = {
 //   hidden: {},
 //   visible: {
@@ -103,36 +99,35 @@
 //   },
 // };
 
-// // --- Reusable StepCard Component ---
-// // Wrapped in React.memo to prevent unnecessary re-renders.
 // const StepCard = React.memo(({ icon: Icon, title, description, visual }) => {
 //   return (
 //     <motion.div
 //       variants={itemVariants}
-//       className="flex flex-col items-center text-center p-6 bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-xl border border-gray-200/60 transition-all duration-300 hover:-translate-y-1"
+//       className="flex flex-col items-center text-center p-6 bg-[var(--card-bg)] backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-xl border border-[var(--border-light)] transition-all duration-300 hover:-translate-y-1"
 //     >
-//       <div className="mb-5 w-14 h-14 flex items-center justify-center bg-gradient-to-br from-[#90C8E8] to-[#5585AC] text-white rounded-full shadow-md">
+//       <div className="mb-5 w-14 h-14 flex items-center justify-center bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)] text-[var(--color-edgenius-button-text)] rounded-full shadow-md">
 //         <Icon className="w-7 h-7" />
 //       </div>
-//       <h3 className="text-2xl font-bold text-[#34495E] mb-3">{title}</h3>
-//       <p className="text-base text-[#4A6989] mb-6 min-h-[70px] flex-grow">
+//       <h3 className="text-2xl font-bold text-[var(--color-landing-text-navy)] mb-3">
+//         {title}
+//       </h3>
+//       <p className="text-base text-[var(--color-landing-text-slate)] mb-6 min-h-[70px] flex-grow">
 //         {description}
 //       </p>
-//       <div className="w-full h-48 bg-[#f7faff]/80 rounded-2xl flex items-center justify-center p-4 border border-[#90C8E8]/50 shadow-inner">
+//       <div className="w-full h-48 bg-[var(--hover-bg-light)] rounded-2xl flex items-center justify-center p-4 border border-[var(--color-landing-accent-bright)]/50 shadow-inner">
 //         {visual}
 //       </div>
 //     </motion.div>
 //   );
 // });
-// StepCard.displayName = "StepCard"; // For better debugging
+// StepCard.displayName = "StepCard";
 
-// // --- Main JourneySection Component ---
 // export default function JourneySection() {
 //   return (
 //     <section className="w-full py-28 px-4 sm:px-8">
 //       <div className="max-w-7xl mx-auto text-center">
 //         <motion.h2
-//           className="text-4xl md:text-5xl font-black text-[#34495E] mb-4"
+//           className="text-4xl md:text-5xl font-black text-[var(--color-landing-text-navy)] mb-4"
 //           initial={{ opacity: 0, y: 20 }}
 //           whileInView={{ opacity: 1, y: 0 }}
 //           viewport={{ once: true, amount: 0.5 }}
@@ -141,7 +136,7 @@
 //           Your Personalized Journey Starts Here
 //         </motion.h2>
 //         <motion.p
-//           className="text-lg text-[#4A6989] max-w-3xl mx-auto mb-20"
+//           className="text-lg text-[var(--color-landing-text-slate)] max-w-3xl mx-auto mb-20"
 //           initial={{ opacity: 0, y: 20 }}
 //           whileInView={{ opacity: 1, y: 0 }}
 //           viewport={{ once: true, amount: 0.5 }}
@@ -171,10 +166,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Target, TestTubeDiagonal, Route } from "lucide-react";
 
+// Visual components updated with the new color theme
 const VisualStep1 = () => (
-  <div className="w-5/6 p-3 bg-[var(--card-bg)] rounded-lg shadow-inner border border-[var(--border-light)] text-left text-sm text-[var(--color-landing-text-slate)]">
+  <div className="w-5/6 p-3 bg-card rounded-lg shadow-inner border border-primary/20 text-left text-sm text-muted-foreground">
     I want to master{" "}
-    <span className="font-semibold text-[var(--color-landing-accent-medium)]">
+    <span className="font-semibold text-[#1b6fdd]">
       React for building enterprise apps...
     </span>
   </div>
@@ -182,14 +178,14 @@ const VisualStep1 = () => (
 
 const VisualStep2 = () => (
   <div className="w-full text-left p-2">
-    <p className="text-sm font-bold text-[var(--color-landing-text-navy)] mb-2">
+    <p className="text-sm font-bold text-foreground mb-2">
       What is a React Hook?
     </p>
     <div className="space-y-2 text-sm">
-      <div className="p-2 bg-gradient-to-r from-blue-50 to-white rounded-md border border-[var(--color-landing-accent-bright)] text-[var(--color-landing-text-slate)] font-medium">
+      <div className="p-2 bg-primary/10 rounded-md border border-[#1b6fdd] text-foreground font-medium">
         A function to 'hook into' React state...
       </div>
-      <div className="p-2 bg-[var(--hover-bg-light)] rounded-md text-[var(--color-landing-text-slate)]">
+      <div className="p-2 bg-muted rounded-md text-muted-foreground">
         A type of lifecycle method...
       </div>
     </div>
@@ -206,7 +202,7 @@ const AnimatedPath = () => (
   >
     <motion.path
       d="M10 70 Q 30 10, 75 40 T 140 10"
-      stroke="url(#journey-gradient)"
+      stroke="url(#journey-gradient-themed)"
       strokeWidth="6"
       strokeLinecap="round"
       initial={{ pathLength: 0 }}
@@ -215,9 +211,15 @@ const AnimatedPath = () => (
       transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
     />
     <defs>
-      <linearGradient id="journey-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="var(--color-landing-accent-medium)" />
-        <stop offset="100%" stopColor="var(--color-landing-accent-bright)" />
+      <linearGradient
+        id="journey-gradient-themed"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stopColor="#1b6fdd" />
+        <stop offset="100%" stopColor="#60a5fa" />
       </linearGradient>
     </defs>
   </motion.svg>
@@ -268,22 +270,21 @@ const itemVariants = {
   },
 };
 
+// Main components refactored to use theme-aware classes and the new colors
 const StepCard = React.memo(({ icon: Icon, title, description, visual }) => {
   return (
     <motion.div
       variants={itemVariants}
-      className="flex flex-col items-center text-center p-6 bg-[var(--card-bg)] backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-xl border border-[var(--border-light)] transition-all duration-300 hover:-translate-y-1"
+      className="flex flex-col items-center text-center p-6 bg-card backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      <div className="mb-5 w-14 h-14 flex items-center justify-center bg-gradient-to-br from-[var(--color-landing-accent-bright)] to-[var(--color-landing-accent-medium)] text-[var(--color-edgenius-button-text)] rounded-full shadow-md">
+      <div className="mb-5 w-14 h-14 flex items-center justify-center bg-gradient-to-br from-#3b87eb to-[#1b6fdd] text-primary-foreground rounded-full shadow-md">
         <Icon className="w-7 h-7" />
       </div>
-      <h3 className="text-2xl font-bold text-[var(--color-landing-text-navy)] mb-3">
-        {title}
-      </h3>
-      <p className="text-base text-[var(--color-landing-text-slate)] mb-6 min-h-[70px] flex-grow">
+      <h3 className="text-2xl font-bold text-foreground mb-3">{title}</h3>
+      <p className="text-base text-muted-foreground mb-6 min-h-[70px] flex-grow">
         {description}
       </p>
-      <div className="w-full h-48 bg-[var(--hover-bg-light)] rounded-2xl flex items-center justify-center p-4 border border-[var(--color-landing-accent-bright)]/50 shadow-inner">
+      <div className="w-full h-48 bg-background rounded-2xl flex items-center justify-center p-4 border border-[#1b6fdd]/50 shadow-inner">
         {visual}
       </div>
     </motion.div>
@@ -296,7 +297,7 @@ export default function JourneySection() {
     <section className="w-full py-28 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto text-center">
         <motion.h2
-          className="text-4xl md:text-5xl font-black text-[var(--color-landing-text-navy)] mb-4"
+          className="text-4xl md:text-5xl font-black text-foreground mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
@@ -305,7 +306,7 @@ export default function JourneySection() {
           Your Personalized Journey Starts Here
         </motion.h2>
         <motion.p
-          className="text-lg text-[var(--color-landing-text-slate)] max-w-3xl mx-auto mb-20"
+          className="text-lg text-muted-foreground max-w-3xl mx-auto mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}

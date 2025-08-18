@@ -1,3 +1,4 @@
+import { NavLink, useLocation } from "react-router-dom";
 import {
   BookOpenIcon,
   AcademicCapIcon,
@@ -9,17 +10,17 @@ import {
 } from "@heroicons/react/24/outline";
 import { TbBrain } from "react-icons/tb";
 
-const Sidebar = ({
-  user,
-  currentPage,
-  isSidebarOpen,
-  setIsSidebarOpen,
-  onPageChange,
-}) => {
+const Sidebar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
+  const location = useLocation();
+
   const navItems = [
-    { name: "Dashboard", icon: HomeModernIcon, href: "/dashboard" },
-    { name: "My Courses", icon: BookOpenIcon, href: "/courses" },
-    { name: "Enrolled Students", icon: AcademicCapIcon, href: "/students" },
+    { name: "Dashboard", icon: HomeModernIcon, href: "/Instructordash" },
+    { name: "My Courses", icon: BookOpenIcon, href: "/instructor/courses" },
+    {
+      name: "Enrolled Students",
+      icon: AcademicCapIcon,
+      href: "/instructor/students",
+    },
   ];
 
   const utilityItems = [
@@ -31,9 +32,7 @@ const Sidebar = ({
     },
   ];
 
-  const handleNavClick = (href, e) => {
-    e.preventDefault();
-    onPageChange(href);
+  const handleNavClick = () => {
     setIsSidebarOpen(false);
   };
 
@@ -70,18 +69,21 @@ const Sidebar = ({
         <ul className="space-y-2">
           {navItems.map((item) => (
             <li key={item.name}>
-              <a
-                href={item.href}
-                onClick={(e) => handleNavClick(item.href, e)}
-                className={`flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200 ${
-                  currentPage === item.href
-                    ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg transform scale-105"
-                    : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
-                }`}
+              <NavLink
+                to={item.href}
+                onClick={handleNavClick}
+                className={({ isActive }) =>
+                  `flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200
+                   ${
+                     isActive
+                       ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg transform scale-105"
+                       : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
+                   }`
+                }
               >
                 <item.icon className="h-6 w-6 mr-4" />
                 {item.name}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -94,18 +96,21 @@ const Sidebar = ({
             <ul className="space-y-2">
               {utilityItems.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
-                    onClick={(e) => handleNavClick(item.href, e)}
-                    className={`flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200 ${
-                      currentPage === item.href
-                        ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg"
-                        : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
-                    }`}
+                  <NavLink
+                    to={item.href}
+                    onClick={handleNavClick}
+                    className={({ isActive }) =>
+                      `flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200
+                       ${
+                         isActive
+                           ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg transform scale-105"
+                           : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
+                       }`
+                    }
                   >
                     <item.icon className="h-6 w-6 mr-4" />
                     {item.name}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>

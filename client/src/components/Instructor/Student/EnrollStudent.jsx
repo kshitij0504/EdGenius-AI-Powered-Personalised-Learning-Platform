@@ -5,8 +5,17 @@ import {
   TrophyIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+import Sidebar from "../Instructorsidebar/Instructorsidebar";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const EnrolledStudent = () => {
+  const user = {
+    name: "Dr. Eleanor Vance",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    level: 12,
+    xpPoints: 3450,
+  };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [students] = useState([
     {
       id: 1,
@@ -72,185 +81,225 @@ const EnrolledStudent = () => {
       : students.filter((student) => student.course === selectedCourse);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-3xl font-bold text-[var(--color-edgenius-text-primary)] mb-2">
-            Enrolled Students
-          </h3>
-          <p className="text-[var(--color-edgenius-text-secondary)]">
-            Monitor student progress and engagement across your courses
-          </p>
-        </div>
-        <div className="flex items-center space-x-4">
-          <select
-            value={selectedCourse}
-            onChange={(e) => setSelectedCourse(e.target.value)}
-            className="p-3 border border-[var(--color-edgenius-accent-light)] rounded-lg focus:ring-2 focus:ring-[var(--color-edgenius-accent-medium)] bg-white"
-          >
-            {courses.map((course) => (
-              <option key={course} value={course}>
-                {course}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+    <div className="flex min-h-screen bg-[var(--color-edgenius-bg-lightest)]">
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
-                Total Students
-              </p>
-              <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
-                {students.length}
-              </p>
-            </div>
-            <UserGroupIcon className="h-8 w-8 text-[var(--color-edgenius-accent-medium)]" />
+      <Sidebar
+        user={user}
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+
+      <div className="flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out">
+        <header className="lg:hidden sticky top-0 bg-[var(--color-edgenius-bg-lightest)]">
+          <div className="flex items-center justify-between h-16 mt-[-20px]">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="text-[var(--color-edgenius-text-primary)] hover:bg-gray-100 rounded-md transition-colors"
+              aria-label="Open sidebar"
+            >
+              <Bars3Icon className="h-6 w-6" />
+            </button>
+            <div className="w-10 h-10"></div>
           </div>
-        </div>
+        </header>
 
-        <div className="bg-white rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
-                Active Students
-              </p>
-              <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
-                {students.filter((s) => s.status === "Active").length}
-              </p>
-            </div>
-            <TrophyIcon className="h-8 w-8 text-green-500" />
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-edgenius-text-primary)] mb-1">
+              Enrolled Students
+            </h3>
+            <p className="text-sm md:text-base text-[var(--color-edgenius-text-secondary)]">
+              Monitor student progress and engagement across your courses.
+            </p>
           </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
-                Avg Progress
-              </p>
-              <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
-                {Math.round(
-                  students.reduce((acc, s) => acc + s.progress, 0) /
-                    students.length
-                )}
-                %
-              </p>
-            </div>
-            <ChartBarSquareIcon className="h-8 w-8 text-[var(--color-edgenius-accent-medium)]" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-6 shadow-xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
-                This Month
-              </p>
-              <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
-                12
-              </p>
-            </div>
-            <PlusIcon className="h-8 w-8 text-[var(--color-edgenius-accent-light)]" />
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <h4 className="text-xl font-semibold text-[var(--color-edgenius-text-primary)]">
-            Student Details
-          </h4>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-[var(--color-edgenius-bg-lightest)]">
-              <tr>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Student
-                </th>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Course
-                </th>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Progress
-                </th>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Status
-                </th>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Last Active
-                </th>
-                <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)]">
-                  Joined
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredStudents.map((student) => (
-                <tr
-                  key={student.id}
-                  className="border-b border-gray-100 hover:bg-[var(--color-edgenius-bg-lightest)] transition-colors"
-                >
-                  <td className="p-4">
-                    <div className="flex items-center space-x-3">
-                      <img
-                        src={student.avatar}
-                        alt={student.name}
-                        className="w-10 h-10 rounded-full border-2 border-[var(--color-edgenius-accent-light)]"
-                      />
-                      <div>
-                        <p className="font-semibold text-[var(--color-edgenius-text-primary)]">
-                          {student.name}
-                        </p>
-                        <p className="text-sm text-[var(--color-edgenius-text-secondary)]">
-                          {student.email}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    <span className="bg-[var(--color-edgenius-accent-light)]/20 text-[var(--color-edgenius-accent-dark)] px-3 py-1 rounded-full text-sm font-medium">
-                      {student.course}
-                    </span>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-20 bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-[var(--color-edgenius-accent-light)] to-[var(--color-edgenius-accent-medium)] h-2 rounded-full"
-                          style={{ width: `${student.progress}%` }}
-                        ></div>
-                      </div>
-                      <span className="text-sm font-medium text-[var(--color-edgenius-text-primary)]">
-                        {student.progress}%
-                      </span>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        student.status === "Active"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
-                    >
-                      {student.status}
-                    </span>
-                  </td>
-                  <td className="p-4 text-[var(--color-edgenius-text-secondary)]">
-                    {student.lastActive}
-                  </td>
-                  <td className="p-4 text-[var(--color-edgenius-text-secondary)]">
-                    {student.joinedDate}
-                  </td>
-                </tr>
+          <div className="mt-4 md:mt-0">
+            <select
+              value={selectedCourse}
+              onChange={(e) => setSelectedCourse(e.target.value)}
+              className="w-full p-3 border border-[var(--color-edgenius-accent-light)] rounded-lg focus:ring-2 focus:ring-[var(--color-edgenius-accent-medium)] focus:border-transparent outline-none bg-white text-[var(--color-edgenius-text-primary)]"
+            >
+              {courses.map((course) => (
+                <option key={course} value={course}>
+                  {course}
+                </option>
               ))}
-            </tbody>
-          </table>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="bg-white rounded-2xl p-6 shadow-md md:shadow-xl border border-[var(--color-edgenius-accent-light)]">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
+                  Total Students
+                </p>
+                <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
+                  {students.length}
+                </p>
+              </div>
+              <div className="p-2 bg-[var(--color-edgenius-accent-light)]/20 rounded-lg">
+                <UserGroupIcon className="h-6 w-6 text-[var(--color-edgenius-accent-medium)]" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-md md:shadow-xl border border-[var(--color-edgenius-accent-light)]">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
+                  Active Students
+                </p>
+                <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
+                  {students.filter((s) => s.status === "Active").length}
+                </p>
+              </div>
+              <div className="p-2 bg-green-100 rounded-lg">
+                <TrophyIcon className="h-6 w-6 text-green-500" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-md md:shadow-xl border border-[var(--color-edgenius-accent-light)]">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
+                  Avg Progress
+                </p>
+                <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
+                  {Math.round(
+                    students.reduce((acc, s) => acc + s.progress, 0) /
+                      students.length
+                  )}
+                  %
+                </p>
+              </div>
+              <div className="p-2 bg-[var(--color-edgenius-accent-light)]/20 rounded-lg">
+                <ChartBarSquareIcon className="h-6 w-6 text-[var(--color-edgenius-accent-medium)]" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 shadow-md md:shadow-xl border border-[var(--color-edgenius-accent-light)]">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-[var(--color-edgenius-text-secondary)] text-sm font-medium mb-1">
+                  New Students
+                </p>
+                <p className="text-3xl font-bold text-[var(--color-edgenius-text-primary)]">
+                  12
+                </p>
+              </div>
+              <div className="p-2 bg-[var(--color-edgenius-accent-light)]/20 rounded-lg">
+                <PlusIcon className="h-6 w-6 text-[var(--color-edgenius-accent-light)]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-md md:shadow-xl overflow-hidden border border-[var(--color-edgenius-accent-light)]">
+          <div className="p-4 md:p-6 border-b border-[var(--color-edgenius-accent-light)]">
+            <h4 className="text-lg md:text-xl font-semibold text-[var(--color-edgenius-text-primary)]">
+              Student Details
+            </h4>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-[var(--color-edgenius-bg-lightest)]">
+                <tr>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Student
+                  </th>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Course
+                  </th>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Progress
+                  </th>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Status
+                  </th>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Last Active
+                  </th>
+                  <th className="text-left p-4 font-semibold text-[var(--color-edgenius-text-primary)] whitespace-nowrap">
+                    Joined
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredStudents.map((student, index) => (
+                  <tr
+                    key={student.id}
+                    className={`hover:bg-[var(--color-edgenius-bg-lightest)] transition-colors ${
+                      index < filteredStudents.length - 1
+                        ? "border-b border-[var(--color-edgenius-accent-light)]"
+                        : ""
+                    }`}
+                  >
+                    <td className="p-4 whitespace-nowrap">
+                      <div className="flex items-center space-x-3">
+                        <img
+                          src={student.avatar}
+                          alt={student.name}
+                          className="w-10 h-10 rounded-full border-2 border-[var(--color-edgenius-accent-light)]"
+                        />
+                        <div>
+                          <p className="font-semibold text-[var(--color-edgenius-text-primary)]">
+                            {student.name}
+                          </p>
+                          <p className="text-sm text-[var(--color-edgenius-text-secondary)]">
+                            {student.email}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-4 whitespace-nowrap">
+                      <span className="bg-[var(--color-edgenius-accent-light)]/20 text-[var(--color-edgenius-accent-dark)] px-3 py-1 rounded-full text-sm font-medium">
+                        {student.course}
+                      </span>
+                    </td>
+                    <td className="p-4 whitespace-nowrap">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-24 bg-gray-200 rounded-full h-2">
+                          <div
+                            className="bg-gradient-to-r from-[var(--color-edgenius-accent-light)] to-[var(--color-edgenius-accent-medium)] h-2 rounded-full"
+                            style={{ width: `${student.progress}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-sm font-medium text-[var(--color-edgenius-text-primary)]">
+                          {student.progress}%
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-4 whitespace-nowrap">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          student.status === "Active"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {student.status}
+                      </span>
+                    </td>
+                    <td className="p-4 whitespace-nowrap text-[var(--color-edgenius-text-secondary)]">
+                      {student.lastActive}
+                    </td>
+                    <td className="p-4 whitespace-nowrap text-[var(--color-edgenius-text-secondary)]">
+                      {student.joinedDate}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -13,9 +13,9 @@ body {
 :root {
   /* Original Edgenius colors */
   --color-edgenius-bg-lightest: #fffbf0;
-  --color-edgenius-accent-light: #91c8e4;
-  --color-edgenius-accent-medium: #749bc2;
-  --color-edgenius-accent-dark: #4682a9;
+  --color-edgenius-accent-light: #117acf;
+  --color-edgenius-accent-medium: #377ec5;
+  --color-edgenius-accent-dark: #1b6fdd;
   --color-edgenius-text-primary: #333333;
   --color-edgenius-text-secondary: #555555;
   --color-edgenius-button-text: #ffffff;
@@ -23,9 +23,9 @@ body {
   /* Auth component specific colors */
   --auth-left-panel-gradient-from: #91c8e4;
   --auth-left-panel-gradient-to: #749bc2;
-  --auth-primary-button: #4682a9;
+  --auth-primary-button: #1b6fdd;
   --auth-primary-button-hover: #749bc2;
-  --auth-link-color: #4682a9;
+  --auth-link-color: #1b6fdd;
   --auth-link-hover: #749bc2;
   --auth-input-focus-ring: #91c8e4;
   --auth-input-bg: #f0f2f5;
@@ -46,7 +46,7 @@ body {
   --auth-input-bg: #f0f2f5;
   --auth-input-border: #e0e3e7;
   --auth-input-focus: #91c8e4;
-  --auth-accent: #4682a9;
+  --auth-accent: #1b6fdd;
   --auth-accent-hover: #749bc2;
   --auth-divider: #e0e3e7;
   --auth-social-bg: #ffffff;
@@ -99,8 +99,8 @@ body.dark {
 
   /* Original Edgenius dark colors */
   --color-edgenius-bg-lightest: #1e1e1e;
-  --color-edgenius-accent-light: #5fa8d3;
-  --color-edgenius-accent-medium: #4a90b0;
+  --color-edgenius-accent-light: #2c79df;
+  --color-edgenius-accent-medium: #1a73e8;
   --color-edgenius-accent-dark: #35728f;
   --color-edgenius-text-primary: #f5f5f5;
   --color-edgenius-text-secondary: #c0c0c0;
@@ -120,8 +120,8 @@ body.dark {
   --auth-text-secondary: #c0c0c0;
   --auth-input-bg: #2a2a2a;
   --auth-input-border: #3a3a3a;
-  --auth-input-focus: #5fa8d3;
-  --auth-accent: #4a90b0;
+  --auth-input-focus: #2c79df;
+  --auth-accent: #1a73e8;
   --auth-accent-hover: #6ba3d0;
   --auth-divider: #3a3a3a;
   --auth-social-bg: #2a2a2a;
@@ -129,13 +129,13 @@ body.dark {
   --auth-social-hover: #3a3a3a;
 
   /* Auth component dark theme colors */
-  --auth-left-panel-gradient-from: #5fa8d3;
-  --auth-left-panel-gradient-to: #4a90b0;
-  --auth-primary-button: #4a90b0;
+  --auth-left-panel-gradient-from: #2c79df;
+  --auth-left-panel-gradient-to: #3482e9;
+  --auth-primary-button: #1a73e8;
   --auth-primary-button-hover: #6ba3d0;
-  --auth-link-color: #5fa8d3;
+  --auth-link-color: #2c79df;
   --auth-link-hover: #7bb3d3;
-  --auth-input-focus-ring: #5fa8d3;
+  --auth-input-focus-ring: #2c79df;
   --auth-input-bg: #2a2a2a;
   --auth-input-border: #3a3a3a;
   --auth-input-hover-bg: #3a3a3a;
