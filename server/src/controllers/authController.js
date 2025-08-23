@@ -53,28 +53,35 @@ const verifyEmail = async (req, res) => {
 
 const signin = async (req, res) => {
   const { email, password } = req.body;
+  const result = await authService.signin(email, password);
 
-  const result = await authService.signin(email, password, res);
+  if (result.error) {
+    return res
+      .status(result.error.status)
+      .json({ message: result.error.message });
+  }
 
-  res
-    .cookie("token", result.token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-    })
-    .status(200)
-    .json(result.response);
+  res.cookie("token", result.token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+  });
+
+  return res.status(200).json({
+    message: "Login successful",
+    user: result.user,
+    success: true,
+  });
 };
 
-const googleSignin = async (req, res) => {
+const googleSignin = async (req, res, next) => {
  const { credential } = req.body;
-
   if (!credential) {
     return next(new ApiError(400, "Missing Google token"));
   }
 
   try {
-    const { user, token } = await googleLoginService(credential);
+    const { user, token } = await authService.googleLoginService(credential);
 
     res.cookie("token", token, {
       httpOnly: true,

@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const prisma = require("../config/prisma");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
@@ -114,41 +115,21 @@ const verifyEmail = async (token) => {
   return { redirectUrl: `${process.env.FRONTEND_URL}/login?message=verified` };
 };
 
-const signin = async (email, password, res) => {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+// authService.js
+const signin = async (email, password) => {
+  const user = await prisma.user.findUnique({ where: { email } });
 
   if (!user) {
-    return res
-      .status(404)
-      .json(new ApiError(404, "User not found"));
+    return { error: { status: 404, message: "User not found" } };
   }
 
   if (!user.isVerified) {
-    return res
-      .status(403)
-      .json(new ApiError(403, "Email not verified"));
+    return { error: { status: 403, message: "Email not verified" } };
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    return res
-      .status(401)
-      .json(new ApiError(401, "Invalid email or password"));
-  }
-
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    return res
-      .status(401)
-      .json(new ApiError(401, "Invalid email or password"));
-  }
-
-  if (!user.isVerified) {
-     return res
-      .status(403)
-      .json(new ApiError(403, "Email not verified"));
+    return { error: { status: 401, message: "Invalid email or password" } };
   }
 
   const token = generateSiginToken(user);
@@ -159,14 +140,18 @@ const signin = async (email, password, res) => {
     isVerified: user.isVerified,
     interests: user.interests,
     role: user.role,
-    redirectTo: user.role === "INSTRUCTOR" ? "/instructor/dashboard" : "/user/home"
+    redirectTo:
+      user.role === "INSTRUCTOR"
+        ? "/instructor/dashboard"
+        : "/user/home",
   };
 
   return {
     token,
-    response: new ApiResponse(200, { user: userData }, "Login successful"),
+    user: userData,
   };
 };
+
 
 const googleLoginService = async (credential) => {
   let ticket;
@@ -198,8 +183,8 @@ const googleLoginService = async (credential) => {
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email },
-    process.env.JWT_ACCESS_SECRET,
+    { id: user.id, email: user.email, role: user.role },
+    process.env.JWT_SECRET,
     { expiresIn: "7d" }
   );
 

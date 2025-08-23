@@ -1,9 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import DarkModeToggle from "./components/DarkModeToggle.jsx";
-import SignUpComponent from "./components/Authentication/signup.jsx";
-import SignUpInterests from "./components/Authentication/SignUpInterests.jsx";
-import Signin from "./components/Authentication/signin.jsx";
 import StudentDashboard from "./components/student/Studentdash/Studentdash.jsx";
 import Studentquiz from "./components/student/Quiz/Studentquiz.jsx";
 import MyCoursesPage from "./components/student/StudentCourse/Mycourse.jsx";
@@ -19,31 +16,106 @@ import CreateCoursePage from "./components/Instructor/Course/createcourse.jsx";
 import EditCoursePage from "./components/Instructor/Course/editcourse.jsx";
 import SettingsPage from "./components/Instructor/Instructordash/Setting.jsx";
 import AddContentPage from "./components/Instructor/Course/AddContent.jsx";
+import LoginPage from "./components/Authentication/signin.jsx";
+import SignupPage from "./components/Authentication/signup.jsx";
+import RoleProtectedRoute from "./RoleProtectedRoute.jsx";
+import NotAuthorized from "./pages/not-authorized.jsx";
+import NotFound from "./pages/404.jsx";
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<SignUpComponent />} />
-        <Route path="/signup/interests" element={<SignUpInterests />} />
-        <Route path="/studentdash" element={<StudentDashboard />} />
-        <Route path="/studentfirstquiz" element={<Studentquiz />} />
-        <Route path="/quiz" element={<EdgeniusQuiz />} />
-        <Route path="/mycourse" element={<MyCoursesPage />} />
-        <Route path="/allcourses" element={<AllCoursesPage />} />
-        <Route path="/myprogress" element={<MyProgress />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/signin" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
 
-        <Route path="/instructordash" element={<InstructorDashboard />} />
-        <Route path="/instructor/courses" element={<Course />} />
-        <Route path="/instructor/students" element={<EnrollStudent />} />
-        <Route path="/instructor/createcourse" element={<CreateCoursePage />} />
-        <Route path="/instructor/editcourse" element={<EditCoursePage />} />
-        <Route path="/instructor/addcontent" element={<AddContentPage />} />
-        <Route path="/instrctor/settings" element={<SettingsPage />} />
+        {/* Student Protected Routes */}
+        <Route path="/studentdash" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <StudentDashboard />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/studentfirstquiz" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <Studentquiz />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/quiz" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <EdgeniusQuiz />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/mycourse" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <MyCoursesPage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/allcourses" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <AllCoursesPage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/myprogress" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <MyProgress />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/contact" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <ContactPage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/quiz" element={
+          <RoleProtectedRoute allowedRoles={["USER"]}>
+            <QuizPage />
+          </RoleProtectedRoute>
+        } />
+
+        {/* Instructor Protected Routes */}
+        <Route path="/instructordash" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <InstructorDashboard />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instructor/courses" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <Course />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instructor/students" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <EnrollStudent />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instructor/createcourse" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <CreateCoursePage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instructor/editcourse" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <EditCoursePage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instructor/addcontent" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <AddContentPage />
+          </RoleProtectedRoute>
+        } />
+        <Route path="/instrctor/settings" element={
+          <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+            <SettingsPage />
+          </RoleProtectedRoute>
+        } />
+
+        {/* Not Authorized */}
+        <Route path="/not-authorized" element={<NotAuthorized />} />
+
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

@@ -346,3 +346,192 @@
 [2025-08-17T05:29:24.962Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-08-18T09:57:24.496Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-08-18T10:07:47.197Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T10:27:32.753Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T10:27:41.259Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T12:46:08.720Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T12:47:47.982Z] INFO: POST /auth/signup 404 151 - 4.668 ms
+[2025-08-18T12:48:38.230Z] INFO: POST /api/auth/signup 409 102 - 2775.521 ms
+[2025-08-18T12:51:44.126Z] INFO: POST /api/auth/signup 201 742 - 5861.628 ms
+[2025-08-18T12:53:30.816Z] INFO: POST /api/auth/signup 201 742 - 5208.791 ms
+[2025-08-18T12:54:01.322Z] INFO: POST /api/auth/signup 409 114 - 1094.640 ms
+[2025-08-18T12:56:04.026Z] INFO: POST /api/auth/signup 201 742 - 6233.323 ms
+[2025-08-18T13:02:49.488Z] INFO: POST /api/auth/signin 200 261 - 2390.620 ms
+[2025-08-18T13:03:06.123Z] INFO: POST /api/auth/signin 401 84 - 601.529 ms
+[2025-08-18T13:03:30.118Z] INFO: POST /api/auth/signin 403 77 - 177.156 ms
+[2025-08-18T13:03:50.671Z] INFO: POST /api/auth/signin 403 77 - 153.450 ms
+[2025-08-18T13:04:21.936Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T13:05:07.552Z] INFO: GET /api/auth/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTU1MjE3NTgsImV4cCI6MTc1NTYwODE1OH0.V3TPr3aoHOKOhdxAIJzUUnfdbW__-hidl--9CCizX9o 302 73 - 2532.232 ms
+[2025-08-18T13:05:24.235Z] INFO: POST /api/auth/signin 200 351 - 1250.877 ms
+[2025-08-18T13:05:56.584Z] INFO: POST /api/auth/signin 200 351 - 1110.800 ms
+[2025-08-18T13:06:52.728Z] INFO: POST /api/auth/signin 200 351 - 1049.046 ms
+[2025-08-18T13:08:52.291Z] INFO: POST /api/auth/signin 200 351 - 1096.042 ms
+[2025-08-18T13:21:18.163Z] INFO: POST /api/auth/signin 200 351 - 3243.441 ms
+[2025-08-18T13:22:27.663Z] INFO: POST /api/auth/signin 200 351 - 1920.703 ms
+[2025-08-18T13:25:15.336Z] INFO: POST /api/auth/signin 200 351 - 2223.685 ms
+[2025-08-18T17:38:25.259Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T17:39:54.546Z] INFO: POST /api/auth/signin 401 84 - 2979.235 ms
+[2025-08-18T17:43:12.307Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T17:43:29.039Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T17:43:56.512Z] INFO: POST /api/auth/signin 200 310 - 1102.529 ms
+[2025-08-18T17:44:06.491Z] INFO: POST /api/auth/signin 200 310 - 370.179 ms
+[2025-08-18T17:46:12.868Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T17:46:25.994Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T17:46:30.361Z] INFO: POST /api/auth/signin 200 325 - 960.870 ms
+[2025-08-18T17:46:57.322Z] INFO: POST /api/auth/signin 200 325 - 434.049 ms
+[2025-08-18T17:47:43.329Z] INFO: POST /api/auth/signin 200 325 - 433.680 ms
+[2025-08-18T17:48:12.148Z] INFO: POST /api/auth/signin 200 325 - 440.500 ms
+[2025-08-18T17:52:57.911Z] INFO: POST /api/auth/signin 500 1717 - 5009.897 ms
+[2025-08-18T17:55:25.747Z] INFO: POST /api/auth/signin 200 325 - 4627.122 ms
+[2025-08-18T18:02:01.066Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:02:19.541Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:03:33.871Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:04:44.784Z] INFO: POST /api/auth/signin 200 325 - 2084.615 ms
+[2025-08-18T18:04:44.849Z] INFO: GET /auth/status 404 150 - 1.736 ms
+[2025-08-18T18:04:44.854Z] INFO: GET /auth/status 404 150 - 1.402 ms
+[2025-08-18T18:05:05.005Z] INFO: POST /api/auth/signin 200 325 - 456.891 ms
+[2025-08-18T18:05:05.057Z] INFO: GET /api/auth/status 500 1623 - 0.913 ms
+[2025-08-18T18:05:05.062Z] INFO: GET /api/auth/status 500 1623 - 0.595 ms
+[2025-08-18T18:06:39.541Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:07:07.970Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:07:42.222Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:07:54.525Z] INFO: POST /api/auth/signin 200 325 - 1007.619 ms
+[2025-08-18T18:07:54.591Z] INFO: GET /api/auth/status 200 152 - 4.444 ms
+[2025-08-18T18:07:54.599Z] INFO: GET /api/auth/status 304 - - 3.142 ms
+[2025-08-18T18:08:48.150Z] INFO: POST /api/auth/signin 200 325 - 444.015 ms
+[2025-08-18T18:08:48.217Z] INFO: GET /api/auth/status 304 - - 5.639 ms
+[2025-08-18T18:08:48.236Z] INFO: GET /api/auth/status 304 - - 3.619 ms
+[2025-08-18T18:09:20.993Z] INFO: POST /api/auth/signin 200 325 - 443.512 ms
+[2025-08-18T18:09:21.052Z] INFO: GET /api/auth/status 304 - - 1.273 ms
+[2025-08-18T18:09:21.062Z] INFO: GET /api/auth/status 304 - - 1.619 ms
+[2025-08-18T18:10:17.293Z] INFO: POST /api/auth/signin 200 325 - 444.179 ms
+[2025-08-18T18:10:17.389Z] INFO: GET /api/auth/status 304 - - 2.448 ms
+[2025-08-18T18:10:17.397Z] INFO: GET /api/auth/status 304 - - 2.253 ms
+[2025-08-18T18:10:49.380Z] INFO: POST /api/auth/signin 200 325 - 436.836 ms
+[2025-08-18T18:10:49.434Z] INFO: GET /api/auth/status 304 - - 2.455 ms
+[2025-08-18T18:10:49.438Z] INFO: GET /api/auth/status 304 - - 1.311 ms
+[2025-08-18T18:11:03.153Z] INFO: GET /api/auth/status 304 - - 1.447 ms
+[2025-08-18T18:11:03.162Z] INFO: GET /api/auth/status 304 - - 1.745 ms
+[2025-08-18T18:11:16.657Z] INFO: POST /api/auth/signin 200 325 - 437.087 ms
+[2025-08-18T18:11:16.719Z] INFO: GET /api/auth/status 304 - - 1.406 ms
+[2025-08-18T18:11:16.727Z] INFO: GET /api/auth/status 304 - - 1.737 ms
+[2025-08-18T18:11:48.007Z] INFO: POST /api/auth/signin 200 325 - 436.569 ms
+[2025-08-18T18:11:48.057Z] INFO: GET /api/auth/status 304 - - 1.072 ms
+[2025-08-18T18:11:48.073Z] INFO: GET /api/auth/status 304 - - 1.093 ms
+[2025-08-18T18:12:05.101Z] INFO: POST /api/auth/signin 200 325 - 440.919 ms
+[2025-08-18T18:12:05.161Z] INFO: GET /api/auth/status 304 - - 1.634 ms
+[2025-08-18T18:12:05.166Z] INFO: GET /api/auth/status 304 - - 1.221 ms
+[2025-08-18T18:12:37.510Z] INFO: POST /api/auth/signin 200 325 - 451.996 ms
+[2025-08-18T18:12:37.585Z] INFO: GET /api/auth/status 304 - - 1.858 ms
+[2025-08-18T18:12:37.593Z] INFO: GET /api/auth/status 304 - - 1.782 ms
+[2025-08-18T18:12:51.948Z] INFO: POST /api/auth/signin 200 325 - 361.945 ms
+[2025-08-18T18:12:52.020Z] INFO: GET /api/auth/status 304 - - 7.746 ms
+[2025-08-18T18:12:52.027Z] INFO: GET /api/auth/status 304 - - 1.957 ms
+[2025-08-18T18:13:30.684Z] INFO: POST /api/auth/signin 200 325 - 3047.369 ms
+[2025-08-18T18:13:30.745Z] INFO: GET /api/auth/status 304 - - 1.151 ms
+[2025-08-18T18:13:30.750Z] INFO: GET /api/auth/status 304 - - 2.432 ms
+[2025-08-18T18:13:36.740Z] INFO: GET /api/auth/status 304 - - 0.794 ms
+[2025-08-18T18:13:36.743Z] INFO: GET /api/auth/status 304 - - 0.758 ms
+[2025-08-18T18:14:08.654Z] INFO: POST /api/auth/signin 200 235 - 438.169 ms
+[2025-08-18T18:14:08.694Z] INFO: GET /api/auth/status 200 163 - 1.802 ms
+[2025-08-18T18:14:08.700Z] INFO: GET /api/auth/status 304 - - 1.377 ms
+[2025-08-18T18:15:30.557Z] INFO: POST /api/auth/signin 401 39 - 438.931 ms
+[2025-08-18T18:15:54.533Z] INFO: POST /api/auth/signin 200 235 - 431.129 ms
+[2025-08-18T18:15:54.591Z] INFO: GET /api/auth/status 304 - - 1.513 ms
+[2025-08-18T18:15:54.595Z] INFO: GET /api/auth/status 304 - - 1.325 ms
+[2025-08-18T18:17:53.316Z] INFO: POST /api/auth/signin 200 235 - 427.595 ms
+[2025-08-18T18:17:53.378Z] INFO: GET /api/auth/status 304 - - 1.379 ms
+[2025-08-18T18:17:53.383Z] INFO: GET /api/auth/status 304 - - 1.561 ms
+[2025-08-18T18:23:30.258Z] INFO: POST /api/auth/signin 200 235 - 1765.401 ms
+[2025-08-18T18:23:30.321Z] INFO: GET /api/auth/status 304 - - 2.302 ms
+[2025-08-18T18:23:30.326Z] INFO: GET /api/auth/status 304 - - 1.702 ms
+[2025-08-18T18:24:37.926Z] INFO: POST /api/auth/signin 200 235 - 435.384 ms
+[2025-08-18T18:24:37.975Z] INFO: GET /api/auth/status 304 - - 1.106 ms
+[2025-08-18T18:24:37.981Z] INFO: GET /api/auth/status 304 - - 1.759 ms
+[2025-08-18T18:26:47.344Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:46:30.302Z] INFO: POST /api/auth/google-signin 500 313 - 1545.871 ms
+[2025-08-18T18:48:44.426Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:48:54.274Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:48:55.766Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:49:05.075Z] INFO: POST /api/auth/google-signin 500 478 - 938.546 ms
+[2025-08-18T18:49:35.555Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:49:46.066Z] INFO: POST /api/auth/google-signin 500 652 - 938.056 ms
+[2025-08-18T18:51:56.524Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:52:11.431Z] INFO: POST /api/auth/google-signin 200 458 - 899.681 ms
+[2025-08-18T18:52:11.484Z] INFO: GET /api/auth/status 200 121 - 15.512 ms
+[2025-08-18T18:52:11.493Z] INFO: GET /api/auth/status 304 - - 3.798 ms
+[2025-08-18T18:52:43.794Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:54:25.437Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-18T18:54:59.892Z] INFO: POST /api/auth/google-signin 200 458 - 905.391 ms
+[2025-08-18T18:54:59.971Z] INFO: GET /api/auth/status 200 149 - 12.673 ms
+[2025-08-18T18:54:59.982Z] INFO: GET /api/auth/status 304 - - 2.981 ms
+[2025-08-18T18:57:35.304Z] INFO: POST /api/auth/signin 200 325 - 503.358 ms
+[2025-08-18T18:57:35.384Z] INFO: GET /api/auth/status 200 152 - 8.699 ms
+[2025-08-18T18:57:35.398Z] INFO: GET /api/auth/status 304 - - 1.511 ms
+[2025-08-18T19:02:25.920Z] INFO: GET /api/auth/status 304 - - 3.736 ms
+[2025-08-18T19:02:25.926Z] INFO: GET /api/auth/status 304 - - 0.926 ms
+[2025-08-18T19:07:00.226Z] INFO: GET /api/auth/status 304 - - 1.232 ms
+[2025-08-18T19:07:00.232Z] INFO: GET /api/auth/status 304 - - 3.108 ms
+[2025-08-18T19:11:41.117Z] INFO: GET /api/auth/status 304 - - 1.150 ms
+[2025-08-18T19:11:41.121Z] INFO: GET /api/auth/status 304 - - 1.796 ms
+[2025-08-18T19:11:58.000Z] INFO: GET /api/auth/status 304 - - 1.210 ms
+[2025-08-18T19:11:58.010Z] INFO: GET /api/auth/status 304 - - 2.911 ms
+[2025-08-18T19:16:41.012Z] INFO: GET /api/auth/status 304 - - 1.844 ms
+[2025-08-18T19:16:41.017Z] INFO: GET /api/auth/status 304 - - 1.959 ms
+[2025-08-19T02:57:52.368Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-19T03:00:04.350Z] INFO: POST /api/auth/google-signin 200 458 - 1476.296 ms
+[2025-08-19T03:00:04.411Z] INFO: GET /api/auth/status 200 149 - 8.457 ms
+[2025-08-19T03:00:04.427Z] INFO: GET /api/auth/status 304 - - 5.400 ms
+[2025-08-19T03:01:33.984Z] INFO: GET /api/auth/status 401 66 - 1.184 ms
+[2025-08-19T03:01:33.990Z] INFO: GET /api/auth/status 401 66 - 0.299 ms
+[2025-08-19T03:01:40.564Z] INFO: GET /api/auth/status 401 66 - 0.302 ms
+[2025-08-19T03:01:40.566Z] INFO: GET /api/auth/status 401 66 - 0.291 ms
+[2025-08-19T05:38:46.143Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-19T05:47:12.581Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-19T05:47:57.605Z] INFO: GET /api/auth/status 401 66 - 3.100 ms
+[2025-08-19T05:47:57.607Z] INFO: GET /api/auth/status 401 66 - 0.402 ms
+[2025-08-19T05:48:09.199Z] INFO: GET /api/auth/status 401 66 - 0.390 ms
+[2025-08-19T05:48:09.206Z] INFO: GET /api/auth/status 401 66 - 0.965 ms
+[2025-08-19T05:48:43.393Z] INFO: POST /api/auth/signin 200 325 - 2444.610 ms
+[2025-08-19T05:48:43.449Z] INFO: GET /api/auth/status 200 152 - 3.456 ms
+[2025-08-19T05:48:43.458Z] INFO: GET /api/auth/status 304 - - 3.405 ms
+[2025-08-19T05:50:43.397Z] INFO: GET /api/auth/status 304 - - 1.398 ms
+[2025-08-19T05:50:43.401Z] INFO: GET /api/auth/status 304 - - 1.334 ms
+[2025-08-19T05:51:30.541Z] INFO: GET /api/auth/status 304 - - 1.449 ms
+[2025-08-19T05:51:30.544Z] INFO: GET /api/auth/status 304 - - 1.050 ms
+[2025-08-19T05:52:20.926Z] INFO: GET /api/auth/status 304 - - 1.557 ms
+[2025-08-19T05:52:20.930Z] INFO: GET /api/auth/status 304 - - 1.165 ms
+[2025-08-19T05:52:23.526Z] INFO: GET /api/auth/status 304 - - 1.358 ms
+[2025-08-19T05:52:23.531Z] INFO: GET /api/auth/status 304 - - 2.475 ms
+[2025-08-19T05:53:40.568Z] INFO: POST /api/auth/google-signin 200 451 - 2505.961 ms
+[2025-08-19T05:53:40.592Z] INFO: GET /api/auth/status 200 142 - 3.459 ms
+[2025-08-19T05:53:40.604Z] INFO: GET /api/auth/status 304 - - 2.933 ms
+[2025-08-19T05:53:51.414Z] INFO: GET /api/auth/status 304 - - 1.372 ms
+[2025-08-19T05:53:51.420Z] INFO: GET /api/auth/status 304 - - 2.608 ms
+[2025-08-19T05:54:07.334Z] INFO: GET /api/auth/status 304 - - 2.257 ms
+[2025-08-19T05:54:07.342Z] INFO: GET /api/auth/status 304 - - 3.258 ms
+[2025-08-19T05:54:10.742Z] INFO: GET /api/auth/status 304 - - 1.607 ms
+[2025-08-19T05:54:10.748Z] INFO: GET /api/auth/status 304 - - 2.457 ms
+[2025-08-19T05:54:12.575Z] INFO: GET /api/auth/status 304 - - 1.317 ms
+[2025-08-19T05:54:12.581Z] INFO: GET /api/auth/status 304 - - 2.821 ms
+[2025-08-19T05:54:16.349Z] INFO: GET /api/auth/status 304 - - 2.157 ms
+[2025-08-19T05:54:16.362Z] INFO: GET /api/auth/status 304 - - 3.136 ms
+[2025-08-19T05:54:18.496Z] INFO: GET /api/auth/status 304 - - 1.346 ms
+[2025-08-19T05:54:18.504Z] INFO: GET /api/auth/status 304 - - 2.066 ms
+[2025-08-19T05:54:46.401Z] INFO: POST /api/auth/google-signin 200 451 - 1421.962 ms
+[2025-08-19T05:54:46.430Z] INFO: GET /api/auth/status 304 - - 4.253 ms
+[2025-08-19T05:54:46.440Z] INFO: GET /api/auth/status 304 - - 2.894 ms
+[2025-08-19T05:57:43.648Z] INFO: POST /api/auth/signin 200 325 - 1158.224 ms
+[2025-08-19T05:57:43.701Z] INFO: GET /api/auth/status 304 - - 2.998 ms
+[2025-08-19T05:57:43.707Z] INFO: GET /api/auth/status 304 - - 1.533 ms
+[2025-08-19T05:58:21.707Z] INFO: GET /api/auth/status 304 - - 1.557 ms
+[2025-08-19T05:58:21.711Z] INFO: GET /api/auth/status 304 - - 1.398 ms
+[2025-08-19T05:58:53.145Z] INFO: GET /api/auth/status 304 - - 2.135 ms
+[2025-08-19T05:58:53.155Z] INFO: GET /api/auth/status 304 - - 2.657 ms
+[2025-08-19T11:34:29.633Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-19T11:35:02.647Z] INFO: POST /api/auth/google-signin 200 458 - 2514.330 ms
+[2025-08-19T11:35:02.718Z] INFO: GET /api/auth/status 304 - - 26.707 ms
+[2025-08-19T11:35:02.733Z] INFO: GET /api/auth/status 304 - - 3.903 ms
+[2025-08-19T11:36:40.021Z] INFO: GET /api/auth/status 304 - - 2.541 ms
+[2025-08-19T11:36:40.025Z] INFO: GET /api/auth/status 304 - - 1.295 ms
+[2025-08-19T11:36:52.713Z] INFO: GET /api/auth/status 304 - - 2.095 ms
+[2025-08-19T11:36:52.723Z] INFO: GET /api/auth/status 304 - - 2.809 ms
