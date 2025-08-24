@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import getApi from "./helpers/API/getApi";
 
 export default function RoleProtectedRoute({ allowedRoles, children }) {
-  const [authStatus, setAuthStatus] = useState(null); 
+  const [authStatus, setAuthStatus] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,12 +13,12 @@ export default function RoleProtectedRoute({ allowedRoles, children }) {
   const checkAuthStatus = async () => {
     try {
       const response = await getApi("/api/auth/status", {
-        credentials: 'include'
+        credentials: "include",
       });
-      
+
       if (response.data.success && response.data.authenticated) {
         console.log("Auth status response:", response.data);
-        
+
         setAuthStatus(response.data);
       } else {
         setAuthStatus({ authenticated: false });
@@ -34,7 +34,7 @@ export default function RoleProtectedRoute({ allowedRoles, children }) {
     return <div>Loading...</div>;
   }
 
-  if (!authStatus?.authenticated) {    
+  if (!authStatus?.authenticated) {
     return <Navigate to="/signin" replace />;
   }
 

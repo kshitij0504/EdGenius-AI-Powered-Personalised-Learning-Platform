@@ -1,4 +1,97 @@
-import { useState } from "react";
+// const handleAddChapter = () => {
+//   if (newChapter.title.trim()) {
+//     const newChapterData = {
+//       id: Date.now().toString(),
+//       title: newChapter.title,
+//       order: courseData.chapters.length + 1,
+//       lessons: [],
+//     };
+//     setCourseData((prev) => ({
+//       ...prev,
+//       chapters: [...prev.chapters, newChapterData],
+//     }));
+//     setNewChapter({ title: "" });
+//     setIsAddingChapter(false);
+//   }
+// };
+
+// const handleDeleteChapter = (chapterId) => {
+//   setCourseData((prev) => ({
+//     ...prev,
+//     chapters: prev.chapters.filter((chapter) => chapter.id !== chapterId),
+//   }));
+// };
+
+// const handleEditChapter = (chapterId, newTitle) => {
+//   setCourseData((prev) => ({
+//     ...prev,
+//     chapters: prev.chapters.map((chapter) =>
+//       chapter.id === chapterId ? { ...chapter, title: newTitle } : chapter
+//     ),
+//   }));
+//   setEditingChapter(null);
+// };
+
+// const handleAddLesson = (chapterId) => {
+//   if (newLesson.title.trim()) {
+//     const chapter = courseData.chapters.find((c) => c.id === chapterId);
+//     const newLessonData = {
+//       id: `${chapterId}-${Date.now()}`,
+//       title: newLesson.title,
+//       content: newLesson.content,
+//       videoUrl: newLesson.videoUrl || null,
+//       order: chapter.lessons.length + 1,
+//     };
+
+//     setCourseData((prev) => ({
+//       ...prev,
+//       chapters: prev.chapters.map((chapter) =>
+//         chapter.id === chapterId
+//           ? { ...chapter, lessons: [...chapter.lessons, newLessonData] }
+//           : chapter
+//       ),
+//     }));
+
+//     setNewLesson({ title: "", content: "", videoUrl: "" });
+//     setIsAddingLesson(null);
+//   }
+// };
+
+// const handleDeleteLesson = (chapterId, lessonId) => {
+//   setCourseData((prev) => ({
+//     ...prev,
+//     chapters: prev.chapters.map((chapter) =>
+//       chapter.id === chapterId
+//         ? {
+//             ...chapter,
+//             lessons: chapter.lessons.filter(
+//               (lesson) => lesson.id !== lessonId
+//             ),
+//           }
+//         : chapter
+//     ),
+//   }));
+// };
+
+// const handleEditLesson = (chapterId, lessonId, updatedLesson) => {
+//   setCourseData((prev) => ({
+//     ...prev,
+//     chapters: prev.chapters.map((chapter) =>
+//       chapter.id === chapterId
+//         ? {
+//             ...chapter,
+//             lessons: chapter.lessons.map((lesson) =>
+//               lesson.id === lessonId
+//                 ? { ...lesson, ...updatedLesson }
+//                 : lesson
+//             ),
+//           }
+//         : chapter
+//     ),
+//   }));
+//   setEditingLesson(null);
+// };
+import { useState, useEffect } from "react";
 import {
   BookOpenIcon,
   PlusIcon,
@@ -12,8 +105,23 @@ import {
   AcademicCapIcon,
 } from "@heroicons/react/24/outline";
 import Sidebar from "../Instructorsidebar/Instructorsidebar";
+import {
+  getModules,
+  createModule,
+  updateModule,
+  deleteModule,
+} from "../../../helpers/API/moduleApi";
+import {
+  getLessonsByModule,
+  createLesson,
+  updateLesson,
+  deleteLesson,
+} from "../../../helpers/API/lessonApi";
+import { useParams } from "react-router-dom";
 
 const AddContentPage = () => {
+  const { courseId } = useParams();
+
   const user = {
     name: "Dr. Eleanor Vance",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
@@ -27,49 +135,10 @@ const AddContentPage = () => {
   const [isAddingLesson, setIsAddingLesson] = useState(null);
   const [editingChapter, setEditingChapter] = useState(null);
   const [editingLesson, setEditingLesson] = useState(null);
+  const [newLessonTitle, setNewLessonTitle] = useState(""); // <-- add this
+  const [newLessonContent, setNewLessonContent] = useState("");
 
-  // Sample course data
-  const [courseData, setCourseData] = useState({
-    title: "Advanced JavaScript",
-    chapters: [
-      {
-        id: "1",
-        title: "Introduction to Advanced Concepts",
-        order: 1,
-        lessons: [
-          {
-            id: "1-1",
-            title: "ES6+ Features Overview",
-            content: "Comprehensive overview of modern JavaScript features",
-            videoUrl: "https://example.com/video1",
-            order: 1,
-          },
-          {
-            id: "1-2",
-            title: "Arrow Functions Deep Dive",
-            content: "Understanding arrow functions and their use cases",
-            videoUrl: null,
-            order: 2,
-          },
-        ],
-      },
-      {
-        id: "2",
-        title: "Asynchronous Programming",
-        order: 2,
-        lessons: [
-          {
-            id: "2-1",
-            title: "Promises and Async/Await",
-            content: "Mastering asynchronous JavaScript",
-            videoUrl: "https://example.com/video2",
-            order: 1,
-          },
-        ],
-      },
-    ],
-  });
-
+  const [courseData, setCourseData] = useState({ title: "", chapters: [] });
   const [newChapter, setNewChapter] = useState({ title: "" });
   const [newLesson, setNewLesson] = useState({
     title: "",
@@ -77,107 +146,104 @@ const AddContentPage = () => {
     videoUrl: "",
   });
 
-  const toggleChapter = (chapterId) => {
-    setExpandedChapters((prev) => ({
-      ...prev,
-      [chapterId]: !prev[chapterId],
-    }));
+  // fetch modules + lessons
+  const fetchModules = async () => {
+    try {
+      const res = await getModules(courseId);
+      const modules = res.data.data;
+
+      const withLessons = await Promise.all(
+        modules.map(async (m) => {
+          const lessonsRes = await getLessonsByModule(m.id);
+          return { ...m, lessons: lessonsRes.data.data };
+        })
+      );
+
+      setCourseData({ title: "Your Course Title", chapters: withLessons });
+    } catch (err) {
+      console.error("Error fetching modules:", err);
+    }
   };
 
-  const handleAddChapter = () => {
-    if (newChapter.title.trim()) {
-      const newChapterData = {
-        id: Date.now().toString(),
-        title: newChapter.title,
-        order: courseData.chapters.length + 1,
-        lessons: [],
-      };
-      setCourseData((prev) => ({
-        ...prev,
-        chapters: [...prev.chapters, newChapterData],
-      }));
+  useEffect(() => {
+    if (courseId) fetchModules();
+  }, [courseId]);
+
+  const toggleChapter = (chapterId) => {
+    setExpandedChapters((prev) => ({ ...prev, [chapterId]: !prev[chapterId] }));
+  };
+
+  // ------------------ CHAPTER HANDLERS ------------------
+  const handleAddChapter = async (title) => {
+    try {
+      await createModule(courseId, { title });
+      await fetchModules();
       setNewChapter({ title: "" });
       setIsAddingChapter(false);
+    } catch (err) {
+      console.error("Error adding chapter:", err);
     }
   };
 
-  const handleDeleteChapter = (chapterId) => {
-    setCourseData((prev) => ({
-      ...prev,
-      chapters: prev.chapters.filter((chapter) => chapter.id !== chapterId),
-    }));
+  const handleDeleteChapter = async (chapterId) => {
+    try {
+      await deleteModule(chapterId);
+      await fetchModules();
+    } catch (err) {
+      console.error("Error deleting chapter:", err);
+    }
   };
 
-  const handleEditChapter = (chapterId, newTitle) => {
-    setCourseData((prev) => ({
-      ...prev,
-      chapters: prev.chapters.map((chapter) =>
-        chapter.id === chapterId ? { ...chapter, title: newTitle } : chapter
-      ),
-    }));
-    setEditingChapter(null);
+  const handleEditChapter = async (chapterId, newTitle) => {
+    try {
+      await updateModule(chapterId, { title: newTitle });
+      await fetchModules();
+      setEditingChapter(null);
+    } catch (err) {
+      console.error("Error editing chapter:", err);
+    }
   };
 
-  const handleAddLesson = (chapterId) => {
-    if (newLesson.title.trim()) {
-      const chapter = courseData.chapters.find((c) => c.id === chapterId);
-      const newLessonData = {
-        id: `${chapterId}-${Date.now()}`,
-        title: newLesson.title,
-        content: newLesson.content,
-        videoUrl: newLesson.videoUrl || null,
-        order: chapter.lessons.length + 1,
-      };
+  const handleAddLesson = async (chapterId, { title, content, videoUrl }) => {
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("moduleId", chapterId);
+      if (videoUrl) {
+        formData.append("video", videoUrl); // must be a File object
+      }
 
-      setCourseData((prev) => ({
-        ...prev,
-        chapters: prev.chapters.map((chapter) =>
-          chapter.id === chapterId
-            ? { ...chapter, lessons: [...chapter.lessons, newLessonData] }
-            : chapter
-        ),
-      }));
+      console.log("Sending lesson data:", [...formData.entries()]);
 
+      await createLesson(formData);
+
+      await fetchModules(); // refresh UI after adding lesson
       setNewLesson({ title: "", content: "", videoUrl: "" });
       setIsAddingLesson(null);
+    } catch (err) {
+      console.error("Error adding lesson:", err.response?.data || err.message);
     }
   };
 
-  const handleDeleteLesson = (chapterId, lessonId) => {
-    setCourseData((prev) => ({
-      ...prev,
-      chapters: prev.chapters.map((chapter) =>
-        chapter.id === chapterId
-          ? {
-              ...chapter,
-              lessons: chapter.lessons.filter(
-                (lesson) => lesson.id !== lessonId
-              ),
-            }
-          : chapter
-      ),
-    }));
+  const handleDeleteLesson = async (lessonId) => {
+    try {
+      await deleteLesson(lessonId);
+      await fetchModules();
+    } catch (err) {
+      console.error("Error deleting lesson:", err);
+    }
   };
 
-  const handleEditLesson = (chapterId, lessonId, updatedLesson) => {
-    setCourseData((prev) => ({
-      ...prev,
-      chapters: prev.chapters.map((chapter) =>
-        chapter.id === chapterId
-          ? {
-              ...chapter,
-              lessons: chapter.lessons.map((lesson) =>
-                lesson.id === lessonId
-                  ? { ...lesson, ...updatedLesson }
-                  : lesson
-              ),
-            }
-          : chapter
-      ),
-    }));
-    setEditingLesson(null);
+  const handleEditLesson = async (lessonId, updatedData) => {
+    try {
+      await updateLesson(lessonId, updatedData);
+      await fetchModules();
+      setEditingLesson(null);
+    } catch (err) {
+      console.error("Error editing lesson:", err);
+    }
   };
-
   return (
     <div className="flex min-h-screen bg-[var(--color-edgenius-bg-lightest)]">
       {isSidebarOpen && (
@@ -257,7 +323,7 @@ const AddContentPage = () => {
               />
               <div className="flex space-x-2">
                 <button
-                  onClick={handleAddChapter}
+                  onClick={() => handleAddChapter(newChapter.title)}
                   className="bg-[var(--color-edgenius-accent-dark)] text-[var(--color-edgenius-button-text)] px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-200 font-semibold"
                 >
                   Add Chapter
@@ -365,7 +431,7 @@ const AddContentPage = () => {
                       onChange={(e) =>
                         setNewLesson({ ...newLesson, title: e.target.value })
                       }
-                      className="w-full px-4 py-3 border border-[var(--color-edgenius-accent-light)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-edgenius-accent-medium)] transition-all"
+                      className="w-full px-4 py-3 border rounded-xl"
                     />
                     <textarea
                       placeholder="Lesson content (optional)"
@@ -374,21 +440,27 @@ const AddContentPage = () => {
                         setNewLesson({ ...newLesson, content: e.target.value })
                       }
                       rows="3"
-                      className="w-full px-4 py-3 border border-[var(--color-edgenius-accent-light)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-edgenius-accent-medium)] transition-all resize-none"
+                      className="w-full px-4 py-3 border rounded-xl resize-none"
                     />
                     <input
-                      type="url"
-                      placeholder="Video URL (optional)"
-                      value={newLesson.videoUrl}
+                      type="file"
+                      accept="video/*"
                       onChange={(e) =>
-                        setNewLesson({ ...newLesson, videoUrl: e.target.value })
+                        setNewLesson({ ...newLesson, video: e.target.files[0] })
                       }
-                      className="w-full px-4 py-3 border border-[var(--color-edgenius-accent-light)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-edgenius-accent-medium)] transition-all"
+                      placeholder="Video URL (optional)"
+                      className="w-full px-4 py-3 border rounded-xl"
                     />
                     <div className="flex space-x-2">
                       <button
-                        onClick={() => handleAddLesson(chapter.id)}
-                        className="bg-[var(--color-edgenius-accent-dark)] text-[var(--color-edgenius-button-text)] px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-200 font-semibold"
+                        onClick={() =>
+                          handleAddLesson(chapter.id, {
+                            title: newLesson.title,
+                            content: newLesson.content,
+                            videoUrl: newLesson.video,
+                          })
+                        }
+                        className="bg-[var(--color-edgenius-accent-dark)] text-white px-6 py-3 rounded-xl"
                       >
                         Add Lesson
                       </button>
@@ -401,7 +473,7 @@ const AddContentPage = () => {
                             videoUrl: "",
                           });
                         }}
-                        className="bg-gray-500 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-200 font-semibold"
+                        className="bg-gray-500 text-white px-6 py-3 rounded-xl"
                       >
                         Cancel
                       </button>
@@ -502,9 +574,7 @@ const AddContentPage = () => {
                                   <PencilIcon className="h-4 w-4" />
                                 </button>
                                 <button
-                                  onClick={() =>
-                                    handleDeleteLesson(chapter.id, lesson.id)
-                                  }
+                                  onClick={() => handleDeleteLesson(lesson.id)}
                                   className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                                   title="Delete Lesson"
                                 >

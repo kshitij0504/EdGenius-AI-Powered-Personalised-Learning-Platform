@@ -61,31 +61,31 @@ const LoginPage = () => {
   };
 
   // Handle Google Login Success
- const handleGoogleSuccess = async (credentialResponse) => {
-  try {
-    const { data } = await axios.post(
-      "http://localhost:8000/api/auth/google-signin",
-      { credential: credentialResponse.credential },
-      { withCredentials: true } // Enables cookies
-    );
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/auth/google-signin",
+        { credential: credentialResponse.credential },
+        { withCredentials: true } // Enables cookies
+      );
 
-    if (data.success) {
-      // Redirect based on user role
-      if (data.data.user.role === "USER") {
-        navigate("/studentdash");
-      } else if (data.data.user.role === "INSTRUCTOR") {
-        navigate("/instructordash");
+      if (data.success) {
+        // Redirect based on user role
+        if (data.data.user.role === "USER") {
+          navigate("/studentdash");
+        } else if (data.data.user.role === "INSTRUCTOR") {
+          navigate("/instructordash");
+        }
+      } else {
+        console.error("Google login failed:", data.message);
       }
-    } else {
-      console.error("Google login failed:", data.message);
+    } catch (error) {
+      console.error(
+        "Google login error:",
+        error.response?.data || error.message
+      );
     }
-  } catch (error) {
-    console.error(
-      "Google login error:",
-      error.response?.data || error.message
-    );
-  }
-};
+  };
 
   // Handle Google Login Error
   const handleGoogleError = () => {
