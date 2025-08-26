@@ -10,6 +10,7 @@ import {
   XMarkIcon,
   HomeModernIcon,
 } from "@heroicons/react/24/outline";
+import { LogOut } from "lucide-react";
 import { TbBrain } from "react-icons/tb";
 
 const Sidebar = ({
@@ -17,6 +18,7 @@ const Sidebar = ({
   unreadNotifications,
   isSidebarOpen,
   setIsSidebarOpen,
+  isDarkMode = false,
 }) => {
   const navItems = [
     { name: "Home", icon: HomeModernIcon, href: "/studentdash" },
@@ -34,50 +36,104 @@ const Sidebar = ({
   const utilityItems = [
     { name: "Settings", icon: Cog6ToothIcon, href: "#settings" },
     { name: "Help & Support", icon: QuestionMarkCircleIcon, href: "#help" },
+    { name: "Logout", icon: LogOut, href: "/" },
   ];
+
+  const isActive = (href) => window.location.pathname === href;
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen w-64 z-40 overflow-y-auto
-                  bg-[var(--color-edgenius-accent-dark)] text-[var(--color-edgenius-button-text)]
-                  flex flex-col shadow-lg rounded-r-xl
-                  transform transition-transform duration-300 ease-in-out
+      className={`fixed top-0 left-0 h-screen w-64 z-40 overflow-y-auto flex flex-col shadow-xl border-r
+                  transform transition-all duration-300 ease-out
                   ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                  lg:static lg:translate-x-0 lg:w-64 lg:h-auto lg:rounded-r-xl lg:shadow-lg`}
+                  lg:static lg:translate-x-0 lg:w-64 lg:h-auto
+                  ${
+                    isDarkMode
+                      ? "bg-gray-900 text-gray-100 border-gray-700"
+                      : "bg-white text-gray-800 border-gray-200"
+                  }`}
     >
-      <div className="flex items-center justify-between h-20 border-b border-[var(--color-edgenius-text-dark-gray)] px-4">
-        <div className="flex items-center space-x-3 group cursor-pointer animate-fade-in-right">
-          <TbBrain className="text-[var(--color-edgenius-accent-lightest)] text-4xl group-hover:scale-110 transition-transform duration-300" />
-          <h1 className="text-3xl font-extrabold text-[var(--color-edgenius-accent-lighest)]">
+      <div
+        className={`flex items-center justify-between h-20 px-6 border-b transition-colors duration-300 ${
+          isDarkMode ? "border-gray-700" : "border-gray-200"
+        }`}
+      >
+        <div className="flex items-center space-x-3 cursor-pointer">
+          <div
+            className={`p-2 rounded-xl transition-all duration-300 ${
+              isDarkMode
+                ? "bg-gradient-to-br from-blue-600 to-blue-700 shadow-lg"
+                : "bg-gradient-to-br from-blue-500 to-blue-600 shadow-md"
+            }`}
+          >
+            <TbBrain className="text-white text-2xl" />
+          </div>
+          <h1
+            className={`text-2xl font-bold transition-colors duration-300 ${
+              isDarkMode
+                ? "text-white bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent"
+                : "text-gray-900 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent"
+            }`}
+          >
             Edgenius
           </h1>
         </div>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden text-[var(--color-edgenius-button-text)] hover:text-[var(--color-edgenius-primary)] focus:outline-none"
+          className={`lg:hidden p-2 rounded-lg transition-all duration-200 ${
+            isDarkMode
+              ? "hover:bg-gray-800 text-gray-300 hover:text-white hover:shadow-lg"
+              : "hover:bg-gray-100 text-gray-600 hover:text-gray-900 hover:shadow-md"
+          }`}
           aria-label="Toggle sidebar"
         >
           {isSidebarOpen ? (
-            <XMarkIcon className="h-7 w-7" />
+            <XMarkIcon className="h-5 w-5" />
           ) : (
-            <Bars3Icon className="h-7 w-7" />
+            <Bars3Icon className="h-5 w-5" />
           )}
         </button>
       </div>
+
       <nav className="flex-1 px-4 py-6 overflow-y-auto">
         <ul className="space-y-2">
-          {navItems.map((item) => (
-            <li key={item.name}>
+          {navItems.map((item, index) => (
+            <li
+              key={item.name}
+              className="animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
               <a
                 href={item.href}
-                className="flex items-center p-3 text-lg font-medium rounded-md hover:bg-[var(--color-edgenius-light-blue)] hover:text-white transition-colors duration-200"
-                onClick={() => setIsSidebarOpen(true)}
+                className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02]
+                  ${
+                    isActive(item.href)
+                      ? isDarkMode
+                        ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-900/30"
+                        : "bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 shadow-md shadow-blue-200/50"
+                      : isDarkMode
+                      ? "hover:bg-gray-800 text-gray-300 hover:text-white hover:shadow-lg hover:shadow-gray-900/20"
+                      : "hover:bg-blue-50 text-gray-700 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100/50"
+                  }`}
+                onClick={() => setIsSidebarOpen(false)}
               >
-                <item.icon className="h-6 w-6 mr-4" />
-                {item.name}
+                <div
+                  className={`p-1 rounded-lg mr-3 transition-all duration-200 ${
+                    isActive(item.href)
+                      ? isDarkMode
+                        ? "bg-white/20"
+                        : "bg-white/80"
+                      : isDarkMode
+                      ? "group-hover:bg-blue-600/30"
+                      : "group-hover:bg-blue-100"
+                  }`}
+                >
+                  <item.icon className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <span className="truncate">{item.name}</span>
                 {item.name === "Notifications" && unreadNotifications > 0 && (
-                  <span className="ml-auto bg-red-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                    {unreadNotifications}
+                  <span className="ml-auto bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full min-w-[20px] text-center animate-pulse shadow-lg">
+                    {unreadNotifications > 99 ? "99+" : unreadNotifications}
                   </span>
                 )}
               </a>
@@ -86,20 +142,55 @@ const Sidebar = ({
         </ul>
 
         {utilityItems.length > 0 && (
-          <div className="mt-8 pt-8 border-t border-[var(--color-edgenius-text-dark-gray)]">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-edgenius-text-medium-gray)] mb-4">
+          <div
+            className={`mt-8 pt-6 border-t transition-colors duration-300 ${
+              isDarkMode ? "border-gray-700" : "border-gray-200"
+            }`}
+          >
+            <h3
+              className={`text-xs font-semibold uppercase tracking-wider mb-4 transition-colors duration-300 ${
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
               Utility
             </h3>
             <ul className="space-y-2">
-              {utilityItems.map((item) => (
-                <li key={item.name}>
+              {utilityItems.map((item, index) => (
+                <li
+                  key={item.name}
+                  className="animate-fade-in-up"
+                  style={{
+                    animationDelay: `${(navItems.length + index) * 0.1}s`,
+                  }}
+                >
                   <a
                     href={item.href}
-                    className="flex items-center p-3 text-lg font-medium rounded-md hover:bg-[var(--color-edgenius-light-blue)] hover:text-white transition-colors duration-200"
-                    onClick={() => setIsSidebarOpen(false)} // Close sidebar on nav item click (mobile)
+                    className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02]
+                      ${
+                        isActive(item.href)
+                          ? isDarkMode
+                            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-900/30"
+                            : "bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 shadow-md shadow-blue-200/50"
+                          : isDarkMode
+                          ? "hover:bg-gray-800 text-gray-300 hover:text-white hover:shadow-lg hover:shadow-gray-900/20"
+                          : "hover:bg-blue-50 text-gray-700 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100/50"
+                      }`}
+                    onClick={() => setIsSidebarOpen(false)}
                   >
-                    <item.icon className="h-6 w-6 mr-4" />
-                    {item.name}
+                    <div
+                      className={`p-1 rounded-lg mr-3 transition-all duration-200 ${
+                        isActive(item.href)
+                          ? isDarkMode
+                            ? "bg-white/20"
+                            : "bg-white/80"
+                          : isDarkMode
+                          ? "group-hover:bg-blue-600/30"
+                          : "group-hover:bg-blue-100"
+                      }`}
+                    >
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="truncate">{item.name}</span>
                   </a>
                 </li>
               ))}
@@ -107,18 +198,53 @@ const Sidebar = ({
           </div>
         )}
       </nav>
+
       {user && (
-        <div className="flex items-center p-4 border-t border-[var(--color-edgenius-text-dark-gray)]">
-          <img
-            src={user.avatar}
-            alt={user.name}
-            className="w-10 h-10 rounded-full border-2 border-[var(--color-edgenius-primary)]"
-          />
-          <div className="ml-3">
-            <p className="text-white text-md font-semibold">{user.name}</p>
-            <p className="text-[var(--color-edgenius-text-medium-gray)] text-sm">
-              Level {user.level} | {user.xpPoints} XP
+        <div
+          className={`flex items-center p-4 border-t transition-all duration-300 ${
+            isDarkMode
+              ? "border-gray-700 bg-gradient-to-r from-gray-800/50 to-gray-900/50"
+              : "border-gray-200 bg-gradient-to-r from-gray-50/50 to-blue-50/30"
+          }`}
+        >
+          <div className="relative">
+            <img
+              src={user.avatar}
+              alt={user.name}
+              className={`w-12 h-12 rounded-full object-cover shadow-lg transition-all duration-300 ${
+                isDarkMode
+                  ? "ring-2 ring-blue-500/70"
+                  : "ring-2 ring-blue-400/70"
+              }`}
+            />
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-md animate-pulse"></div>
+          </div>
+          <div className="ml-3 flex-1 min-w-0">
+            <p
+              className={`font-semibold truncate transition-colors duration-300 ${
+                isDarkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {user.name}
             </p>
+            <div className="flex items-center space-x-2 text-sm mt-1">
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 ${
+                  isDarkMode
+                    ? "bg-gradient-to-r from-blue-900/60 to-blue-800/60 text-blue-200 border border-blue-700/50 shadow-lg"
+                    : "bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border border-blue-300/50 shadow-md"
+                }`}
+              >
+                Level {user.level}
+              </span>
+              <span
+                className={`font-medium transition-colors duration-300 ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
+                {user.xpPoints} XP
+              </span>
+            </div>
           </div>
         </div>
       )}

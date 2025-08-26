@@ -8,7 +8,6 @@ const Navbar = () => {
     return localStorage.getItem("theme") === "dark";
   });
 
-  // Sync dark mode with body class
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
@@ -74,7 +73,6 @@ const Navbar = () => {
     <>
       <style>
         {`
-        /* Your existing CSS variables remain same */
         :root {
           --color-edgenius-light-cream: #FFFBDE;
           --color-edgenius-light-blue:rgb(61, 128, 214);
@@ -127,7 +125,6 @@ const Navbar = () => {
             <span className="text-2xl font-bold text-[#1a73e8]">EdGenius</span>
           </motion.div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6 items-center">
             {navLinks.slice(0, 5).map((link) => (
               <motion.a
@@ -142,17 +139,17 @@ const Navbar = () => {
               </motion.a>
             ))}
 
-            {/* Dark Mode Button */}
             <motion.button
               onClick={() => setDarkMode((prev) => !prev)}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              className="p-2 rounded-full bg-[#1b6fdd]
+              "
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               {darkMode ? (
                 <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5 text-white " />
               )}
             </motion.button>
 
@@ -168,7 +165,6 @@ const Navbar = () => {
             </motion.a>
           </div>
 
-          {/* Mobile Toggle */}
           <div className="md:hidden flex space-x-2">
             <motion.button
               onClick={() => setDarkMode((prev) => !prev)}
@@ -198,7 +194,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div

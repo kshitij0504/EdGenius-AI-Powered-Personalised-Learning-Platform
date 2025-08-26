@@ -129,7 +129,7 @@ const SignupPage = () => {
   const [errors, setErrors] = useState({});
   // const [isLoading, setIsLoading] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState([]);
-  const {signUpUser, isLoading} = useContext(AuthContext);
+  const { signUpUser, isLoading } = useContext(AuthContext);
   const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const getPasswordStrength = () => {
@@ -190,20 +190,19 @@ const SignupPage = () => {
   };
 
   const handleFinalSubmit = async () => {
-  const userData = {
-    firstName: formData.firstName.trim(),
-    lastName: formData.lastName.trim(),
-    email: formData.email,
-    password: formData.password,
-    interests: selectedInterests,
+    const userData = {
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      email: formData.email,
+      password: formData.password,
+      interests: selectedInterests,
+    };
+
+    const result = await signUpUser(userData);
+    if (result.success) {
+      navigate("/studentdash");
+    }
   };
-
-  const result = await signUpUser(userData);
-  if (result.success) {
-    navigate("/studentdash");
-  }
-};
-
 
   const handleSocialSignup = (provider) => {
     console.log(`Sign up with ${provider}`);
@@ -580,6 +579,10 @@ const SignupPage = () => {
                     </>
                   )}
                 </button>
+                <p className="mt-4 text-center text-sm text-gray-600">
+                  After you click "Finish Signup," we'll send a verification
+                  email. You must verify your email to log in to your account.
+                </p>
               </div>
               <div className="text-center mt-7">
                 <Link
