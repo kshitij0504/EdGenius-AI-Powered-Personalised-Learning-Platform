@@ -1059,3 +1059,68 @@
 [2025-08-24T13:21:29.409Z] INFO: GET /api/auth/status 304 - - 1.155 ms
 [2025-08-24T13:21:29.450Z] INFO: GET /api/module/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1768 - 4.963 ms
 [2025-08-24T13:21:29.456Z] INFO: GET /api/module/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1768 - 3.803 ms
+[2025-08-24T13:43:07.728Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-24T13:43:35.813Z] INFO: POST /api/auth/signin 200 235 - 2618.584 ms
+[2025-08-24T13:43:35.940Z] INFO: GET /api/auth/status 200 163 - 9.561 ms
+[2025-08-24T13:43:35.949Z] INFO: GET /api/auth/status 304 - - 4.001 ms
+[2025-08-24T13:43:41.882Z] INFO: GET /api/courses 200 1566 - 334.073 ms
+[2025-08-24T13:43:42.044Z] INFO: GET /api/courses 304 - - 157.803 ms
+[2025-08-24T13:43:52.944Z] INFO: GET /api/courses 304 - - 228.698 ms
+[2025-08-24T13:43:53.106Z] INFO: GET /api/courses 304 - - 157.778 ms
+[2025-08-24T13:43:59.284Z] INFO: GET /api/module/cce8c496-975b-4235-82f4-42dfdc610712 200 286 - 324.915 ms
+[2025-08-24T13:43:59.451Z] INFO: GET /api/module/cce8c496-975b-4235-82f4-42dfdc610712 304 - - 162.618 ms
+[2025-08-24T13:44:00.291Z] INFO: GET /api/lesson/1ab2ce28-206b-4f05-a901-2f5205ee029f 200 403 - 997.187 ms
+[2025-08-24T13:44:00.544Z] INFO: GET /api/lesson/1ab2ce28-206b-4f05-a901-2f5205ee029f 304 - - 249.583 ms
+[2025-08-24T13:44:29.462Z] INFO: GET /api/courses 304 - - 412.307 ms
+[2025-08-24T13:44:29.630Z] INFO: GET /api/courses 304 - - 163.744 ms
+[2025-08-24T13:44:34.926Z] INFO: GET /api/courses 304 - - 174.590 ms
+[2025-08-24T13:44:35.091Z] INFO: GET /api/courses 304 - - 161.263 ms
+[2025-08-27T03:05:56.961Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T04:52:17.472Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T04:56:59.443Z] INFO: POST /api/search/search?q=javascript 404 157 - 3.440 ms
+[2025-08-27T04:58:05.544Z] INFO: GET /api/search/search?q=javascript 500 49 - 5175.529 ms
+[2025-08-27T04:58:16.521Z] INFO: GET /api/search/search?q=javascript 500 49 - 5079.915 ms
+[2025-08-27T04:58:26.406Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T04:58:38.802Z] INFO: GET /api/search/search?q=javascript 500 49 - 5136.586 ms
+[2025-08-27T05:00:16.716Z] INFO: POST /api/auth/signin 500 1719 - 5129.059 ms
+[2025-08-27T05:03:10.967Z] INFO: POST /api/auth/signin 200 235 - 3425.286 ms
+[2025-08-27T05:04:43.892Z] INFO: GET /api/search/search?q=javascript 200 1038 - 2953.875 ms
+[2025-08-27T05:05:02.308Z] INFO: GET /api/search/search?q=node 200 244 - 726.921 ms
+[2025-08-27T05:17:41.659Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:17:53.802Z] INFO: GET /api/search/search?q=node 200 244 - 1606.205 ms
+[2025-08-27T05:18:25.762Z] INFO: GET /api/search/search?q=ja 200 1030 - 2606.834 ms
+[2025-08-27T05:20:47.545Z] INFO: GET /api/search/search?q=py 500 49 - 10005.581 ms
+[2025-08-27T05:31:53.379Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:32:07.842Z] INFO: GET /api/courses/filter?category=Design&minPrice=0&maxPrice=100&isFree=true&sort=price&order=asc&page=1&limit=5%0A 401 1632 - 2.976 ms
+[2025-08-27T05:32:26.529Z] INFO: POST /api/auth/signin 200 235 - 3044.415 ms
+[2025-08-27T05:32:30.154Z] INFO: GET /api/courses/filter?category=Design&minPrice=0&maxPrice=100&isFree=true&sort=price&order=asc&page=1&limit=5%0A 404 482 - 470.977 ms
+[2025-08-27T05:33:07.614Z] INFO: GET /api/search/filter?category=Design&minPrice=0&maxPrice=100&isFree=true&sort=price&order=asc&page=1&limit=5%0A 200 267 - 1741.547 ms
+[2025-08-27T05:33:33.192Z] INFO: GET /api/search/filter?category=development&minPrice=0&maxPrice=100&isFree=true&sort=price&order=asc&page=1&limit=5%0A 200 272 - 1078.604 ms
+[2025-08-27T05:33:47.334Z] INFO: GET /api/search/filter?category=development&minPrice=0&maxPrice=3000&isFree=true&sort=price&order=asc&page=1&limit=5%0A 200 273 - 419.913 ms
+[2025-08-27T05:34:01.257Z] INFO: GET /api/search/filter?category=development&minPrice=0&maxPrice=3000%0A 200 918 - 3431.761 ms
+[2025-08-27T05:40:46.851Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:40:49.582Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:53:34.698Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:54:07.886Z] INFO: GET /api/search/filter?category=Development&minPrice=0&maxPrice=3000%0A 200 7435 - 8105.726 ms
+[2025-08-27T05:56:15.765Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T05:56:17.694Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T06:30:22.686Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T06:30:32.419Z] INFO: POST /api/auth/signin 200 235 - 2095.779 ms
+[2025-08-27T06:30:55.883Z] INFO: GET /api/search/filter?category=Development%0A 200 244 - 921.494 ms
+[2025-08-27T06:33:48.485Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T06:47:09.283Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T06:47:48.088Z] INFO: GET /api/search/search?q=Ad 200 7503 - 3608.613 ms
+[2025-08-27T06:48:44.080Z] INFO: GET /api/courses 200 26041 - 1461.121 ms
+[2025-08-27T06:49:05.779Z] INFO: GET /api/search/filter?category=Development%0A 200 244 - 1207.513 ms
+[2025-08-27T06:50:03.209Z] INFO: GET /api/search/filter?category=Development&minPrice=0&maxPrice=0 200 272 - 924.617 ms
+[2025-08-27T06:50:24.532Z] INFO: GET /api/search/filter?category=Development&minPrice=0&maxPrice=0 200 272 - 577.678 ms
+[2025-08-27T06:50:36.723Z] INFO: GET /api/search/filter?category=Programming&minPrice=0&maxPrice=0 200 272 - 459.140 ms
+[2025-08-27T06:51:21.984Z] INFO: GET /api/search/search?q=Next 200 976 - 2202.920 ms
+[2025-08-27T06:51:55.874Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T06:52:39.792Z] INFO: POST /api/auth/google-signin 200 458 - 2374.545 ms
+[2025-08-27T06:52:39.851Z] INFO: GET /api/auth/status 200 149 - 6.502 ms
+[2025-08-27T06:52:39.865Z] INFO: GET /api/auth/status 304 - - 4.521 ms
+[2025-08-27T06:53:33.467Z] INFO: GET /api/auth/status 304 - - 2.028 ms
+[2025-08-27T06:53:33.483Z] INFO: GET /api/auth/status 304 - - 2.523 ms
+[2025-08-27T06:53:50.664Z] INFO: GET /api/auth/status 304 - - 1.988 ms
+[2025-08-27T06:53:50.673Z] INFO: GET /api/auth/status 304 - - 2.742 ms
