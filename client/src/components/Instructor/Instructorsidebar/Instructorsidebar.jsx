@@ -1,136 +1,320 @@
-import { NavLink, useLocation } from "react-router-dom";
+// import { useState } from "react";
+// import { Link } from "react-router-dom"; // <-- Import Link here
+// import {
+//   UserGroupIcon,
+//   BookOpenIcon,
+//   ChartBarIcon,
+//   AcademicCapIcon,
+//   StarIcon,
+//   Bars3Icon,
+//   ChevronRightIcon,
+//   Cog6ToothIcon,
+//   ChatBubbleBottomCenterTextIcon,
+//   HomeIcon,
+// } from "@heroicons/react/24/outline";
+// import { TbBrain } from "react-icons/tb";
+
+// // Sidebar Component
+// const Sidebar = ({ user, onHoverChange }) => {
+//   const [isHovered, setIsHovered] = useState(false);
+
+//   const handleMouseEnter = () => {
+//     setIsHovered(true);
+//     onHoverChange && onHoverChange(true);
+//   };
+
+//   const handleMouseLeave = () => {
+//     setIsHovered(false);
+//     onHoverChange && onHoverChange(false);
+//   };
+
+//   const navItems = [
+//     {
+//       name: "Dashboard",
+//       icon: HomeIcon,
+//       href: "/Instructordash",
+//       active: true,
+//     },
+//     { name: "My Courses", icon: BookOpenIcon, href: "/instructor/courses" },
+//     { name: "Students", icon: AcademicCapIcon, href: "/instructor/students" },
+//   ];
+
+//   const utilityItems = [
+//     { name: "Settings", icon: Cog6ToothIcon, href: "/instructor/settings" }, // fixed typo here
+//     { name: "Support", icon: ChatBubbleBottomCenterTextIcon, href: "/contact" },
+//   ];
+
+//   return (
+//     <aside
+//       className={`fixed top-0 left-0 h-screen z-40 overflow-hidden
+//                   bg-white border-r border-gray-200 shadow-lg
+//                   flex flex-col transition-all duration-300 ease-in-out
+//                   ${isHovered ? "w-64" : "w-20"}
+//                   group`}
+//       onMouseEnter={handleMouseEnter}
+//       onMouseLeave={handleMouseLeave}
+//     >
+//       {/* Header */}
+//       <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
+//         <div className="flex items-center space-x-3 min-w-0">
+//           <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+//             <TbBrain className="text-white text-2xl" />
+//           </div>
+//           <h1
+//             className={`text-xl font-semibold text-gray-900 transition-all duration-300 ${
+//               isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+//             }`}
+//           >
+//             Edgenius
+//           </h1>
+//         </div>
+
+//         {/* Expand Arrow */}
+//         <div
+//           className={`transition-all duration-300 ${
+//             isHovered ? "opacity-0" : "opacity-100"
+//           }`}
+//         >
+//           <ChevronRightIcon className="h-5 w-5 text-gray-400" />
+//         </div>
+//       </div>
+
+//       {/* Navigation */}
+//       <nav className="flex-1 px-3 py-6">
+//         <div className="space-y-4">
+//           {navItems.map((item) => (
+//             <Link
+//               key={item.name}
+//               to={item.href}
+//               className={`group/item flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer
+//                  ${
+//                    item.active
+//                      ? "bg-blue-100 text-blue-700"
+//                      : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+//                  }`}
+//               title={!isHovered ? item.name : ""}
+//             >
+//               <item.icon className="h-8 w-8 flex-shrink-0 transition-colors duration-150" />
+//               <span
+//                 className={`ml-3 transition-all duration-300 whitespace-nowrap ${
+//                   isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+//                 }`}
+//               >
+//                 {item.name}
+//               </span>
+
+//               {/* Active indicator */}
+//               {item.active && (
+//                 <div
+//                   className={`absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-blue-600 rounded-l-full transition-opacity duration-200 ${
+//                     isHovered ? "opacity-0" : "opacity-100"
+//                   }`}
+//                 />
+//               )}
+//             </Link>
+//           ))}
+//         </div>
+
+//         {/* Utility Section */}
+//         <div className="mt-8 pt-6 border-t border-gray-100">
+//           <div className="space-y-2">
+//             {utilityItems.map((item) => (
+//               <Link
+//                 key={item.name}
+//                 to={item.href}
+//                 className="group/item flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out cursor-pointer text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+//                 title={!isHovered ? item.name : ""}
+//               >
+//                 <item.icon className="h-6 w-6 flex-shrink-0" />
+//                 <span
+//                   className={`ml-3 transition-all duration-300 whitespace-nowrap ${
+//                     isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+//                   }`}
+//                 >
+//                   {item.name}
+//                 </span>
+//               </Link>
+//             ))}
+//           </div>
+//         </div>
+//       </nav>
+
+//       {/* User Profile */}
+//       {user && (
+//         <div className="flex items-center px-3 py-4 border-t border-gray-100 bg-blue-50">
+//           <img
+//             src={user.avatar}
+//             alt={user.name}
+//             className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-blue-200"
+//           />
+//           <div
+//             className={`ml-3 min-w-0 flex-1 transition-all duration-300 ${
+//               isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+//             }`}
+//           >
+//             <p className="text-sm font-medium text-gray-900 truncate">
+//               {user.name}
+//             </p>
+//             <p className="text-xs text-blue-600 truncate">
+//               Level {user.level} • {user.xpPoints} XP
+//             </p>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Hover indicator line */}
+//       <div
+//         className={`absolute right-0 top-0 w-1 h-full bg-blue-200 transition-opacity duration-200 ${
+//           isHovered ? "opacity-100" : "opacity-0"
+//         }`}
+//       />
+//     </aside>
+//   );
+// };
+
+// export default Sidebar;
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   BookOpenIcon,
   AcademicCapIcon,
+  HomeIcon,
   Cog6ToothIcon,
   ChatBubbleBottomCenterTextIcon,
-  Bars3Icon,
-  XMarkIcon,
-  HomeModernIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { TbBrain } from "react-icons/tb";
 
-const Sidebar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
-  const location = useLocation();
+const Sidebar = ({ user, onHoverChange }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    onHoverChange && onHoverChange(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    onHoverChange && onHoverChange(false);
+  };
 
   const navItems = [
-    { name: "Dashboard", icon: HomeModernIcon, href: "/Instructordash" },
-    { name: "My Courses", icon: BookOpenIcon, href: "/instructor/courses" },
     {
-      name: "Enrolled Students",
-      icon: AcademicCapIcon,
-      href: "/instructor/students",
+      name: "Dashboard",
+      icon: HomeIcon,
+      href: "/Instructordash",
+      active: true,
     },
+    { name: "My Courses", icon: BookOpenIcon, href: "/instructor/courses" },
+    { name: "Students", icon: AcademicCapIcon, href: "/instructor/students" },
   ];
 
   const utilityItems = [
-    { name: "Settings", icon: Cog6ToothIcon, href: "/settings" },
-    {
-      name: "Contact Form",
-      icon: ChatBubbleBottomCenterTextIcon,
-      href: "/contact",
-    },
+    { name: "Settings", icon: Cog6ToothIcon, href: "/instructor/settings" },
+    { name: "Support", icon: ChatBubbleBottomCenterTextIcon, href: "/contact" },
   ];
-
-  const handleNavClick = () => {
-    setIsSidebarOpen(false);
-  };
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen w-64 z-40 overflow-y-auto
-                  bg-[var(--color-edgenius-accent-dark)] text-[var(--color-edgenius-button-text)]
-                  flex flex-col shadow-lg
-                  transform transition-transform duration-300 ease-in-out
-                  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                  lg:static lg:translate-x-0 lg:w-64 lg:h-auto lg:shadow-lg`}
+      className={`fixed top-0 left-0 h-screen z-40 
+        bg-white border-r border-gray-200 shadow-lg flex flex-col 
+        transition-all duration-300 ease-in-out
+        ${isHovered ? "w-64" : "w-20"}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="flex items-center justify-between h-20 border-b border-[var(--color-edgenius-accent-medium)] px-4">
-        <div className="flex items-center space-x-3 group cursor-pointer">
-          <TbBrain className="text-[var(--color-edgenius-accent-light)] text-4xl group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
-          <h1 className="text-3xl font-extrabold text-[var(--color-edgenius-button-text)]">
+      {/* Header */}
+      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
+        <div className="flex items-center space-x-3 min-w-0">
+          <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <TbBrain className="text-white text-2xl" />
+          </div>
+          <h1
+            className={`text-xl font-semibold text-gray-900 transition-all duration-300 ${
+              isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+            }`}
+          >
             Edgenius
           </h1>
         </div>
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden text-[var(--color-edgenius-button-text)] hover:text-[var(--color-edgenius-accent-light)] focus:outline-none"
-          aria-label="Toggle sidebar"
+        <div
+          className={`transition-all duration-300 ${
+            isHovered ? "opacity-0" : "opacity-100"
+          }`}
         >
-          {isSidebarOpen ? (
-            <XMarkIcon className="h-7 w-7" />
-          ) : (
-            <Bars3Icon className="h-7 w-7" />
-          )}
-        </button>
+          <ChevronRightIcon className="h-5 w-5 text-gray-400" />
+        </div>
       </div>
 
-      <nav className="flex-1 px-4 py-6 overflow-y-auto">
-        <ul className="space-y-2">
+      {/* Navigation */}
+      <nav className="flex-1 px-3 py-6">
+        <div className="space-y-4">
           {navItems.map((item) => (
-            <li key={item.name}>
-              <NavLink
-                to={item.href}
-                onClick={handleNavClick}
-                className={({ isActive }) =>
-                  `flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200
-                   ${
-                     isActive
-                       ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg transform scale-105"
-                       : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
-                   }`
-                }
+            <Link
+              key={item.name}
+              to={item.href}
+              className={`group/item flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out relative cursor-pointer
+                ${
+                  item.active
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              title={!isHovered ? item.name : ""}
+            >
+              <item.icon className="h-6 w-6 flex-shrink-0" />
+              <span
+                className={`ml-3 transition-all duration-300 whitespace-nowrap ${
+                  isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+                }`}
               >
-                <item.icon className="h-6 w-6 mr-4" />
                 {item.name}
-              </NavLink>
-            </li>
+              </span>
+            </Link>
           ))}
-        </ul>
+        </div>
 
-        {utilityItems.length > 0 && (
-          <div className="mt-8 pt-8 border-t border-[var(--color-edgenius-accent-medium)]">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-edgenius-accent-light)] mb-4">
-              Utility
-            </h3>
-            <ul className="space-y-2">
-              {utilityItems.map((item) => (
-                <li key={item.name}>
-                  <NavLink
-                    to={item.href}
-                    onClick={handleNavClick}
-                    className={({ isActive }) =>
-                      `flex items-center p-3 text-lg font-medium rounded-xl transition-all duration-200
-                       ${
-                         isActive
-                           ? "bg-[var(--color-edgenius-accent-light)] text-[var(--color-edgenius-text-primary)] shadow-lg transform scale-105"
-                           : "hover:bg-[var(--color-edgenius-accent-medium)] hover:text-[var(--color-edgenius-button-text)]"
-                       }`
-                    }
-                  >
-                    <item.icon className="h-6 w-6 mr-4" />
-                    {item.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+        {/* Utility Section */}
+        <div className="mt-8 pt-6 border-t border-gray-100">
+          <div className="space-y-2">
+            {utilityItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="group/item flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out cursor-pointer text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                title={!isHovered ? item.name : ""}
+              >
+                <item.icon className="h-6 w-6 flex-shrink-0" />
+                <span
+                  className={`ml-3 transition-all duration-300 whitespace-nowrap ${
+                    isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+                  }`}
+                >
+                  {item.name}
+                </span>
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
       </nav>
 
+      {/* User Profile */}
       {user && (
-        <div className="flex items-center p-4 border-t border-[var(--color-edgenius-accent-medium)] bg-[var(--color-edgenius-accent-medium)]/30">
+        <div className="flex items-center px-3 py-4 border-t border-gray-100 bg-blue-50">
           <img
             src={user.avatar}
             alt={user.name}
-            className="w-12 h-12 rounded-full border-2 border-[var(--color-edgenius-accent-light)] shadow-lg"
+            className="w-10 h-10 rounded-full object-cover flex-shrink-0 border-2 border-blue-200"
           />
-          <div className="ml-3">
-            <p className="text-[var(--color-edgenius-button-text)] text-md font-semibold">
+          <div
+            className={`ml-3 min-w-0 flex-1 transition-all duration-300 ${
+              isHovered ? "opacity-100 w-auto" : "opacity-0 w-0 ml-0"
+            }`}
+          >
+            <p className="text-sm font-medium text-gray-900 truncate">
               {user.name}
             </p>
-            <p className="text-[var(--color-edgenius-accent-light)] text-sm">
-              Level {user.level} | {user.xpPoints} XP
+            <p className="text-xs text-blue-600 truncate">
+              Level {user.level} • {user.xpPoints} XP
             </p>
           </div>
         </div>
