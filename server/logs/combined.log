@@ -1177,3 +1177,9 @@
 [2025-08-26T07:17:09.870Z] INFO: GET /api/auth/status 304 - - 3.610 ms
 [2025-08-26T07:17:09.876Z] INFO: GET /api/auth/status 304 - - 2.237 ms
 [2025-08-27T08:58:03.934Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T08:58:33.085Z] INFO: POST /api/auth/signin 200 508 - 1854.440 ms
+[2025-08-27T08:58:33.138Z] INFO: GET /api/auth/status 304 - - 3.021 ms
+[2025-08-27T08:58:33.143Z] INFO: GET /api/auth/status 304 - - 1.740 ms
+[2025-08-27T08:59:53.832Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-27T08:59:54.459Z] INFO: GET /api/auth/status 304 - - 3.718 ms
+[2025-08-27T08:59:54.463Z] INFO: GET /api/auth/status 304 - - 1.698 ms
