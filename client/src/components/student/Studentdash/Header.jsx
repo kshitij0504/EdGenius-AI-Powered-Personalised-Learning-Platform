@@ -1,4 +1,5 @@
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import React, { useState, useEffect } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   IoSearchOutline,
   IoHomeOutline,
@@ -7,128 +8,159 @@ import {
   IoNotificationsOutline,
   IoMoonOutline,
   IoSunnyOutline,
+  IoBookOutline as IoBook2,
 } from "react-icons/io5";
-import { useState, useEffect } from "react";
 
-const Header = ({ user, toggleSidebar }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.body.classList.add("dark");
-    } else {
-      setIsDarkMode(false);
-      document.body.classList.remove("dark");
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-
-    if (newDarkMode) {
-      document.body.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+const Header = ({ user, toggleSidebar, isDarkMode, toggleDarkMode }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white dark:bg-[var(--auth-container-bg)] shadow-md py-4 px-6 flex items-center justify-between relative z-20 transition-colors duration-300">
+    <header
+      className={`shadow-md py-3 px-4 sm:px-6 flex items-center justify-between relative z-20 transition-all duration-300 ${
+        isDarkMode
+          ? "bg-gray-900 border-b border-gray-700"
+          : "bg-white border-b border-gray-200"
+      }`}
+    >
       <button
         onClick={toggleSidebar}
-        className="lg:hidden text-[var(--color-edgenius-text-dark)] hover:text-[var(--color-edgenius-primary)] focus:outline-none"
+        className={`lg:hidden focus:outline-none transition-colors duration-200 ${
+          isDarkMode
+            ? "text-gray-300 hover:text-white"
+            : "text-gray-600 hover:text-blue-600"
+        }`}
         aria-label="Toggle sidebar"
       >
         <Bars3Icon className="h-7 w-7" />
       </button>
 
-      <div
-        className="relative flex-grow mx-10 max-w-xl animate-fade-in-up"
-        style={{ animationDelay: "0.1s" }}
-      >
+      <div className="relative flex-grow mx-4 sm:mx-10 max-w-xs sm:max-w-md md:max-w-xl">
         <input
           type="text"
-          placeholder="Search courses, skills, or mentors..."
-          className="w-full pl-12 pr-6 py-3 rounded-full bg-white dark:bg-[var(--auth-input-bg)] border border-[var(--color-edgenius-accent-light)] dark:border-[var(--auth-input-border)] focus:outline-none focus:ring-3 focus:ring-[var(--color-edgenius-accent-medium)] dark:focus:ring-[var(--auth-input-focus)] focus:border-transparent text-[var(--color-edgenius-text-primary)] dark:text-[var(--auth-text-primary)] transition-all duration-300 placeholder-[var(--color-edgenius-text-secondary)] dark:placeholder-[var(--auth-text-secondary)]"
+          placeholder="Search..."
+          className={`w-full pl-10 pr-4 py-2 sm:py-3 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base transition-all duration-300 ${
+            isDarkMode
+              ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+          }`}
         />
-        <IoSearchOutline className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--color-edgenius-accent-dark)] dark:text-[var(--auth-text-secondary)] text-xl" />
+        <IoSearchOutline
+          className={`absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-lg sm:text-xl transition-colors duration-300 ${
+            isDarkMode ? "text-gray-400" : "text-gray-500"
+          }`}
+        />
       </div>
 
-      <nav className="flex items-center space-x-6">
-        <ul className="flex items-center space-x-7 text-[var(--color-edgenius-text-primary)] dark:text-[var(--auth-text-primary)]">
+      <nav className="flex items-center space-x-4 sm:space-x-6">
+        <button
+          className={`md:hidden transition-colors duration-200 ${
+            isDarkMode ? "text-gray-300" : "text-gray-600"
+          }`}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? (
+            <XMarkIcon className="h-7 w-7" />
+          ) : (
+            <Bars3Icon className="h-7 w-7" />
+          )}
+        </button>
+
+        <ul
+          className={`hidden md:flex items-center space-x-6 transition-colors duration-300 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
           {["Home", "Course", "Chatbot"].map((item, index) => (
             <li
               key={item}
               className="animate-fade-in-up"
               style={{ animationDelay: `${0.2 + index * 0.05}s` }}
             >
-              <a href="#" className="flex flex-col items-center group relative">
+              <a
+                href="#"
+                className="flex flex-col items-center group relative hover:text-blue-500 transition-colors duration-200"
+              >
                 {item === "Home" && (
-                  <IoHomeOutline className="text-2xl group-hover:text-[var(--color-edgenius-accent-medium)] dark:group-hover:text-[var(--auth-accent-hover)] transition-colors group-hover:scale-110" />
+                  <IoHomeOutline className="text-xl sm:text-2xl" />
                 )}
                 {item === "Course" && (
-                  <IoBookOutline className="text-2xl group-hover:text-[var(--color-edgenius-accent-medium)] dark:group-hover:text-[var(--auth-accent-hover)] transition-colors group-hover:scale-110" />
+                  <IoBookOutline className="text-xl sm:text-2xl" />
                 )}
                 {item === "Chatbot" && (
-                  <IoChatbubbleEllipsesOutline className="text-2xl group-hover:text-[var(--color-edgenius-accent-medium)] dark:group-hover:text-[var(--auth-accent-hover)] transition-colors group-hover:scale-110" />
+                  <IoChatbubbleEllipsesOutline className="text-xl sm:text-2xl" />
                 )}
-                <span className="text-xs mt-1 font-medium group-hover:text-[var(--color-edgenius-accent-medium)] dark:group-hover:text-[var(--auth-accent-hover)] transition-colors">
+                <span className="text-[10px] sm:text-xs mt-1 font-medium">
                   {item}
                 </span>
-                <span className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[var(--color-edgenius-accent-medium)] dark:bg-[var(--auth-accent-hover)] rounded-full group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
           ))}
         </ul>
 
-        <div
-          className="flex items-center space-x-5 ml-8 animate-fade-in-up"
-          style={{ animationDelay: "0.4s" }}
-        >
+        <div className="flex items-center space-x-3 sm:space-x-5 ml-2 sm:ml-8">
           <button
             onClick={toggleDarkMode}
-            className="relative p-2 rounded-full text-[var(--color-edgenius-accent-dark)] dark:text-[var(--auth-text-primary)] hover:bg-[rgba(145,200,228,0.3)] dark:hover:bg-[var(--auth-social-hover)] transition-all duration-300 group"
+            className={`relative p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+              isDarkMode
+                ? "text-yellow-400 hover:bg-gray-800 hover:shadow-lg"
+                : "text-gray-600 hover:bg-gray-100 hover:shadow-md"
+            }`}
             aria-label={
               isDarkMode ? "Switch to light mode" : "Switch to dark mode"
             }
           >
             {isDarkMode ? (
-              <IoSunnyOutline className="text-2xl group-hover:scale-110 transition-transform duration-300" />
+              <IoSunnyOutline className="text-xl sm:text-2xl" />
             ) : (
-              <IoMoonOutline className="text-2xl group-hover:scale-110 transition-transform duration-300" />
+              <IoMoonOutline className="text-xl sm:text-2xl" />
             )}
           </button>
 
-          <button className="relative p-2 rounded-full text-[var(--color-edgenius-accent-dark)] dark:text-[var(--auth-text-primary)] hover:bg-[rgba(145,200,228,0.3)] dark:hover:bg-[var(--auth-social-hover)] transition-colors">
-            <IoNotificationsOutline className="text-2xl" />
+          <button
+            className={`relative p-2 rounded-full transition-all duration-300 ${
+              isDarkMode
+                ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+                : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
+            }`}
+          >
+            <IoNotificationsOutline className="text-xl sm:text-2xl" />
             {user.unreadNotifications > 0 && (
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-[var(--color-edgenius-button-text)] bg-red-500 rounded-full transform translate-x-1/4 -translate-y-1/4 animate-bounce-subtle">
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 text-[10px] sm:text-xs font-bold leading-none text-white bg-red-500 rounded-full transform translate-x-1/4 -translate-y-1/4 animate-pulse">
                 {user.unreadNotifications}
               </span>
             )}
           </button>
-
-          <div className="flex items-center space-x-3 cursor-pointer group">
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-11 h-11 rounded-full border-2 border-[var(--color-edgenius-accent-medium)] dark:border-[var(--auth-accent)] object-cover shadow-sm group-hover:scale-105 transition-transform duration-300"
-            />
-            <span className="font-semibold text-[var(--color-edgenius-text-primary)] dark:text-[var(--auth-text-primary)] hidden md:block group-hover:text-[var(--color-edgenius-accent-medium)] dark:group-hover:text-[var(--auth-accent-hover)] transition-colors">
-              {user.name.split(" ")[0]}
-            </span>
-          </div>
         </div>
       </nav>
+
+      {mobileMenuOpen && (
+        <div
+          className={`absolute top-full left-0 w-full shadow-lg flex flex-col items-center py-4 space-y-4 md:hidden transition-all duration-300 ${
+            isDarkMode
+              ? "bg-gray-900 border-t border-gray-700"
+              : "bg-white border-t border-gray-200"
+          }`}
+        >
+          {["Home", "Course", "Chatbot"].map((item) => (
+            <a
+              key={item}
+              href="#"
+              className={`flex items-center space-x-2 transition-colors duration-200 ${
+                isDarkMode
+                  ? "text-gray-300 hover:text-white"
+                  : "text-gray-700 hover:text-blue-600"
+              }`}
+            >
+              {item === "Home" && <IoHomeOutline className="text-lg" />}
+              {item === "Course" && <IoBookOutline className="text-lg" />}
+              {item === "Chatbot" && (
+                <IoChatbubbleEllipsesOutline className="text-lg" />
+              )}
+              <span>{item}</span>
+            </a>
+          ))}
+        </div>
+      )}
     </header>
   );
 };

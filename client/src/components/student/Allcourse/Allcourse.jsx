@@ -1,18 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoBookmarks, IoPlayCircleOutline } from "react-icons/io5";
 import Sidebar from "../Studentsidebar/Studentsidebar";
+import Header from "../Studentdash/Header";
 import { Link, useLocation } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 
 const AllCoursesPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const page = parseInt(query.get("page") || "1", 10);
 
   const coursesPerPage = 6;
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+
+    if (newDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   const user = {
     name: "Aisha Sharma",
@@ -144,12 +174,16 @@ const AllCoursesPage = () => {
   const totalPages = Math.ceil(enrolledCourses.length / coursesPerPage);
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-edgenius-background-light)]">
+    <div
+      className={`flex min-h-screen transition-all duration-500 ${
+        isDarkMode ? "bg-gray-900" : "bg-gray-50"
+      }`}
+    >
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm lg:hidden z-30 transition-all duration-500"
           onClick={() => setIsSidebarOpen(false)}
-        ></div>
+        />
       )}
 
       <Sidebar
@@ -157,60 +191,122 @@ const AllCoursesPage = () => {
         unreadNotifications={user.unreadNotifications}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
+        isDarkMode={isDarkMode}
       />
 
       <div className="flex-1 flex flex-col">
-        <main className="flex-1 container mx-auto px-1 py-7">
-          <section className="bg-white p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in-up">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-edgenius-accent-dark)] mb-7 flex items-center">
-              <IoBookmarks className="text-[var(--color-edgenius-accent-medium)] mr-3 text-3xl sm:text-4xl" />
+        <Header
+          user={user}
+          toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+
+        <main className="flex-1 container mx-auto px-4 py-7 sm:px-6 lg:px-8 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div
+              className={`absolute top-1/2 right-1/4 w-20 h-20 rounded-full opacity-20 blur-xl animate-float ${
+                isDarkMode ? "bg-green-500" : "bg-green-400"
+              }`}
+              style={{ animationDelay: "1s" }}
+            />
+          </div>
+
+          <section
+            className={`p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in-up relative z-10 ${
+              isDarkMode
+                ? "bg-gray-800 border border-gray-700"
+                : "bg-white border border-gray-200"
+            }`}
+          >
+            <h3
+              className={`text-2xl sm:text-3xl font-extrabold mb-7 flex items-center ${
+                isDarkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              <IoBookmarks
+                className={`mr-3 text-3xl sm:text-4xl ${
+                  isDarkMode ? "text-blue-400" : "text-blue-600"
+                }`}
+              />
               All Courses
             </h3>
             {enrolledCourses.length === 0 ? (
-              <p className="text-center text-[var(--color-edgenius-text-secondary)] py-10 text-lg">
+              <p
+                className={`text-center py-10 text-lg ${
+                  isDarkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
                 You are not currently enrolled in any courses. Explore "All
                 Courses" to get started!
               </p>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {currentCourses.map((course) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                  {currentCourses.map((course, index) => (
                     <div
                       key={course.id}
-                      className="bg-gray-50 rounded-lg shadow-md border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1"
+                      className={`rounded-lg shadow-md border overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-slide-in-up ${
+                        isDarkMode
+                          ? "bg-gray-700 border-gray-600 hover:bg-gray-650"
+                          : "bg-gray-50 border-gray-200 hover:bg-white"
+                      }`}
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <img
-                        src={course.imageUrl}
-                        alt={course.title}
-                        className="w-full h-30 object-cover"
-                      />
+                      <div className="relative overflow-hidden">
+                        <img
+                          src={course.imageUrl}
+                          alt={course.title}
+                          className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
                       <div className="p-4">
-                        <h4 className="font-semibold text-[var(--color-edgenius-text-primary)] mb-1 text-lg line-clamp-1">
+                        <h4
+                          className={`font-semibold mb-1 text-lg line-clamp-2 ${
+                            isDarkMode ? "text-white" : "text-gray-900"
+                          }`}
+                        >
                           {course.title}
                         </h4>
-                        <p className="text-sm text-[var(--color-edgenius-text-secondary)] mb-2 line-clamp-2">
+                        <p
+                          className={`text-sm mb-3 line-clamp-2 ${
+                            isDarkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
                           {course.description}
                         </p>
-                        <div className="flex items-center text-sm text-gray-500 mb-3">
+                        <div
+                          className={`flex items-center text-sm mb-3 ${
+                            isDarkMode ? "text-gray-400" : "text-gray-500"
+                          }`}
+                        >
                           <span>Instructor: {course.instructor}</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+
+                        <div
+                          className={`w-full rounded-full h-2 mb-2 ${
+                            isDarkMode ? "bg-gray-600" : "bg-gray-200"
+                          }`}
+                        >
                           <div
-                            className="h-2 rounded-full"
-                            style={{
-                              width: `${course.progress || 0}%`,
-                              backgroundColor: "var(--color-edgenius-primary)",
-                            }}
+                            className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500"
+                            style={{ width: `${course.progress || 0}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-600 mt-1 text-right">
+                        <p
+                          className={`text-xs mb-4 text-right ${
+                            isDarkMode ? "text-gray-400" : "text-gray-600"
+                          }`}
+                        >
                           {course.progress || 0}% Completed
                         </p>
+
                         <button
                           onClick={() => handleContinueCourse(course.id)}
-                          className="mt-4 w-full bg-[var(--color-edgenius-accent-medium)] text-white px-4 py-2 rounded-full font-bold text-sm flex items-center justify-center hover:bg-[var(--color-edgenius-accent-dark)] transition-colors duration-300"
+                          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-full font-bold text-sm flex items-center justify-center transition-all duration-300 transform hover:scale-105"
                         >
-                          <IoPlayCircleOutline className="mr-2 text-lg" />{" "}
+                          <IoPlayCircleOutline className="mr-2 text-lg" />
                           Continue Course
                         </button>
                       </div>
@@ -223,6 +319,18 @@ const AllCoursesPage = () => {
                     <Pagination
                       page={page}
                       count={totalPages}
+                      sx={{
+                        "& .MuiPaginationItem-root": {
+                          color: isDarkMode ? "#E5E7EB" : "#374151",
+                          "&.Mui-selected": {
+                            backgroundColor: isDarkMode ? "#3B82F6" : "#3B82F6",
+                            color: "white",
+                          },
+                          "&:hover": {
+                            backgroundColor: isDarkMode ? "#374151" : "#F3F4F6",
+                          },
+                        },
+                      }}
                       renderItem={(item) => (
                         <PaginationItem
                           component={Link}
@@ -241,6 +349,59 @@ const AllCoursesPage = () => {
           </section>
         </main>
       </div>
+
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slide-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-up {
+          animation: slide-in-up 0.6s ease-out forwards;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
     </div>
   );
 };
