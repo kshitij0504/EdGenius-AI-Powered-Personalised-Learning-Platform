@@ -3,7 +3,10 @@ const jwt = require("jsonwebtoken");
 const prisma = require("../config/prisma");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
-const { sendVerificationEmail, sendPasswordResetEmail } = require("../utils/sendEmail");
+const {
+  sendVerificationEmail,
+  sendPasswordResetEmail,
+} = require("../utils/sendEmail");
 const { OAuth2Client } = require("google-auth-library");
 const {
   generateEmailVerificationToken,
@@ -141,9 +144,7 @@ const signin = async (email, password) => {
     interests: user.interests,
     role: user.role,
     redirectTo:
-      user.role === "INSTRUCTOR"
-        ? "/instructor/dashboard"
-        : "/user/home",
+      user.role === "INSTRUCTOR" ? "/instructor/dashboard" : "/user/home",
   };
 
   return {
@@ -151,7 +152,6 @@ const signin = async (email, password) => {
     user: userData,
   };
 };
-
 
 const googleLoginService = async (credential) => {
   let ticket;

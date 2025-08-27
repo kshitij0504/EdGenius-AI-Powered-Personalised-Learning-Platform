@@ -7,7 +7,8 @@ const createCourse = async (data, instructorId) => {
   const slug = slugify(title);
 
   const existing = await prisma.course.findUnique({ where: { slug } });
-  if (existing) throw new ApiError(409, "Course with this title already exists");
+  if (existing)
+    throw new ApiError(409, "Course with this title already exists");
 
   const course = await prisma.course.create({
     data: {
@@ -27,7 +28,9 @@ const createCourse = async (data, instructorId) => {
 const getAllPublishedCourses = async () => {
   return await prisma.course.findMany({
     where: { published: true },
-    include: { instructor: { select: { id: true, name: true, profilePhoto: true } } },
+    include: {
+      instructor: { select: { id: true, name: true, profilePhoto: true } },
+    },
     orderBy: { createdAt: "desc" },
   });
 };
