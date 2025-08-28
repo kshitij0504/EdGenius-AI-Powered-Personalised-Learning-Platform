@@ -1,3 +1,4 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   ChartBarSquareIcon,
   BookOpenIcon,
@@ -20,6 +21,9 @@ const Sidebar = ({
   setIsSidebarOpen,
   isDarkMode = false,
 }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const navItems = [
     { name: "Home", icon: HomeModernIcon, href: "/studentdash" },
     { name: "My Progress", icon: ChartBarSquareIcon, href: "/myprogress" },
@@ -34,27 +38,45 @@ const Sidebar = ({
   ];
 
   const utilityItems = [
-    { name: "Settings", icon: Cog6ToothIcon, href: "#settings" },
-    { name: "Help & Support", icon: QuestionMarkCircleIcon, href: "#help" },
-    { name: "Logout", icon: LogOut, href: "/" },
+    { name: "Settings", icon: Cog6ToothIcon, href: "/settings" },
+    { name: "Help & Support", icon: QuestionMarkCircleIcon, href: "/help" },
+    { name: "Logout", icon: LogOut, href: "/", isLogout: true },
   ];
 
-  const isActive = (href) => window.location.pathname === href;
+  const isActive = (href) => location.pathname === href;
+
+  const handleLogout = () => {
+    // Add your logout logic here (clear tokens, etc.)
+    // For example:
+    // localStorage.removeItem('token');
+    // sessionStorage.clear();
+    navigate("/");
+    setIsSidebarOpen(false);
+  };
+
+  const handleNavClick = (item) => {
+    if (item.isLogout) {
+      handleLogout();
+    } else {
+      setIsSidebarOpen(false);
+    }
+  };
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen w-64 z-40 overflow-y-auto flex flex-col shadow-xl border-r
+      className={`fixed top-0 left-0 h-screen w-64 z-40 flex flex-col shadow-xl border-r
                   transform transition-all duration-300 ease-out
                   ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                  lg:static lg:translate-x-0 lg:w-64 lg:h-auto
+                  lg:static lg:translate-x-0 lg:w-64 lg:h-screen
                   ${
                     isDarkMode
                       ? "bg-gray-900 text-gray-100 border-gray-700"
                       : "bg-white text-gray-800 border-gray-200"
                   }`}
     >
+      {/* Header */}
       <div
-        className={`flex items-center justify-between h-20 px-6 border-b transition-colors duration-300 ${
+        className={`flex items-center justify-between h-20 px-6 border-b flex-shrink-0 transition-colors duration-300 ${
           isDarkMode ? "border-gray-700" : "border-gray-200"
         }`}
       >
@@ -95,7 +117,8 @@ const Sidebar = ({
         </button>
       </div>
 
-      <nav className="flex-1 px-4 py-6 overflow-y-auto">
+      {/* Navigation - Scrollable Area */}
+      <nav className="flex-1 px-4 py-6 overflow-y-auto min-h-0">
         <ul className="space-y-2">
           {navItems.map((item, index) => (
             <li
@@ -103,8 +126,8 @@ const Sidebar = ({
               className="animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <a
-                href={item.href}
+              <Link
+                to={item.href}
                 className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02]
                   ${
                     isActive(item.href)
@@ -136,7 +159,7 @@ const Sidebar = ({
                     {unreadNotifications > 99 ? "99+" : unreadNotifications}
                   </span>
                 )}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -163,35 +186,58 @@ const Sidebar = ({
                     animationDelay: `${(navItems.length + index) * 0.1}s`,
                   }}
                 >
-                  <a
-                    href={item.href}
-                    className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02]
-                      ${
-                        isActive(item.href)
-                          ? isDarkMode
-                            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-900/30"
-                            : "bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 shadow-md shadow-blue-200/50"
-                          : isDarkMode
-                          ? "hover:bg-gray-800 text-gray-300 hover:text-white hover:shadow-lg hover:shadow-gray-900/20"
-                          : "hover:bg-blue-50 text-gray-700 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100/50"
-                      }`}
-                    onClick={() => setIsSidebarOpen(false)}
-                  >
-                    <div
-                      className={`p-1 rounded-lg mr-3 transition-all duration-200 ${
-                        isActive(item.href)
-                          ? isDarkMode
-                            ? "bg-white/20"
-                            : "bg-white/80"
-                          : isDarkMode
-                          ? "group-hover:bg-blue-600/30"
-                          : "group-hover:bg-blue-100"
-                      }`}
+                  {item.isLogout ? (
+                    <button
+                      onClick={() => handleNavClick(item)}
+                      className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02] w-full text-left
+                        ${
+                          isDarkMode
+                            ? "hover:bg-red-800 text-gray-300 hover:text-white hover:shadow-lg hover:shadow-red-900/20"
+                            : "hover:bg-red-50 text-gray-700 hover:text-red-600 hover:shadow-sm hover:shadow-red-100/50"
+                        }`}
                     >
-                      <item.icon className="h-5 w-5 flex-shrink-0" />
-                    </div>
-                    <span className="truncate">{item.name}</span>
-                  </a>
+                      <div
+                        className={`p-1 rounded-lg mr-3 transition-all duration-200 ${
+                          isDarkMode
+                            ? "group-hover:bg-red-600/30"
+                            : "group-hover:bg-red-100"
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5 flex-shrink-0" />
+                      </div>
+                      <span className="truncate">{item.name}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`group flex items-center p-3 text-sm font-medium rounded-xl transition-all duration-200 transform hover:scale-[1.02]
+                        ${
+                          isActive(item.href)
+                            ? isDarkMode
+                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-900/30"
+                              : "bg-gradient-to-r from-blue-100 to-blue-200 text-blue-700 shadow-md shadow-blue-200/50"
+                            : isDarkMode
+                            ? "hover:bg-gray-800 text-gray-300 hover:text-white hover:shadow-lg hover:shadow-gray-900/20"
+                            : "hover:bg-blue-50 text-gray-700 hover:text-blue-600 hover:shadow-sm hover:shadow-blue-100/50"
+                        }`}
+                      onClick={() => handleNavClick(item)}
+                    >
+                      <div
+                        className={`p-1 rounded-lg mr-3 transition-all duration-200 ${
+                          isActive(item.href)
+                            ? isDarkMode
+                              ? "bg-white/20"
+                              : "bg-white/80"
+                            : isDarkMode
+                            ? "group-hover:bg-blue-600/30"
+                            : "group-hover:bg-blue-100"
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5 flex-shrink-0" />
+                      </div>
+                      <span className="truncate">{item.name}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -199,9 +245,10 @@ const Sidebar = ({
         )}
       </nav>
 
+      {/* User Profile - Fixed at Bottom */}
       {user && (
         <div
-          className={`flex items-center p-4 border-t transition-all duration-300 ${
+          className={`flex items-center p-4 border-t flex-shrink-0 transition-all duration-300 ${
             isDarkMode
               ? "border-gray-700 bg-gradient-to-r from-gray-800/50 to-gray-900/50"
               : "border-gray-200 bg-gradient-to-r from-gray-50/50 to-blue-50/30"

@@ -26,13 +26,16 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  verificationToken    VerificationToken?
-  passwordResetTokens  PasswordResetToken[]
-  coursesEnrolled      Enrollment[]
-  coursesCreated       Course[]     @relation("InstructorCourses")
-  lessonCompletions    LessonProgress[]
-  Payment Payment[]
-  CartItem CartItem[]
+  verificationToken   VerificationToken?
+  passwordResetTokens PasswordResetToken[]
+  coursesEnrolled     Enrollment[]
+  coursesCreated      Course[]             @relation("InstructorCourses")
+  lessonCompletions   LessonProgress[]
+  Payment             Payment[]
+  CartItem            CartItem[]
+
+  @@index([name])
+  @@index([createdAt])
 }
 
 model Course {
@@ -47,13 +50,13 @@ model Course {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  instructor   User     @relation("InstructorCourses", fields: [instructorId], references: [id])
+  instructor   User   @relation("InstructorCourses", fields: [instructorId], references: [id])
   instructorId String
 
-  modules      Module[]
-  enrollments  Enrollment[]
-  Payment      Payment[] @relation("PaymentCourses")
-  CartItem     CartItem[]
+  modules     Module[]
+  enrollments Enrollment[]
+  Payment     Payment[]    @relation("PaymentCourses")
+  CartItem    CartItem[]
 
   // 🔥 Indexes to speed up search & filtering
   @@index([title])
@@ -69,36 +72,44 @@ model Module {
   order     Int
   course    Course   @relation(fields: [courseId], references: [id])
   courseId  String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  lessons   Lesson[]
+  lessons Lesson[]
+
+  @@index([courseId])
 }
 
 model Lesson {
-  id        String   @id @default(uuid())
-  title     String
-  content   String   // Markdown or HTML
-  videoUrl  String?
-  order     Int
-  module    Module   @relation(fields: [moduleId], references: [id])
-  moduleId  String
+  id       String  @id @default(uuid())
+  title    String
+  content  String // Markdown or HTML
+  videoUrl String?
+  order    Int
+  module   Module  @relation(fields: [moduleId], references: [id])
+  moduleId String
 
-  quizzes   Quiz[]
+  quizzes     Quiz[]
   completions LessonProgress[]
+
+  @@index([moduleId])
+  @@index([order])
 }
 
 model Enrollment {
-  id           String   @id @default(cuid())
-  user         User     @relation(fields: [userId], references: [id])
-  userId       String
-  course       Course   @relation(fields: [courseId], references: [id])
-  courseId     String
-  paymentId    String?  // Razorpay Payment ID (if paid)
-  enrolledAt   DateTime @default(now())
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  course     Course   @relation(fields: [courseId], references: [id])
+  courseId   String
+  paymentId  String? // Razorpay Payment ID (if paid)
+  enrolledAt DateTime @default(now())
+
+  @@index([courseId])
+  @@index([userId])
+  @@index([courseId, userId])
+  @@index([enrolledAt])
 }
-
-
 
 model CartItem {
   id        String   @id @default(uuid())
@@ -112,21 +123,19 @@ model CartItem {
 }
 
 model Payment {
-  id              String   @id @default(cuid())
-  user            User     @relation(fields: [userId], references: [id])
-  userId          String
-  courseId        String
-  razorpayOrderId String
+  id                String   @id @default(cuid())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            String
+  courseId          String
+  razorpayOrderId   String
   razorpayPaymentId String?
-  amount          Int
-  currency        String   @default("INR")
-  status          String   @default("PENDING") // PENDING, SUCCESS, FAILED
-  createdAt       DateTime @default(now())
+  amount            Int
+  currency          String   @default("INR")
+  status            String   @default("PENDING") // PENDING, SUCCESS, FAILED
+  createdAt         DateTime @default(now())
 
   Course Course[] @relation("PaymentCourses")
 }
-
-
 
 model LessonProgress {
   id              String    @id @default(uuid())
@@ -136,33 +145,35 @@ model LessonProgress {
   lessonId        String
   completed       Boolean   @default(false)
   completedAt     DateTime?
-  videoProgress   Float     @default(0.0)        // Percentage (0.0 to 100.0)
-  currentTime     Float     @default(0.0)        // Current time in seconds
-  duration        Float?                         // Total video duration in seconds
-  watchedSegments Json?                          // Array of watched segments
-  lastWatchedAt   DateTime?                      // Last time user watched
-  
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  
+  videoProgress   Float     @default(0.0) // Percentage (0.0 to 100.0)
+  currentTime     Float     @default(0.0) // Current time in seconds
+  duration        Float? // Total video duration in seconds
+  watchedSegments Json? // Array of watched segments
+  lastWatchedAt   DateTime? // Last time user watched
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+  @@index([userId, lessonId])
 }
 
-
 model Quiz {
-  id        String   @id @default(uuid())
-  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  id        String     @id @default(uuid())
+  lesson    Lesson     @relation(fields: [lessonId], references: [id])
   lessonId  String
   questions Question[]
 }
 
 model Question {
-  id        String   @id @default(uuid())
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
-  quizId    String
-  text      String
-  options   String[] // e.g. ["A", "B", "C", "D"]
-  correct   String
+  id      String   @id @default(uuid())
+  quiz    Quiz     @relation(fields: [quizId], references: [id])
+  quizId  String
+  text    String
+  options String[] // e.g. ["A", "B", "C", "D"]
+  correct String
 }
 
 model PasswordResetToken {

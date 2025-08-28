@@ -21,6 +21,9 @@ import SignupPage from "./components/Authentication/signup.jsx";
 import RoleProtectedRoute from "./RoleProtectedRoute.jsx";
 import NotAuthorized from "./pages/not-authorized.jsx";
 import NotFound from "./pages/404.jsx";
+import CourseDetailsPage from "./components/student/Allcourse/CourseDetail.jsx";
+import CheckoutPage from "./components/student/Allcourse/checkOutPage.jsx";
+import MyCourseDetailPage from "./components/student/StudentCourse/MyCourseDetail.jsx";
 
 function App() {
   return (
@@ -61,6 +64,30 @@ function App() {
           element={
             <RoleProtectedRoute allowedRoles={["USER"]}>
               <MyCoursesPage />
+            </RoleProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-course/:slug"
+          element={
+            <RoleProtectedRoute allowedRoles={["USER"]}>
+              <MyCourseDetailPage />
+            </RoleProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses/:slug"
+          element={
+            <RoleProtectedRoute allowedRoles={["USER"]}>
+              <CourseDetailsPage />
+            </RoleProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <RoleProtectedRoute allowedRoles={["USER"]}>
+              <CheckoutPage/>
             </RoleProtectedRoute>
           }
         />
