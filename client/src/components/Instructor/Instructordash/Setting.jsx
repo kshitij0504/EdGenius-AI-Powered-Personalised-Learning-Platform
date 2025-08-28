@@ -1,5 +1,10 @@
+import React from "react";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import SideBar from "../Instructorsidebar/Instructorsidebar";
+
 const SettingsPage = () => (
   <div className="space-y-6">
+    <SideBar />
     <div>
       <h3 className="text-3xl font-bold text-[var(--color-edgenius-text-primary)] mb-2">
         Settings
@@ -19,4 +24,5 @@ const SettingsPage = () => (
     </div>
   </div>
 );
+
 export default SettingsPage;

@@ -174,7 +174,7 @@ function App() {
           }
         />
         <Route
-          path="/instrctor/settings"
+          path="/instructor/settings"
           element={
             <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
               <SettingsPage />

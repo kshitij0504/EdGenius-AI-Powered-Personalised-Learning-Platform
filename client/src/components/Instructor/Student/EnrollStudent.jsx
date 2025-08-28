@@ -15,6 +15,7 @@ const EnrolledStudent = () => {
     level: 12,
     xpPoints: 3450,
   };
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [students] = useState([
     {
@@ -91,11 +92,15 @@ const EnrolledStudent = () => {
 
       <Sidebar
         user={user}
+        onHoverChange={setIsSidebarHovered}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
 
-      <div className="flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out">
+      <div
+        className={`flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out 
+          ${isSidebarHovered ? "ml-64" : "ml-20"}`}
+      >
         <header className="lg:hidden sticky top-0 bg-[var(--color-edgenius-bg-lightest)]">
           <div className="flex items-center justify-between h-16 mt-[-20px]">
             <button
