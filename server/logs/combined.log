@@ -128,6 +128,7 @@
 [2025-07-24T03:36:13.333Z] INFO: GET /api/auth/protected 200 187 - 3.300 ms
 [2025-07-24T03:36:28.801Z] INFO: POST /api/auth/signout 200 52 - 0.721 ms
 [2025-07-24T03:36:35.750Z] INFO: GET /api/auth/protected 401 1340 - 2.413 ms
+<<<<<<< HEAD
 [2025-07-27T06:49:37.156Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-27T06:50:35.900Z] INFO: POST /api/auth/signup 201 614 - 5704.127 ms
 [2025-07-27T06:50:53.636Z] INFO: GET /api/auth/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3NTM1OTkwMzEsImV4cCI6MTc1MzY4NTQzMX0.AxUwlqf6DwOAjGXdHPO3-ZksU5GRksFSLYeTE8QbJec 302 73 - 666.325 ms
@@ -180,6 +181,7 @@
 [2025-07-28T02:14:46.181Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
 [2025-07-28T02:14:51.753Z] INFO: GET / 200 28 - 1.412 ms
 [2025-07-28T02:14:51.802Z] INFO: GET /favicon.ico 404 150 - 2.268 ms
+=======
 [2025-07-21T05:22:54.823Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-27T08:21:58.812Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-27T08:25:21.864Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
@@ -200,6 +202,7 @@
 [2025-07-31T05:13:27.888Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-31T12:14:11.641Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-31T17:05:38.543Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+>>>>>>> roshni
 [2025-07-31T12:08:00.472Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-31T16:56:02.220Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-07-31T16:56:21.785Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
