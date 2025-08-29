@@ -1,7 +1,14 @@
 const prisma = require("../config/prisma");
 
 // 📌 Get Instructor Courses
-exports.getInstructorCourses = async ({ instructorId, page, limit, published, category, search }) => {
+exports.getInstructorCourses = async ({
+  instructorId,
+  page,
+  limit,
+  published,
+  category,
+  search,
+}) => {
   const skip = (page - 1) * limit;
 
   const whereClause = {
@@ -55,7 +62,9 @@ exports.getCourseDetails = async ({ courseId, instructorId }) => {
             include: {
               quizzes: { include: { questions: true } },
               completions: {
-                include: { user: { select: { id: true, name: true, email: true } } },
+                include: {
+                  user: { select: { id: true, name: true, email: true } },
+                },
               },
             },
           },
@@ -64,7 +73,9 @@ exports.getCourseDetails = async ({ courseId, instructorId }) => {
       },
       enrollments: {
         include: {
-          user: { select: { id: true, name: true, email: true, profilePhoto: true } },
+          user: {
+            select: { id: true, name: true, email: true, profilePhoto: true },
+          },
         },
         orderBy: { enrolledAt: "desc" },
       },
@@ -74,7 +85,14 @@ exports.getCourseDetails = async ({ courseId, instructorId }) => {
 };
 
 // 📌 Create Course
-exports.createCourse = async ({ instructorId, title, description, thumbnail, category, price }) => {
+exports.createCourse = async ({
+  instructorId,
+  title,
+  description,
+  thumbnail,
+  category,
+  price,
+}) => {
   const slug = title
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
@@ -102,6 +120,7 @@ exports.createCourse = async ({ instructorId, title, description, thumbnail, cat
 
 // 📌 Update Course
 exports.updateCourse = async ({ courseId, instructorId, updateData }) => {
+  console.log(updateData);
   if (updateData.title) {
     const baseSlug = updateData.title
       .toLowerCase()
@@ -111,6 +130,8 @@ exports.updateCourse = async ({ courseId, instructorId, updateData }) => {
       .trim("-");
     updateData.slug = `${baseSlug}-${Date.now()}`;
   }
+
+  console.log(updateData);
 
   return prisma.$transaction(async (tx) => {
     const updated = await tx.course.updateMany({
@@ -131,7 +152,11 @@ exports.updateCourse = async ({ courseId, instructorId, updateData }) => {
 };
 
 // 📌 Toggle Course Publication
-exports.toggleCoursePublication = async ({ courseId, instructorId, published }) => {
+exports.toggleCoursePublication = async ({
+  courseId,
+  instructorId,
+  published,
+}) => {
   const updated = await prisma.course.updateMany({
     where: { id: courseId, instructorId },
     data: { published: Boolean(published) },
@@ -154,7 +179,13 @@ exports.deleteCourse = async ({ courseId, instructorId }) => {
 };
 
 // 📌 Get Enrolled Students
-exports.getEnrolledStudents = async ({ instructorId, courseId, page, limit, search }) => {
+exports.getEnrolledStudents = async ({
+  instructorId,
+  courseId,
+  page,
+  limit,
+  search,
+}) => {
   const skip = (page - 1) * limit;
 
   const whereClause = {
@@ -219,7 +250,11 @@ exports.getStudentProgress = async ({ instructorId, userId, courseId }) => {
       },
       enrollments: {
         where: { userId },
-        include: { user: { select: { id: true, name: true, email: true, profilePhoto: true } } },
+        include: {
+          user: {
+            select: { id: true, name: true, email: true, profilePhoto: true },
+          },
+        },
       },
     },
   });

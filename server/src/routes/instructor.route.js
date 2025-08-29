@@ -3,26 +3,20 @@ const router = express.Router();
 const instructorController = require("../controllers/instructor.controller");
 const authenticate = require("../middleware/authMiddleware");
 const { isInstructor } = require("../utils/role");
+const upload = require("../middleware/multer");
 
 router.use(authenticate);
-router.get(
-  "/courses",
-  isInstructor,
-  instructorController.getInstructorCourses
-);
+router.get("/courses", isInstructor, instructorController.getInstructorCourses);
 router.get(
   "/courses/:courseId",
   isInstructor,
   instructorController.getCourseDetails
 );
-router.post(
-  "/courses",
-  isInstructor,
-  instructorController.createCourse
-);
+router.post("/courses", isInstructor, instructorController.createCourse);
 router.put(
   "/courses/:courseId",
   isInstructor,
+  upload.single("thumbnailFile"), // 👈 multer handles thumbnail file
   instructorController.updateCourse
 );
 router.patch(
@@ -35,14 +29,10 @@ router.delete(
   isInstructor,
   instructorController.deleteCourse
 );
-router.get(
-  "/students",
-  isInstructor,
-  instructorController.getEnrolledStudents
-);
+router.get("/students", isInstructor, instructorController.getEnrolledStudents);
 router.get(
   "/students/:userId/courses/:courseId",
-  isInstructor,     
+  isInstructor,
   instructorController.getStudentProgress
 );
 

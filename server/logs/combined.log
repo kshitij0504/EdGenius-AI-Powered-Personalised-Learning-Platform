@@ -2398,4 +2398,152 @@
 [2025-08-29T11:51:15.398Z] INFO: GET /api/auth/status 304 - - 2.198 ms
 [2025-08-29T11:51:21.086Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 5501.072 ms
 [2025-08-29T11:51:22.993Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1902.461 ms
+<<<<<<< Updated upstream
 >>>>>>> 81e5b6fdfe0bf3ce7146c462b185431a88927638
+=======
+[2025-08-29T12:16:36.903Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T12:39:20.727Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T12:40:11.331Z] INFO: GET /api/auth/status 304 - - 5.286 ms
+[2025-08-29T12:40:11.337Z] INFO: GET /api/auth/status 304 - - 2.183 ms
+[2025-08-29T12:40:48.196Z] INFO: GET /api/instructor/courses?page=1&limit=10 - - - - ms
+[2025-08-29T12:40:49.306Z] INFO: GET /api/auth/status 304 - - 1.835 ms
+[2025-08-29T12:40:49.311Z] INFO: GET /api/auth/status 304 - - 1.681 ms
+[2025-08-29T12:40:52.020Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 2683 - 2648.530 ms
+[2025-08-29T12:40:54.542Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 2519.811 ms
+[2025-08-29T12:52:39.497Z] INFO: GET /api/auth/status 304 - - 1.808 ms
+[2025-08-29T12:52:39.506Z] INFO: GET /api/auth/status 304 - - 2.575 ms
+[2025-08-29T12:53:10.813Z] INFO: GET /api/auth/status 304 - - 1.591 ms
+[2025-08-29T12:53:10.819Z] INFO: GET /api/auth/status 304 - - 1.684 ms
+[2025-08-29T12:53:24.409Z] INFO: PUT /api/instructor/courses/courses/undefined 404 179 - 8.620 ms
+[2025-08-29T12:53:41.781Z] INFO: GET /api/auth/status 304 - - 2.555 ms
+[2025-08-29T12:53:41.791Z] INFO: GET /api/auth/status 304 - - 2.817 ms
+[2025-08-29T12:53:48.170Z] INFO: PUT /api/instructor/courses/undefined 500 83 - 4.247 ms
+[2025-08-29T12:58:09.619Z] INFO: GET /api/auth/status 304 - - 2.814 ms
+[2025-08-29T12:58:09.626Z] INFO: GET /api/auth/status 304 - - 2.458 ms
+[2025-08-29T13:00:22.037Z] INFO: GET /api/auth/status 304 - - 1.611 ms
+[2025-08-29T13:00:22.041Z] INFO: GET /api/auth/status 304 - - 1.417 ms
+[2025-08-29T13:00:24.414Z] INFO: PUT /api/instructor/courses/undefined 500 83 - 5.076 ms
+[2025-08-29T13:02:07.600Z] INFO: GET /api/auth/status 304 - - 3.179 ms
+[2025-08-29T13:02:07.609Z] INFO: GET /api/auth/status 304 - - 3.086 ms
+[2025-08-29T13:02:28.320Z] INFO: GET /api/auth/status 304 - - 1.985 ms
+[2025-08-29T13:02:28.326Z] INFO: GET /api/auth/status 304 - - 2.476 ms
+[2025-08-29T13:02:30.633Z] INFO: GET /api/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 - - - - ms
+[2025-08-29T13:02:32.318Z] INFO: GET /api/auth/status 304 - - 2.340 ms
+[2025-08-29T13:02:32.323Z] INFO: GET /api/auth/status 304 - - 1.582 ms
+[2025-08-29T13:02:32.696Z] INFO: GET /api/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 484 - 187.286 ms
+[2025-08-29T13:02:32.900Z] INFO: GET /api/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 484 - 200.557 ms
+[2025-08-29T13:03:26.396Z] INFO: GET /api/auth/status 304 - - 2.762 ms
+[2025-08-29T13:03:26.402Z] INFO: GET /api/auth/status 304 - - 1.824 ms
+[2025-08-29T13:03:30.637Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 4027.883 ms
+[2025-08-29T13:03:32.355Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1713.561 ms
+[2025-08-29T13:03:35.536Z] INFO: GET /api/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 484 - 267.054 ms
+[2025-08-29T13:03:36.025Z] INFO: GET /api/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 484 - 483.652 ms
+[2025-08-29T13:11:00.304Z] INFO: GET /api/auth/status 304 - - 2.996 ms
+[2025-08-29T13:11:00.312Z] INFO: GET /api/auth/status 304 - - 1.642 ms
+[2025-08-29T13:11:00.455Z] INFO: GET /api/courses/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 195 - 0.610 ms
+[2025-08-29T13:11:00.462Z] INFO: GET /api/courses/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 404 195 - 0.502 ms
+[2025-08-29T13:11:22.303Z] INFO: GET /api/auth/status 304 - - 2.149 ms
+[2025-08-29T13:11:22.310Z] INFO: GET /api/auth/status 304 - - 2.642 ms
+[2025-08-29T13:11:26.947Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 200 2094 - 4439.244 ms
+[2025-08-29T13:11:28.819Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1865.590 ms
+[2025-08-29T13:11:40.219Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.479 ms
+[2025-08-29T13:15:07.682Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 5.653 ms
+[2025-08-29T13:16:18.808Z] INFO: GET /api/auth/status 304 - - 1.567 ms
+[2025-08-29T13:16:18.813Z] INFO: GET /api/auth/status 304 - - 1.370 ms
+[2025-08-29T13:16:20.358Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1330.894 ms
+[2025-08-29T13:16:21.865Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1502.258 ms
+[2025-08-29T13:16:49.706Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 2.984 ms
+[2025-08-29T13:17:07.480Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 2.933 ms
+[2025-08-29T13:17:58.783Z] INFO: GET /api/auth/status 304 - - 1.245 ms
+[2025-08-29T13:17:58.789Z] INFO: GET /api/auth/status 304 - - 1.564 ms
+[2025-08-29T13:18:04.177Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 5185.306 ms
+[2025-08-29T13:18:05.928Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1744.489 ms
+[2025-08-29T13:18:10.632Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.254 ms
+[2025-08-29T13:18:29.901Z] INFO: GET /api/auth/status 304 - - 1.313 ms
+[2025-08-29T13:18:29.909Z] INFO: GET /api/auth/status 304 - - 2.676 ms
+[2025-08-29T13:18:31.818Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1711.022 ms
+[2025-08-29T13:18:33.204Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1379.490 ms
+[2025-08-29T13:18:38.212Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.311 ms
+[2025-08-29T13:19:01.370Z] INFO: GET /api/auth/status 304 - - 1.785 ms
+[2025-08-29T13:19:01.376Z] INFO: GET /api/auth/status 304 - - 1.756 ms
+[2025-08-29T13:19:03.356Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1766.622 ms
+[2025-08-29T13:19:04.737Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1373.671 ms
+[2025-08-29T13:19:05.013Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.114 ms
+[2025-08-29T13:19:18.827Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.131 ms
+[2025-08-29T13:19:49.577Z] INFO: GET /api/auth/status 304 - - 1.386 ms
+[2025-08-29T13:19:49.583Z] INFO: GET /api/auth/status 304 - - 2.138 ms
+[2025-08-29T13:19:51.718Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1926.679 ms
+[2025-08-29T13:19:53.334Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1611.222 ms
+[2025-08-29T13:19:56.138Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 3.234 ms
+[2025-08-29T13:21:18.855Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:21:20.936Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 19.629 ms
+[2025-08-29T13:21:57.223Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:22:05.863Z] INFO: GET /api/auth/status 304 - - 6.769 ms
+[2025-08-29T13:22:05.868Z] INFO: GET /api/auth/status 304 - - 2.079 ms
+[2025-08-29T13:22:10.755Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 4693.258 ms
+[2025-08-29T13:22:12.183Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1419.592 ms
+[2025-08-29T13:22:15.846Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 83 - 4.269 ms
+[2025-08-29T13:23:40.935Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:23:43.717Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 55 - 19.214 ms
+[2025-08-29T13:23:51.955Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 55 - 7.094 ms
+[2025-08-29T13:25:56.195Z] INFO: GET /api/auth/status 304 - - 4.813 ms
+[2025-08-29T13:25:56.203Z] INFO: GET /api/auth/status 304 - - 3.293 ms
+[2025-08-29T13:26:01.063Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 4630.336 ms
+[2025-08-29T13:26:02.798Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1730.599 ms
+[2025-08-29T13:26:05.393Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 55 - 3.780 ms
+[2025-08-29T13:27:33.798Z] INFO: GET /api/auth/status 304 - - 1.709 ms
+[2025-08-29T13:27:33.805Z] INFO: GET /api/auth/status 304 - - 2.768 ms
+[2025-08-29T13:27:35.998Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1974.865 ms
+[2025-08-29T13:27:37.444Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1439.178 ms
+[2025-08-29T13:27:42.004Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 55 - 4.645 ms
+[2025-08-29T13:28:41.094Z] INFO: GET /api/auth/status 304 - - 3.044 ms
+[2025-08-29T13:28:41.103Z] INFO: GET /api/auth/status 304 - - 2.181 ms
+[2025-08-29T13:28:43.276Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1931.164 ms
+[2025-08-29T13:28:44.970Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1690.861 ms
+[2025-08-29T13:28:47.483Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 55 - 5.205 ms
+[2025-08-29T13:30:12.881Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:30:19.781Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1333 - 1693.901 ms
+[2025-08-29T13:30:30.776Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1333 - 441.953 ms
+[2025-08-29T13:30:41.439Z] INFO: GET /api/auth/status 304 - - 3.036 ms
+[2025-08-29T13:30:41.446Z] INFO: GET /api/auth/status 304 - - 2.836 ms
+[2025-08-29T13:30:44.401Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 2746.491 ms
+[2025-08-29T13:30:45.710Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1301.961 ms
+[2025-08-29T13:30:57.646Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1317 - 564.585 ms
+[2025-08-29T13:34:33.211Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:35:08.150Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:35:32.773Z] INFO: GET /api/auth/status 304 - - 7.520 ms
+[2025-08-29T13:35:32.779Z] INFO: GET /api/auth/status 304 - - 1.753 ms
+[2025-08-29T13:35:36.358Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 3374.851 ms
+[2025-08-29T13:35:37.581Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1216.008 ms
+[2025-08-29T13:35:50.001Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1318 - 496.526 ms
+[2025-08-29T13:37:02.310Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:37:27.260Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:37:35.470Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1318 - 1527.583 ms
+[2025-08-29T13:37:50.023Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:38:08.678Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:38:11.699Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1318 - 1649.274 ms
+[2025-08-29T13:39:56.970Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:40:13.345Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 200 668 - 2901.520 ms
+[2025-08-29T13:40:16.313Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 2712 - 2846.363 ms
+[2025-08-29T13:40:18.253Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1932.936 ms
+[2025-08-29T13:40:23.114Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 200 2123 - 2320.846 ms
+[2025-08-29T13:40:24.709Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1589.207 ms
+[2025-08-29T13:40:32.607Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 500 1591 - 11.681 ms
+[2025-08-29T13:43:34.163Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T13:43:46.078Z] INFO: PUT /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 200 705 - 6113.374 ms
+[2025-08-29T13:43:48.817Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 2749 - 2584.086 ms
+[2025-08-29T13:43:50.533Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1711.198 ms
+[2025-08-29T13:43:54.465Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 200 2160 - 2251.500 ms
+[2025-08-29T13:43:55.802Z] INFO: GET /api/instructor/courses/101e242f-bca5-4ac0-a157-cb4d5a03a811 304 - - 1330.841 ms
+[2025-08-29T13:44:26.313Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1801.644 ms
+[2025-08-29T13:44:28.221Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1903.588 ms
+[2025-08-29T13:44:31.802Z] INFO: GET /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 200 610 - 678.543 ms
+[2025-08-29T13:44:32.359Z] INFO: GET /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 304 - - 551.379 ms
+[2025-08-29T13:44:38.050Z] INFO: PUT /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 200 767 - 960.150 ms
+[2025-08-29T13:44:39.893Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 2762 - 1712.545 ms
+[2025-08-29T13:44:41.839Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1939.200 ms
+[2025-08-29T13:44:46.338Z] INFO: GET /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 200 623 - 578.667 ms
+[2025-08-29T13:44:46.958Z] INFO: GET /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 304 - - 615.613 ms
+[2025-08-29T13:45:04.157Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1949.081 ms
+[2025-08-29T13:45:05.742Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1580.425 ms
+>>>>>>> Stashed changes

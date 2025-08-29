@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const API_BASE = "http://localhost:8000/api/courses";
-const API_URL = "http://localhost:8000/api/instructor/courses";
+const API = "http://localhost:8000/api/instructor/courses";
 
 export const createCourse = async (courseData) => {
   const formData = new FormData();
@@ -29,7 +29,16 @@ export const getCourseBySlug = async (slug) => {
     withCredentials: true,
   });
 };
+export const getCourseById = async (courseId) => {
+  const token = Cookies.get("authToken");
 
+  return axios.get(`${API}/${courseId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    withCredentials: true,
+  });
+};
 export const getCoursesByInstructor = async ({
   page = 1,
   limit = 10,
@@ -40,7 +49,7 @@ export const getCoursesByInstructor = async ({
   try {
     const token = Cookies.get("authToken");
 
-    const res = await axios.get(API_URL, {
+    const res = await axios.get(API, {
       params: { page, limit, published, category, search },
       headers: { Authorization: `Bearer ${token}` },
       withCredentials: true,
@@ -53,19 +62,21 @@ export const getCoursesByInstructor = async ({
 };
 
 // ✅ Update Course
-export const updateCourse = async (courseId, updateData) => {
-  try {
-    const token = Cookies.get("authToken");
+export const updateCourse = async (courseId, courseData) => {
+  const formData = new FormData();
 
-    const res = await axios.put(`${API_URL}/${courseId}`, updateData, {
-      headers: { Authorization: `Bearer ${token}` },
-      withCredentials: true,
-    });
+  Object.keys(courseData).forEach((key) => {
+    if (courseData[key] !== null && courseData[key] !== undefined) {
+      formData.append(key, courseData[key]);
+    }
+  });
 
-    return res.data;
-  } catch (error) {
-    throw error.response?.data || { success: false, message: error.message };
-  }
+  return axios.put(`${API}/${courseId}`, formData, {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 // ✅ Delete Course

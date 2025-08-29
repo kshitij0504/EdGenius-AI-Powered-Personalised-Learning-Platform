@@ -19,9 +19,13 @@ import {
   CheckCircle,
 } from "lucide-react";
 import Sidebar from "../Instructorsidebar/Instructorsidebar";
+import { updateCourse } from "../../../helpers/API/courseApi";
+import { getCourseById } from "../../../helpers/API/courseApi";
 
 const EditCoursePage = () => {
-  const { id } = useParams();
+  const { courseId } = useParams();
+  console.log(courseId);
+  const id = courseId;
   const navigate = useNavigate();
   const isEditing = !!id;
 
@@ -38,6 +42,30 @@ const EditCoursePage = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [courseData, setCourseData] = useState(null);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const res = await getCourseById(id);
+        setCourseData(res.data.data);
+
+        setFormData({
+          title: res.data.data.title || "",
+          slug: res.data.data.slug || "",
+          description: res.data.data.description || "",
+          thumbnailFile: null,
+          thumbnailUrl: res.data.data.thumbnail || "",
+          category: res.data.data.category || "",
+          price: res.data.data.price || 0,
+          published: res.data.data.published || false,
+        });
+      } catch (err) {
+        console.error("Error fetching course:", err);
+      }
+    };
+
+    if (isEditing) fetchCourse();
+  }, [id, isEditing]);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -110,17 +138,46 @@ const EditCoursePage = () => {
     setPreviewImage(null);
   };
 
+  // const handleSubmit = async (e) => {
+  //   console.log("Updating course with data:", formData);
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   try {
+  //     // Simulate API call
+  //     await new Promise((resolve) => setTimeout(resolve, 1500));
+  //     console.log("Course updated:", formData);
+  //     navigate("/instructor/courses");
+  //   } catch (err) {
+  //     console.error("Error updating course:", err);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    console.log("Updating course with data:", formData);
     e.preventDefault();
     setIsLoading(true);
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log("Course updated:", formData);
+      const payload = {
+        ...formData,
+        thumbnailFile: formData.thumbnailFile, // file if present
+      };
+
+      console.log("Updating course with data:", payload);
+
+      const res = await updateCourse(id, payload);
+
+      console.log("Course updated:", res.data);
       navigate("/instructor/courses");
     } catch (err) {
-      console.error("Error updating course:", err);
+      console.error(
+        "Error updating course:",
+        err.response?.data || err.message
+      );
     } finally {
       setIsLoading(false);
     }

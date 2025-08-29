@@ -1,18 +1,19 @@
-const instructorService = require('../service/instructor.service');
+const instructorService = require("../service/instructor.service");
 
 exports.getInstructorCourses = async (req, res) => {
   try {
     const instructorId = req.user.id;
     const { page = 1, limit = 10, published, category, search } = req.query;
 
-    const { courses, totalCount } = await instructorService.getInstructorCourses({
-      instructorId,
-      page: parseInt(page),
-      limit: parseInt(limit),
-      published,
-      category,
-      search
-    });
+    const { courses, totalCount } =
+      await instructorService.getInstructorCourses({
+        instructorId,
+        page: parseInt(page),
+        limit: parseInt(limit),
+        published,
+        category,
+        search,
+      });
 
     res.json({
       success: true,
@@ -22,10 +23,10 @@ exports.getInstructorCourses = async (req, res) => {
           currentPage: parseInt(page),
           totalPages: Math.ceil(totalCount / limit),
           totalCourses: totalCount,
-          hasNext: (page * limit) < totalCount,
-          hasPrev: page > 1
-        }
-      }
+          hasNext: page * limit < totalCount,
+          hasPrev: page > 1,
+        },
+      },
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -36,10 +37,16 @@ exports.getCourseDetails = async (req, res) => {
   try {
     const { courseId } = req.params;
     const instructorId = req.user.id;
-    const course = await instructorService.getCourseDetails({ courseId, instructorId });
+    const course = await instructorService.getCourseDetails({
+      courseId,
+      instructorId,
+    });
 
     if (!course) {
-      return res.status(404).json({ success: false, message: 'Course not found or not authorized' });
+      return res.status(404).json({
+        success: false,
+        message: "Course not found or not authorized",
+      });
     }
 
     res.json({ success: true, data: course });
@@ -54,13 +61,24 @@ exports.createCourse = async (req, res) => {
     const { title, description, thumbnail, category, price } = req.body;
 
     const course = await instructorService.createCourse({
-      instructorId, title, description, thumbnail, category, price
+      instructorId,
+      title,
+      description,
+      thumbnail,
+      category,
+      price,
     });
 
-    res.status(201).json({ success: true, data: course, message: 'Course created successfully' });
+    res.status(201).json({
+      success: true,
+      data: course,
+      message: "Course created successfully",
+    });
   } catch (error) {
-    if (error.code === 'P2002') {
-      return res.status(400).json({ success: false, message: 'Course slug already exists' });
+    if (error.code === "P2002") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Course slug already exists" });
     }
     res.status(500).json({ success: false, message: error.message });
   }
@@ -70,14 +88,56 @@ exports.updateCourse = async (req, res) => {
   try {
     const { courseId } = req.params;
     const instructorId = req.user.id;
-    const updateData = req.body;
 
-    const updatedCourse = await instructorService.updateCourse({ courseId, instructorId, updateData });
-    if (!updatedCourse) {
-      return res.status(404).json({ success: false, message: 'Course not found or not authorized' });
+    // normalize req.body
+    const updateData = { ...req.body };
+
+    // Fix thumbnail
+    if (req.file && req.file.path) {
+      updateData.thumbnail = req.file.path; // Prisma field name
+    } else if (updateData.thumbnailUrl) {
+      updateData.thumbnail = updateData.thumbnailUrl; // fallback
+    }
+    delete updateData.thumbnailUrl;
+
+    // Fix types
+    if (updateData.price) {
+      updateData.price = Number(updateData.price);
+    }
+    if (updateData.published) {
+      updateData.published =
+        updateData.published === "true" || updateData.published === true;
     }
 
-    res.json({ success: true, data: updatedCourse, message: 'Course updated successfully' });
+    // regenerate slug if title exists
+    if (updateData.title) {
+      const baseSlug = updateData.title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .trim("-");
+      updateData.slug = `${baseSlug}-${Date.now()}`;
+    }
+
+    const updatedCourse = await instructorService.updateCourse({
+      courseId,
+      instructorId,
+      updateData,
+    });
+
+    if (!updatedCourse) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found or not authorized",
+      });
+    }
+
+    res.json({
+      success: true,
+      data: updatedCourse,
+      message: "Course updated successfully",
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -89,12 +149,22 @@ exports.toggleCoursePublication = async (req, res) => {
     const instructorId = req.user.id;
     const { published } = req.body;
 
-    const success = await instructorService.toggleCoursePublication({ courseId, instructorId, published });
+    const success = await instructorService.toggleCoursePublication({
+      courseId,
+      instructorId,
+      published,
+    });
     if (!success) {
-      return res.status(404).json({ success: false, message: 'Course not found or not authorized' });
+      return res.status(404).json({
+        success: false,
+        message: "Course not found or not authorized",
+      });
     }
 
-    res.json({ success: true, message: `Course ${published ? 'published' : 'unpublished'} successfully` });
+    res.json({
+      success: true,
+      message: `Course ${published ? "published" : "unpublished"} successfully`,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -105,15 +175,24 @@ exports.deleteCourse = async (req, res) => {
     const { courseId } = req.params;
     const instructorId = req.user.id;
 
-    const result = await instructorService.deleteCourse({ courseId, instructorId });
+    const result = await instructorService.deleteCourse({
+      courseId,
+      instructorId,
+    });
     if (result.blocked) {
-      return res.status(400).json({ success: false, message: 'Cannot delete course with active enrollments' });
+      return res.status(400).json({
+        success: false,
+        message: "Cannot delete course with active enrollments",
+      });
     }
     if (!result) {
-      return res.status(404).json({ success: false, message: 'Course not found or not authorized' });
+      return res.status(404).json({
+        success: false,
+        message: "Course not found or not authorized",
+      });
     }
 
-    res.json({ success: true, message: 'Course deleted successfully' });
+    res.json({ success: true, message: "Course deleted successfully" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -123,15 +202,16 @@ exports.getEnrolledStudents = async (req, res) => {
   try {
     const instructorId = req.user.id;
     const { courseId, page = 1, limit = 20, search } = req.query;
-    console.log(instructorId, courseId)
+    console.log(instructorId, courseId);
 
-    const { enrollments, totalCount } = await instructorService.getEnrolledStudents({
-      instructorId,
-      courseId,
-      page: parseInt(page),
-      limit: parseInt(limit),
-      search
-    });
+    const { enrollments, totalCount } =
+      await instructorService.getEnrolledStudents({
+        instructorId,
+        courseId,
+        page: parseInt(page),
+        limit: parseInt(limit),
+        search,
+      });
 
     res.json({
       success: true,
@@ -142,9 +222,9 @@ exports.getEnrolledStudents = async (req, res) => {
           totalPages: Math.ceil(totalCount / limit),
           totalEnrollments: totalCount,
           hasNext: page * limit < totalCount,
-          hasPrev: page > 1
-        }
-      }
+          hasPrev: page > 1,
+        },
+      },
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -156,13 +236,23 @@ exports.getStudentProgress = async (req, res) => {
     const { userId, courseId } = req.params;
     const instructorId = req.user.id;
 
-    const result = await instructorService.getStudentProgress({ instructorId, userId, courseId });
+    const result = await instructorService.getStudentProgress({
+      instructorId,
+      userId,
+      courseId,
+    });
 
     if (!result) {
-      return res.status(404).json({ success: false, message: 'Course not found or not authorized' });
+      return res.status(404).json({
+        success: false,
+        message: "Course not found or not authorized",
+      });
     }
     if (result.notEnrolled) {
-      return res.status(404).json({ success: false, message: 'Student not enrolled in this course' });
+      return res.status(404).json({
+        success: false,
+        message: "Student not enrolled in this course",
+      });
     }
 
     res.json({ success: true, data: result });
