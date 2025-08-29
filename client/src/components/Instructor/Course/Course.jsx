@@ -203,7 +203,7 @@ import {
   Bars3Icon,
 } from "@heroicons/react/24/outline";
 import Sidebar from "../Instructorsidebar/Instructorsidebar";
-import { getAllCourses } from "../../../helpers/API/courseApi";
+import { getCoursesByInstructor } from "../../../helpers/API/courseApi";
 import Cookies from "js-cookie";
 
 const MyCoursesPage = () => {
@@ -222,8 +222,8 @@ const MyCoursesPage = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await getAllCourses();
-        setCourses(response.data.data);
+        const response = await getCoursesByInstructor({});
+        setCourses(response.data.courses);
       } catch (err) {
         console.error(
           "Error fetching courses:",
