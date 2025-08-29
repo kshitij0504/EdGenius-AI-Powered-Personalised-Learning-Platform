@@ -2,21 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ArrowUpRight, Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Navbar = () => {
+const Navbar = ({ darkMode, setDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -69,6 +56,10 @@ const Navbar = () => {
     visible: { y: 0, opacity: 1 },
   };
 
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <>
       <style>
@@ -114,7 +105,7 @@ const Navbar = () => {
         `}
       </style>
 
-      <nav className="navbar-container">
+      <nav className="navbar-container fixed">
         <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
           <motion.div
             className="flex items-center space-x-2"
@@ -122,7 +113,13 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 10 }}
           >
-            <span className="text-2xl font-bold text-[#1a73e8]">EdGenius</span>
+            <span
+              className={`text-2xl font-bold ${
+                darkMode ? "text-white" : "text-[#1a73e8]"
+              }`}
+            >
+              EdGenius
+            </span>
           </motion.div>
 
           <div className="hidden md:flex space-x-6 items-center">
@@ -130,7 +127,11 @@ const Navbar = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-[#1a73e8] flex items-center group font-medium"
+                className={`flex items-center group font-medium ${
+                  darkMode
+                    ? "text-gray-200 hover:text-white"
+                    : "text-[#1a73e8] hover:text-[#749BC2]"
+                }`}
                 variants={linkVariants}
                 whileHover="hover"
                 whileTap="tap"
@@ -140,22 +141,21 @@ const Navbar = () => {
             ))}
 
             <motion.button
-              onClick={() => setDarkMode((prev) => !prev)}
-              className="p-2 rounded-full bg-[#1b6fdd]
-              "
+              onClick={handleDarkModeToggle}
+              className="p-2 rounded-full bg-[#1b6fdd] hover:bg-[#1557b7] transition-colors"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               {darkMode ? (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5 text-white" />
               ) : (
-                <Moon className="w-5 h-5 text-white " />
+                <Moon className="w-5 h-5 text-white" />
               )}
             </motion.button>
 
             <motion.a
               href="/signup"
-              className="px-6 py-2 bg-[#1b6fdd] text-white rounded-full font-medium flex items-center space-x-2 transition-all duration-300"
+              className="px-6 py-2 bg-[#1b6fdd] text-white rounded-full font-medium flex items-center space-x-2 transition-all duration-300 hover:bg-[#1557b7]"
               variants={primaryButtonVariants}
               whileHover="hover"
               whileTap="tap"
@@ -167,8 +167,12 @@ const Navbar = () => {
 
           <div className="md:hidden flex space-x-2">
             <motion.button
-              onClick={() => setDarkMode((prev) => !prev)}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+              onClick={handleDarkModeToggle}
+              className={`p-2 rounded-full transition-colors ${
+                darkMode
+                  ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+              }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -197,7 +201,9 @@ const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="md:hidden px-4 pb-4 space-y-2 bg-white dark:bg-[#1e1e1e] rounded-b-xl shadow-lg"
+              className={`md:hidden px-4 pb-4 space-y-2 rounded-b-xl shadow-lg ${
+                darkMode ? "bg-[#1e1e1e]" : "bg-white"
+              }`}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -207,7 +213,11 @@ const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="block text-[#1a73e8] py-2 px-3 rounded-md hover:bg-[#FFFBDE] transition"
+                  className={`block py-2 px-3 rounded-md transition ${
+                    darkMode
+                      ? "text-gray-200 hover:bg-gray-700 hover:text-white"
+                      : "text-[#1a73e8] hover:bg-[#FFFBDE]"
+                  }`}
                   variants={mobileMenuItemVariants}
                   onClick={() => setIsOpen(false)}
                 >
@@ -216,7 +226,11 @@ const Navbar = () => {
               ))}
               <motion.a
                 href="/signin"
-                className="block w-full text-center px-4 py-2 bg-[#1a73e8] text-white rounded-md hover:bg-[#749BC2] transition"
+                className={`block w-full text-center px-4 py-2 rounded-md transition ${
+                  darkMode
+                    ? "bg-[#1a73e8] text-white hover:bg-[#1557b7]"
+                    : "bg-[#1a73e8] text-white hover:bg-[#749BC2]"
+                }`}
                 variants={mobileMenuItemVariants}
                 onClick={() => setIsOpen(false)}
               >
@@ -224,7 +238,11 @@ const Navbar = () => {
               </motion.a>
               <motion.a
                 href="/signup"
-                className="block w-full text-center px-4 py-2 bg-[#1a73e8] text-white rounded-md hover:bg-[#749BC2] transition flex items-center justify-center space-x-2"
+                className={`block w-full text-center px-4 py-2 rounded-md transition flex items-center justify-center space-x-2 ${
+                  darkMode
+                    ? "bg-[#1a73e8] text-white hover:bg-[#1557b7]"
+                    : "bg-[#1a73e8] text-white hover:bg-[#749BC2]"
+                }`}
                 variants={mobileMenuItemVariants}
                 onClick={() => setIsOpen(false)}
               >
