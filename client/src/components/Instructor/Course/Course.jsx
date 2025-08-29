@@ -1,4 +1,4 @@
-// import { useState } from "react";
+// import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import {
 //   BookOpenIcon,
@@ -11,6 +11,8 @@
 //   Bars3Icon,
 // } from "@heroicons/react/24/outline";
 // import Sidebar from "../Instructorsidebar/Instructorsidebar";
+// import { getAllCourses } from "../../../helpers/API/courseApi";
+// import Cookies from "js-cookie";
 
 // const MyCoursesPage = () => {
 //   const navigate = useNavigate();
@@ -21,98 +23,57 @@
 //     level: 12,
 //     xpPoints: 3450,
 //   };
-//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-//   const [courses, setCourses] = useState([
-//     {
-//       id: "1",
-//       title: "Advanced JavaScript",
-//       description:
-//         "Comprehensive course covering modern JS concepts, ES6+, and advanced patterns",
-//       students: 342,
-//       lessons: 24,
-//       duration: "8 weeks",
-//       published: true,
-//       rating: 4.8,
-//       lastUpdated: "2 days ago",
-//       thumbnail:
-//         "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=200&fit=crop",
-//       price: 99.99,
-//       category: "Development",
-//       slug: "advanced-javascript",
-//     },
-//     {
-//       id: "2",
-//       title: "React Fundamentals",
-//       description:
-//         "Learn React from basics to advanced concepts with hands-on projects",
-//       students: 289,
-//       lessons: 18,
-//       duration: "6 weeks",
-//       published: true,
-//       rating: 4.6,
-//       lastUpdated: "1 week ago",
-//       thumbnail:
-//         "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=300&h=200&fit=crop",
-//       price: 129.99,
-//       category: "Development",
-//       slug: "react-fundamentals",
-//     },
-//     {
-//       id: "3",
-//       title: "Python for AI",
-//       description:
-//         "Python programming focused on AI applications and machine learning",
-//       students: 156,
-//       lessons: 32,
-//       duration: "10 weeks",
-//       published: false,
-//       rating: 4.9,
-//       lastUpdated: "3 days ago",
-//       thumbnail:
-//         "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=300&h=200&fit=crop",
-//       price: 149.99,
-//       category: "AI & Machine Learning",
-//       slug: "python-for-ai",
-//     },
-//   ]);
+//   const [courses, setCourses] = useState([]);
+//   const [isSidebarHovered, setIsSidebarHovered] = useState(false); // ✅ track sidebar hover
+
+//   useEffect(() => {
+//     const fetchCourses = async () => {
+//       try {
+//         const response = await getAllCourses();
+//         console.log("Courses fetched:", response.data);
+//         setCourses(response.data.data);
+//       } catch (err) {
+//         console.error(
+//           "Error fetching courses:",
+//           err.response?.data || err.message
+//         );
+//       }
+//     };
+
+//     fetchCourses();
+//   }, []);
 
 //   const handleDeleteCourse = (courseId) => {
 //     setCourses(courses.filter((course) => course.id !== courseId));
 //   };
 
 //   const handleEditCourse = (courseId) => {
-//     navigate(`/instructor/editcourse`);
+//     navigate(`/instructor/editcourse/${courseId}`);
 //   };
 
 //   const handleAddCourse = () => {
 //     navigate("/instructor/createcourse");
 //   };
 
-//   const handleAddContent = () => {
-//     navigate("/instructor/addcontent");
+//   const handleAddContent = (courseId) => {
+//     navigate(`/instructor/addcontent/${courseId}`);
 //   };
 
 //   return (
 //     <div className="flex min-h-screen bg-[var(--color-edgenius-bg-lightest)]">
-//       {isSidebarOpen && (
-//         <div
-//           className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-//           onClick={() => setIsSidebarOpen(false)}
-//         ></div>
-//       )}
+//       {/* Sidebar */}
+//       <Sidebar user={user} onHoverChange={setIsSidebarHovered} />
 
-//       <Sidebar
-//         user={user}
-//         isSidebarOpen={isSidebarOpen}
-//         setIsSidebarOpen={setIsSidebarOpen}
-//       />
-
-//       <div className="flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out">
+//       {/* Main content */}
+//       <div
+//         className={`flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out
+//           ${isSidebarHovered ? "ml-64" : "ml-20"}`} // ✅ adjust with sidebar
+//       >
+//         {/* Header */}
 //         <header className="lg:hidden sticky top-0 bg-[var(--color-edgenius-bg-lightest)]">
 //           <div className="flex items-center justify-between h-16 mt-[-20px]">
 //             <button
-//               onClick={() => setIsSidebarOpen(true)}
 //               className="text-[var(--color-edgenius-text-primary)] hover:bg-gray-100 rounded-md transition-colors"
 //               aria-label="Open sidebar"
 //             >
@@ -140,6 +101,7 @@
 //           </button>
 //         </div>
 
+//         {/* Courses Grid */}
 //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 //           {courses.map((course) => (
 //             <div
@@ -148,7 +110,7 @@
 //             >
 //               <div className="relative">
 //                 <img
-//                   src={course.thumbnail}
+//                   src={course.thumbnailUrl}
 //                   alt={course.title}
 //                   className="w-full h-40 object-cover"
 //                 />
@@ -174,25 +136,28 @@
 //                 <div className="grid grid-cols-2 gap-4 mb-4 text-sm text-[var(--color-edgenius-text-secondary)]">
 //                   <div className="flex items-center">
 //                     <UserGroupIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
-//                     {course.students} students
+//                     {course.studentsCount || 0} students
 //                   </div>
 //                   <div className="flex items-center">
 //                     <BookOpenIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
-//                     {course.lessons} lessons
+//                     {course.lessonsCount || 0} lessons
 //                   </div>
 //                   <div className="flex items-center">
 //                     <ClockIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
-//                     {course.duration}
+//                     {course.duration || "N/A"}
 //                   </div>
 //                   <div className="flex items-center">
 //                     <StarIcon className="h-4 w-4 mr-1 text-yellow-500" />
-//                     {course.rating}
+//                     {course.rating || "N/A"}
 //                   </div>
 //                 </div>
 
 //                 <div className="flex items-center justify-between">
 //                   <span className="text-xs text-[var(--color-edgenius-text-secondary)]">
-//                     Updated {course.lastUpdated}
+//                     Updated{" "}
+//                     {course.updatedAt
+//                       ? new Date(course.updatedAt).toLocaleDateString()
+//                       : "N/A"}
 //                   </span>
 //                   <div className="flex space-x-2">
 //                     <button
@@ -238,7 +203,7 @@ import {
   Bars3Icon,
 } from "@heroicons/react/24/outline";
 import Sidebar from "../Instructorsidebar/Instructorsidebar";
-import { getAllCourses } from "../../../helpers/API/courseApi"; // ✅ import API
+import { getAllCourses } from "../../../helpers/API/courseApi";
 import Cookies from "js-cookie";
 
 const MyCoursesPage = () => {
@@ -250,19 +215,15 @@ const MyCoursesPage = () => {
     level: 12,
     xpPoints: 3450,
   };
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // ✅ empty state initially
   const [courses, setCourses] = useState([]);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
-  // ✅ fetch from backend on mount
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await getAllCourses(); // no need to pass token
-        console.log("Courses fetched:", response.data);
-
-        setCourses(response.data.data); // backend wraps in ApiResponse
+        const response = await getAllCourses();
+        setCourses(response.data.data);
       } catch (err) {
         console.error(
           "Error fetching courses:",
@@ -291,26 +252,20 @@ const MyCoursesPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-edgenius-bg-lightest)]">
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
-      )}
+    <div className="flex min-h-screen bg-[var(--color-bg)]">
+      {/* Sidebar */}
+      <Sidebar user={user} onHoverChange={setIsSidebarHovered} />
 
-      <Sidebar
-        user={user}
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
-
-      <div className="flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out">
-        <header className="lg:hidden sticky top-0 bg-[var(--color-edgenius-bg-lightest)]">
-          <div className="flex items-center justify-between h-16 mt-[-20px]">
+      {/* Main content */}
+      <div
+        className={`flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out
+          ${isSidebarHovered ? "ml-64" : "ml-20"}`}
+      >
+        {/* Header */}
+        <header className="lg:hidden sticky top-0 bg-[var(--color-bg)] z-10">
+          <div className="flex items-center justify-between h-16">
             <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="text-[var(--color-edgenius-text-primary)] hover:bg-gray-100 rounded-md transition-colors"
+              className="text-[var(--color-text-primary)] hover:bg-[var(--color-card-border)] rounded-lg p-2 transition-colors"
               aria-label="Open sidebar"
             >
               <Bars3Icon className="h-6 w-6" />
@@ -319,77 +274,82 @@ const MyCoursesPage = () => {
           </div>
         </header>
 
+        {/* Title + Button */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <div>
-            <h3 className="text-3xl font-bold text-[var(--color-edgenius-text-primary)] mb-2">
+            <h3 className="text-3xl font-bold text-[var(--color-text-primary)] mb-2">
               My Courses
             </h3>
-            <p className="text-[var(--color-edgenius-text-secondary)]">
+            <p className="text-[var(--color-text-secondary)]">
               Manage your courses, content, and track performance.
             </p>
           </div>
           <button
             onClick={handleAddCourse}
-            className="mt-4 md:mt-0 bg-gradient-to-r from-[var(--color-edgenius-accent-medium)] to-[var(--color-edgenius-accent-dark)] text-[var(--color-edgenius-button-text)] px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 font-semibold"
+            className="mt-4 md:mt-0 bg-gradient-to-r from-[var(--color-accent-medium)] to-[var(--color-accent-dark)] text-white px-6 py-3 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all duration-200 flex items-center justify-center space-x-2 font-semibold"
           >
             <PlusIcon className="h-5 w-5" />
             <span>Create New Course</span>
           </button>
         </div>
 
-        {/* ✅ dynamic courses rendering */}
+        {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {courses.map((course) => (
             <div
               key={course.id}
-              className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-[var(--color-edgenius-accent-light)]"
+              className="bg-[var(--color-card)] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-[var(--color-card-border)]"
             >
+              {/* Thumbnail */}
               <div className="relative">
                 <img
-                  src={course.thumbnailUrl} // ✅ backend URL
+                  src={course.thumbnailUrl}
                   alt={course.title}
                   className="w-full h-40 object-cover"
                 />
                 <div
-                  className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+                  className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
                     course.published
-                      ? "bg-green-100 text-green-800"
-                      : "bg-yellow-100 text-yellow-800"
+                      ? "bg-[var(--color-success-bg)] text-[var(--color-success-text)]"
+                      : "bg-[var(--color-warning-bg)] text-[var(--color-warning-text)]"
                   }`}
                 >
                   {course.published ? "Published" : "Draft"}
                 </div>
               </div>
 
-              <div className="p-4">
-                <h4 className="text-xl font-bold text-[var(--color-edgenius-text-primary)] mb-2">
+              {/* Card Body */}
+              <div className="p-5">
+                <h4 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2 line-clamp-1">
                   {course.title}
                 </h4>
-                <p className="text-[var(--color-edgenius-text-secondary)] text-sm mb-4 line-clamp-2">
+                <p className="text-[var(--color-text-secondary)] text-sm mb-4 line-clamp-2">
                   {course.description}
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 mb-4 text-sm text-[var(--color-edgenius-text-secondary)]">
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-3 mb-4 text-sm text-[var(--color-text-secondary)]">
                   <div className="flex items-center">
-                    <UserGroupIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
+                    <UserGroupIcon className="h-4 w-4 mr-1 text-[var(--color-accent-medium)]" />
                     {course.studentsCount || 0} students
                   </div>
                   <div className="flex items-center">
-                    <BookOpenIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
+                    <BookOpenIcon className="h-4 w-4 mr-1 text-[var(--color-accent-medium)]" />
                     {course.lessonsCount || 0} lessons
                   </div>
                   <div className="flex items-center">
-                    <ClockIcon className="h-4 w-4 mr-1 text-[var(--color-edgenius-accent-medium)]" />
+                    <ClockIcon className="h-4 w-4 mr-1 text-[var(--color-accent-medium)]" />
                     {course.duration || "N/A"}
                   </div>
                   <div className="flex items-center">
-                    <StarIcon className="h-4 w-4 mr-1 text-yellow-500" />
+                    <StarIcon className="h-4 w-4 mr-1 text-[var(--color-star)]" />
                     {course.rating || "N/A"}
                   </div>
                 </div>
 
+                {/* Footer Actions */}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-[var(--color-edgenius-text-secondary)]">
+                  <span className="text-xs text-[var(--color-text-secondary)]">
                     Updated{" "}
                     {course.updatedAt
                       ? new Date(course.updatedAt).toLocaleDateString()
@@ -398,19 +358,19 @@ const MyCoursesPage = () => {
                   <div className="flex space-x-2">
                     <button
                       onClick={() => handleAddContent(course.id)}
-                      className="p-2 text-[var(--color-edgenius-accent-dark)] hover:bg-[var(--color-edgenius-accent-light)]/20 rounded-lg transition-colors"
+                      className="p-2 text-[var(--color-accent-dark)] hover:bg-[var(--color-accent-light)]/30 rounded-lg transition-colors"
                     >
                       <PlusIcon className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleEditCourse(course.id)}
-                      className="p-2 text-[var(--color-edgenius-accent-dark)] hover:bg-[var(--color-edgenius-accent-light)]/20 rounded-lg transition-colors"
+                      className="p-2 text-[var(--color-accent-dark)] hover:bg-[var(--color-accent-light)]/30 rounded-lg transition-colors"
                     >
                       <PencilIcon className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteCourse(course.id)}
-                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                      className="p-2 text-[var(--color-danger)] hover:bg-[var(--color-danger-bg)] rounded-lg transition-colors"
                     >
                       <TrashIcon className="h-4 w-4" />
                     </button>
@@ -419,6 +379,21 @@ const MyCoursesPage = () => {
               </div>
             </div>
           ))}
+
+          {/* Empty State */}
+          {courses.length === 0 && (
+            <div className="col-span-full flex flex-col items-center justify-center py-16 text-center text-[var(--color-text-secondary)]">
+              <BookOpenIcon className="h-12 w-12 mb-4 text-[var(--color-accent-medium)]" />
+              <p className="text-lg font-medium">No courses found</p>
+              <button
+                onClick={handleAddCourse}
+                className="mt-6 bg-gradient-to-r from-[var(--color-accent-medium)] to-[var(--color-accent-dark)] text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-200 flex items-center space-x-2 font-semibold"
+              >
+                <PlusIcon className="h-5 w-5" />
+                <span>Create your first course</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

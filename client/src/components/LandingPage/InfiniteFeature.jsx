@@ -40,46 +40,28 @@ const testimonials = [
   },
 ];
 
-const TestimonialCard = ({ name, role, quote, avatar, darkMode }) => (
-  <div
-    className={`relative flex-shrink-0 w-[400px] h-auto p-8 rounded-2xl mx-5 flex flex-col transition-all duration-300 ${
-      darkMode
-        ? "bg-gray-800 border border-gray-700/50"
-        : "bg-white border border-gray-200/50"
-    }`}
-  >
+const TestimonialCard = ({ name, role, quote, avatar }) => (
+  <div className="relative flex-shrink-0 w-[400px] h-auto p-8 bg-card rounded-2xl shadow-lg border-primary/10 mx-5 flex flex-col">
     <div className="flex text-yellow-400 mb-4">
       {[...Array(5)].map((_, i) => (
         <Star key={i} fill="currentColor" className="w-5 h-5" />
       ))}
     </div>
-    <p
-      className={`text-base leading-relaxed mb-6 flex-grow ${
-        darkMode ? "text-gray-300" : "text-gray-600"
-      }`}
-    >
+    <p className="text-base text-muted-foreground leading-relaxed mb-6 flex-grow">
       "{quote}"
     </p>
     <div className="flex items-center">
       <img
         src={avatar}
         alt={name}
-        className={`w-12 h-12 rounded-full object-cover border-2 ${
-          darkMode ? "border-gray-600" : "border-gray-200"
-        }`}
+        className="w-12 h-12 rounded-full object-cover border-2 border-background shadow-sm"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = "https://placehold.co/150x150/EBF4FF/34495E?text=User";
         }}
       />
       <div className="ml-4">
-        <h4
-          className={`text-md font-bold ${
-            darkMode ? "text-white" : "text-gray-900"
-          }`}
-        >
-          {name}
-        </h4>
+        <h4 className="text-md font-bold text-foreground">{name}</h4>
         <p className="text-sm text-[#1b6fdd] font-semibold">{role}</p>
       </div>
     </div>

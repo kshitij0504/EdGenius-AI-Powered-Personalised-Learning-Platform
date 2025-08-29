@@ -3,45 +3,75 @@ const crypto = require('crypto');
 const { ApiError } = require('../utils/ApiError');
 const prisma = require('../config/prisma');
 
+console.log("Razorpay Key ID:", process.env.RAZORPAY_KEY_ID ? "Set" : "Not set");
+console.log("Razorpay Secret:", process.env.RAZORPAY_KEY_SECRET ? "Set" : "Not set");
+
+// Add debugging to see actual values
+console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
+console.log("RAZORPAY_SECRET present:", !!process.env.RAZORPAY_KEY_SECRET);
+
 const razorpayInstance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_SECRET,
+  key_secret: process.env.RAZORPAY_KEY_SECRET, // ✅ Fixed variable name
 });
 
 const enrollCourse = async (userId, courseId, res) => {
-  const course = await prisma.course.findUnique({ where: { id: courseId } });
-  if (!course) throw new ApiError(404, 'Course not found');
+  try {
+    console.log("Enroll request for user:", userId, "course:", courseId);
+    
+    const course = await prisma.course.findUnique({ where: { id: courseId } });
+    if (!course) throw new ApiError(404, 'Course not found');
 
-  const existing = await prisma.enrollment.findFirst({ where: { userId, courseId } });
-  if (existing) throw new ApiError(400, 'Already enrolled');
+    const existing = await prisma.enrollment.findFirst({ where: { userId, courseId } });
+    if (existing) throw new ApiError(400, 'Already enrolled');
 
-  if (course.price === 0) {
-    await prisma.enrollment.create({ data: { userId, courseId } });
-    return { message: 'Successfully enrolled in free course' };
-  }
+    if (course.price === 0) {
+      await prisma.enrollment.create({ data: { userId, courseId } });
+      return { message: 'Successfully enrolled in free course' };
+    }
 
-  const razorpayOrder = await razorpayInstance.orders.create({
-    amount: Math.round(course.price * 100),
-    currency: 'INR',
-    receipt: `receipt_${courseId}_${userId}`,
-  });
+    console.log("Creating Razorpay order for paid course:", course.price);
+    
+    // Fix: Create shorter receipt (under 40 characters)
+    const shortCourseId = courseId.replace('course-', '').substring(0, 10);
+    const shortUserId = userId.substring(0, 8);
+    const receipt = `rcpt_${shortCourseId}_${shortUserId}`;
+    
+    console.log("Receipt:", receipt, "Length:", receipt.length);
+    
+    const razorpayOrder = await razorpayInstance.orders.create({
+      amount: Math.round(course.price * 100),
+      currency: 'INR',
+      receipt: receipt, // ✅ Now under 40 characters
+    });
 
-  await prisma.payment.create({
-    data: {
-      userId,
-      courseId,
+    console.log("Razorpay order created:", razorpayOrder);
+    
+    const amountInPaise = Math.round(course.price * 100);
+    
+    await prisma.payment.create({
+      data: {
+        userId,
+        courseId,
+        razorpayOrderId: razorpayOrder.id,
+        amount: amountInPaise,
+      },
+    });
+
+    return {
+      message: 'Payment required',
       razorpayOrderId: razorpayOrder.id,
-      amount: course.price * 100,
-    },
-  });
-
-  return {
-    message: 'Payment required',
-    razorpayOrderId: razorpayOrder.id,
-    courseTitle: course.title,
-    amount: course.price * 100,
-  };
+      courseTitle: course.title,
+      amount: amountInPaise,
+    };
+    
+  } catch (error) {
+    console.error("Enrollment error:", error);
+    throw error;
+  }
 };
+
+
 
 const addToCart = async (userId, courseId) => {
   const existing = await prisma.cartItem.findUnique({
@@ -91,7 +121,7 @@ const verifyPayment = async (req, res) => {
   const { razorpayOrderId, razorpayPaymentId, razorpaySignature } = req.body;
 
   const generatedSignature = crypto
-    .createHmac('sha256', process.env.RAZORPAY_SECRET)
+    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
     .update(`${razorpayOrderId}|${razorpayPaymentId}`)
     .digest('hex');
 

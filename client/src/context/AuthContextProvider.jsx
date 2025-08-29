@@ -1,6 +1,6 @@
-import { useContext, useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import getApi from "../helpers/API/getApi";
 import postApi from "../helpers/API/postApi";
@@ -8,7 +8,7 @@ import React from "react";
 
 export default function AuthContextProvider({ children }) {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
+  const { user, isAuthenticated } = useSelector(state => state.auth);
   const [isLoading, setIsLoading] = useState(false);
 
   // Custom themed toast function
@@ -51,34 +51,22 @@ export default function AuthContextProvider({ children }) {
     async (credentials) => {
       setIsLoading(true);
       try {
-        console.log("Login credentials:", credentials);
         const response = await postApi("/api/auth/signin", credentials);
-        console.log("Login response:", response);
         if (response.data.success) {
           const userData = response.data.user;
-
-          setUser(userData);
-
-          dispatch({
-            type: "auth/setUser",
-            payload: userData,
-          });
-
+          dispatch({ type: "auth/setUser", payload: userData });
           showToast("Welcome back! Login successful", "success");
           return { success: true, data: userData };
         } else {
-          showToast(
-            response.message || "Login failed. Please try again.",
-            "error"
-          );
+          showToast(response.message || "Login failed. Please try again.", "error");
           return { success: false, message: response.message };
         }
       } catch (error) {
-        console.error("Login error:", error);
-        const errorMessage =
+        const errorMessage = (
           error.response?.data?.message ||
           error.message ||
-          "Network error. Please try again.";
+          "Network error. Please try again."
+        );
         showToast(errorMessage, "error");
         return { success: false, message: errorMessage };
       } finally {
@@ -88,6 +76,7 @@ export default function AuthContextProvider({ children }) {
     [dispatch]
   );
 
+  // Sign up function
   const handleSignUp = useCallback(
     async (userData) => {
       setIsLoading(true);
@@ -98,34 +87,22 @@ export default function AuthContextProvider({ children }) {
           password: userData.password,
           interests: userData.interests,
         };
-
         const response = await postApi("/api/auth/signup", cleanData);
-        console.log("Signup response:", response);
-
         if (response.data.success) {
           const newUser = response.data.data;
-
-          setUser(newUser);
           dispatch({ type: "auth/setUser", payload: newUser });
-
-          showToast(
-            "Account created successfully! Welcome to Edgenius",
-            "success"
-          );
+          showToast("Account created successfully! Welcome to Edgenius", "success");
           return { success: true, data: newUser };
         } else {
-          showToast(
-            response.message || "Signup failed. Please try again.",
-            "error"
-          );
+          showToast(response.message || "Signup failed. Please try again.", "error");
           return { success: false, message: response.message };
         }
       } catch (error) {
-        console.error("Signup error:", error);
-        const errorMessage =
+        const errorMessage = (
           error.response?.data?.message ||
           error.message ||
-          "Network error. Please try again.";
+          "Network error. Please try again."
+        );
         showToast(errorMessage, "error");
         return { success: false, message: errorMessage };
       } finally {
@@ -137,43 +114,18 @@ export default function AuthContextProvider({ children }) {
 
   // Logout function
   const handleLogout = useCallback(() => {
-    setUser(null);
     dispatch({ type: "auth/clearUser" });
-    localStorage.removeItem("authToken");
     showToast("Logged out successfully", "success");
   }, [dispatch]);
 
-  const initializeAuth = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      try {
-        const response = await getApi("/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.success) {
-          setUser(response.data);
-          dispatch({ type: "auth/setUser", payload: response.data });
-        } else {
-          localStorage.removeItem("authToken");
-        }
-      } catch (error) {
-        localStorage.removeItem("authToken");
-        console.error("Auth initialization error:", error);
-      }
-    }
-  }, [dispatch]);
-
-  // Call initializeAuth on mount
-  React.useEffect(() => {
-    initializeAuth();
-  }, [initializeAuth]);
+  // No need for initializeAuth or React.useEffect for user initialization anymore
 
   const ctxValue = {
     loginUser: handleLoginUser,
     signUpUser: handleSignUp,
     logout: handleLogout,
     user,
+    isAuthenticated,
     isLoading,
   };
 

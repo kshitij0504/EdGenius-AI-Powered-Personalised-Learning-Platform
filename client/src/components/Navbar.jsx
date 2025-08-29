@@ -105,7 +105,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         `}
       </style>
 
-      <nav className="navbar-container fixed">
+      <nav className="navbar-container">
         <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
           <motion.div
             className="flex items-center space-x-2"
@@ -140,7 +140,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               </motion.a>
             ))}
 
-            <motion.button
+            {/* <motion.button
               onClick={handleDarkModeToggle}
               className="p-2 rounded-full bg-[#1b6fdd] hover:bg-[#1557b7] transition-colors"
               whileHover={{ scale: 1.1 }}
@@ -151,7 +151,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               ) : (
                 <Moon className="w-5 h-5 text-white" />
               )}
-            </motion.button>
+            </motion.button> */}
 
             <motion.a
               href="/signup"
@@ -253,6 +253,18 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           )}
         </AnimatePresence>
       </nav>
+      <motion.button
+        onClick={handleDarkModeToggle}
+        className={`fixed top-4 right-4 z-50 p-3 rounded-full shadow-md transition-colors ${
+          darkMode
+            ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+            : "bg-[#1b6fdd] text-white hover:bg-[#1557b7]"
+        }`}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+      </motion.button>
     </>
   );
 };

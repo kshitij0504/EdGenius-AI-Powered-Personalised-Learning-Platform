@@ -1,96 +1,3 @@
-// const handleAddChapter = () => {
-//   if (newChapter.title.trim()) {
-//     const newChapterData = {
-//       id: Date.now().toString(),
-//       title: newChapter.title,
-//       order: courseData.chapters.length + 1,
-//       lessons: [],
-//     };
-//     setCourseData((prev) => ({
-//       ...prev,
-//       chapters: [...prev.chapters, newChapterData],
-//     }));
-//     setNewChapter({ title: "" });
-//     setIsAddingChapter(false);
-//   }
-// };
-
-// const handleDeleteChapter = (chapterId) => {
-//   setCourseData((prev) => ({
-//     ...prev,
-//     chapters: prev.chapters.filter((chapter) => chapter.id !== chapterId),
-//   }));
-// };
-
-// const handleEditChapter = (chapterId, newTitle) => {
-//   setCourseData((prev) => ({
-//     ...prev,
-//     chapters: prev.chapters.map((chapter) =>
-//       chapter.id === chapterId ? { ...chapter, title: newTitle } : chapter
-//     ),
-//   }));
-//   setEditingChapter(null);
-// };
-
-// const handleAddLesson = (chapterId) => {
-//   if (newLesson.title.trim()) {
-//     const chapter = courseData.chapters.find((c) => c.id === chapterId);
-//     const newLessonData = {
-//       id: `${chapterId}-${Date.now()}`,
-//       title: newLesson.title,
-//       content: newLesson.content,
-//       videoUrl: newLesson.videoUrl || null,
-//       order: chapter.lessons.length + 1,
-//     };
-
-//     setCourseData((prev) => ({
-//       ...prev,
-//       chapters: prev.chapters.map((chapter) =>
-//         chapter.id === chapterId
-//           ? { ...chapter, lessons: [...chapter.lessons, newLessonData] }
-//           : chapter
-//       ),
-//     }));
-
-//     setNewLesson({ title: "", content: "", videoUrl: "" });
-//     setIsAddingLesson(null);
-//   }
-// };
-
-// const handleDeleteLesson = (chapterId, lessonId) => {
-//   setCourseData((prev) => ({
-//     ...prev,
-//     chapters: prev.chapters.map((chapter) =>
-//       chapter.id === chapterId
-//         ? {
-//             ...chapter,
-//             lessons: chapter.lessons.filter(
-//               (lesson) => lesson.id !== lessonId
-//             ),
-//           }
-//         : chapter
-//     ),
-//   }));
-// };
-
-// const handleEditLesson = (chapterId, lessonId, updatedLesson) => {
-//   setCourseData((prev) => ({
-//     ...prev,
-//     chapters: prev.chapters.map((chapter) =>
-//       chapter.id === chapterId
-//         ? {
-//             ...chapter,
-//             lessons: chapter.lessons.map((lesson) =>
-//               lesson.id === lessonId
-//                 ? { ...lesson, ...updatedLesson }
-//                 : lesson
-//             ),
-//           }
-//         : chapter
-//     ),
-//   }));
-//   setEditingLesson(null);
-// };
 import { useState, useEffect } from "react";
 import {
   BookOpenIcon,
@@ -121,7 +28,7 @@ import { useParams } from "react-router-dom";
 
 const AddContentPage = () => {
   const { courseId } = useParams();
-
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const user = {
     name: "Dr. Eleanor Vance",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
@@ -255,11 +162,15 @@ const AddContentPage = () => {
 
       <Sidebar
         user={user}
+        onHoverChange={setIsSidebarHovered}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
 
-      <div className="flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out">
+      <div
+        className={`flex-1 flex flex-col p-4 md:p-8 transition-all duration-300 ease-in-out 
+          ${isSidebarHovered ? "ml-64" : "ml-20"}`}
+      >
         <header className="lg:hidden sticky top-0 bg-[var(--color-edgenius-bg-lightest)]">
           <div className="flex items-center justify-between h-16 mt-[-20px]">
             <button

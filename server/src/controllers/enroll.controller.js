@@ -6,6 +6,8 @@ const enrollCourse = async (req, res) => {
     const { courseId } = req.body;
     const userId = req.user.id;
     const result = await enrollService.enrollCourse(userId, courseId, res);
+    console.log(res);
+    
     res.status(200).json(result);
   } catch (error) {
     if (error instanceof ApiError) {
