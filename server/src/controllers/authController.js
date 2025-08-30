@@ -129,4 +129,13 @@ const resetPassword = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, verifyEmail, signin, logout, googleSignin, forgotPassword, resetPassword };
+const userData = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await authService.getUserById(userId);
+    res.status(200).json(new ApiResponse(200, { user }, "User data fetched"));
+  } catch (error) {
+    next(error);
+  }
+}
+module.exports = { signup, verifyEmail, signin, logout, googleSignin, forgotPassword, resetPassword, userData };

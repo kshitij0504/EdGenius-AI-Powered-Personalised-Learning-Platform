@@ -229,6 +229,29 @@ const forgetPasswordService = async (email) => {
   return { message: "Reset link sent to email" };
 };
 
+const getUserById = async (userId) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      isVerified: true,
+      interests: true,
+      profilePhoto: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  return user;
+};
+
 module.exports = {
   signup,
   verifyEmail,
@@ -236,4 +259,5 @@ module.exports = {
   googleLoginService,
   resetPassworService,
   forgetPasswordService,
+  getUserById
 };

@@ -21,6 +21,7 @@ router.post("/signout",authController.logout)
 router.post("/google-signin", authController.googleSignin);
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
+router.get("/user", authenticate, authController.userData);
 router.get('/status', (req, res) => {
   const token = req.cookies.token; // Read the HttpOnly cookie
   

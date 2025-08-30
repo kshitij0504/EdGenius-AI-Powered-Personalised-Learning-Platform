@@ -9,6 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import CourseContextProvider from "./context/CourseContextProvider.jsx";
 import { PersistGate } from "redux-persist/integration/react";
 import MyCourseContextProvider from "./context/MyCourseContextProvider.jsx";
+import { OrchestratorProvider } from "./context/OrchestratorContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,7 +19,9 @@ createRoot(document.getElementById("root")).render(
           <AuthContextProvider>
             <CourseContextProvider>
               <MyCourseContextProvider>
-                <App />
+                <OrchestratorProvider>
+                  <App />
+                </OrchestratorProvider>
               </MyCourseContextProvider>
             </CourseContextProvider>
           </AuthContextProvider>

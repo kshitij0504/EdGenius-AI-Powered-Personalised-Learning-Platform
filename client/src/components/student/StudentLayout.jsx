@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Studentsidebar/Studentsidebar";
 import Header from "./Studentdash/Header";
+import { useSelector } from "react-redux";
 
 const StudentLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const user_data = useSelector((state) => state.auth.user);
+  console.log(user_data);
+  
   // Theme management
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -36,8 +39,8 @@ const StudentLayout = ({ children }) => {
   };
 
   const user = {
-    name: "Aisha Sharma",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    name: user_data.name,
+    avatar: user_data.profilePhoto,
     learningGoal: "Become a Full-stack Web Developer",
     lessonProgress: 75,
     upcomingQuiz: "React Fundamentals Quiz",

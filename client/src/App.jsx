@@ -1,4 +1,6 @@
+// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import LandingPage from "./components/LandingPage/LandingPage.jsx";
 import DarkModeToggle from "./components/DarkModeToggle.jsx";
 import StudentDashboard from "./components/student/Studentdash/Studentdash.jsx";
@@ -24,170 +26,207 @@ import NotFound from "./pages/404.jsx";
 import CourseDetailsPage from "./components/student/Allcourse/CourseDetail.jsx";
 import CheckoutPage from "./components/student/Allcourse/checkOutPage.jsx";
 import MyCourseDetailPage from "./components/student/StudentCourse/MyCourseDetail.jsx";
+import NovaLearning from "./components/NovaLearning/NovaLearning.jsx";
+
+// Import Chatbot Components
+import ChatbotDrawer from "./components/Chatbot/ChatbotDrawer.jsx";
+import FloatingChatButton from "./components/Chatbot/FloatingChatButton.jsx";
+import UserProfile from "./components/student/UserProfile.jsx";
 
 function App() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+      <div className="relative">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signin" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          
+          {/* Student Protected Routes */}
+          <Route
+            path="/studentdash"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <StudentDashboard />
+              </RoleProtectedRoute>
+            }
+          />
+           <Route
+            path="/studentprofile"
+            element={
+              // <RoleProtectedRoute allowedRoles={["USER"]}>
+                <UserProfile />
+              // </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/studentfirstquiz"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <Studentquiz />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/quiz"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <EdgeniusQuiz />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/mycourse"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <MyCoursesPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-course/:slug"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <MyCourseDetailPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/novalearning"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <NovaLearning />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/courses/:slug"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <CourseDetailsPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <CheckoutPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/allcourses"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <AllCoursesPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/myprogress"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <MyProgress />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <RoleProtectedRoute allowedRoles={["USER"]}>
+                <ContactPage />
+              </RoleProtectedRoute>
+            }
+          />
+          
+          {/* Instructor Protected Routes */}
+          <Route
+            path="/instructordash"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <InstructorDashboard />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/courses"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <Course />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/students"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <EnrollStudent />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/createcourse"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <CreateCoursePage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/editcourse/:courseId"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <EditCoursePage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/addcontent/:courseId"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <AddContentPage />
+              </RoleProtectedRoute>
+            }
+          />
+          <Route
+            path="/instructor/settings"
+            element={
+              <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
+                <SettingsPage />
+              </RoleProtectedRoute>
+            }
+          />
+          
+          {/* Not Authorized */}
+          <Route path="/not-authorized" element={<NotAuthorized />} />
+          
+          {/* 404 Not Found */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
 
-        {/* Student Protected Routes */}
-        <Route
-          path="/studentdash"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <StudentDashboard />
-            </RoleProtectedRoute>
-          }
+        {/* Global Chatbot Components */}
+        <FloatingChatButton onClick={toggleChat} />
+        <ChatbotDrawer 
+          isOpen={isChatOpen} 
+          onClose={() => setIsChatOpen(false)} 
         />
-        <Route
-          path="/studentfirstquiz"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <Studentquiz />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/quiz"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <EdgeniusQuiz />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/mycourse"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <MyCoursesPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/my-course/:slug"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <MyCourseDetailPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/courses/:slug"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <CourseDetailsPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <CheckoutPage/>
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/allcourses"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <AllCoursesPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/myprogress"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <MyProgress />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <ContactPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/quiz"
-          element={
-            <RoleProtectedRoute allowedRoles={["USER"]}>
-              <QuizPage />
-            </RoleProtectedRoute>
-          }
-        />
-
-        {/* Instructor Protected Routes */}
-        <Route
-          path="/instructordash"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <InstructorDashboard />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/courses"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <Course />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/students"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <EnrollStudent />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/createcourse"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <CreateCoursePage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/editcourse/:courseId"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <EditCoursePage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/addcontent/:courseId"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <AddContentPage />
-            </RoleProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/settings"
-          element={
-            <RoleProtectedRoute allowedRoles={["INSTRUCTOR"]}>
-              <SettingsPage />
-            </RoleProtectedRoute>
-          }
-        />
-
-        {/* Not Authorized */}
-        <Route path="/not-authorized" element={<NotAuthorized />} />
-
-        {/* 404 Not Found */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        
+        {/* Backdrop blur when chat is open */}
+        {isChatOpen && (
+          <div 
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-all duration-300"
+            onClick={() => setIsChatOpen(false)}
+          />
+        )}
+      </div>
     </Router>
   );
 }

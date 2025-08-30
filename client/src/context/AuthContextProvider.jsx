@@ -118,7 +118,26 @@ export default function AuthContextProvider({ children }) {
     showToast("Logged out successfully", "success");
   }, [dispatch]);
 
-  // No need for initializeAuth or React.useEffect for user initialization anymore
+  const getUserData = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await getApi("/api/auth/user");
+      if (response.data.success) {
+        const userData = response.data.data.user;
+        dispatch({ type: "auth/setUser", payload: userData });
+      } else {
+        dispatch({ type: "auth/clearUser" });
+      }
+    } catch (error) {
+      dispatch({ type: "auth/clearUser" });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   const ctxValue = {
     loginUser: handleLoginUser,

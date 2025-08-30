@@ -29,6 +29,7 @@ const Sidebar = ({
     { name: "My Progress", icon: ChartBarSquareIcon, href: "/myprogress" },
     { name: "My Courses", icon: BookOpenIcon, href: "/mycourse" },
     { name: "All Courses", icon: AcademicCapIcon, href: "/allcourses" },
+    { name: "NovaLearning", icon: DocumentCheckIcon, href: "/novalearning" },
     { name: "Certificates", icon: DocumentCheckIcon, href: "/mycertificates" },
     {
       name: "Contact Form",

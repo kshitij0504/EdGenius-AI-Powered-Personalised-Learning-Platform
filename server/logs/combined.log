@@ -1124,3 +1124,161 @@
 [2025-08-27T06:53:33.483Z] INFO: GET /api/auth/status 304 - - 2.523 ms
 [2025-08-27T06:53:50.664Z] INFO: GET /api/auth/status 304 - - 1.988 ms
 [2025-08-27T06:53:50.673Z] INFO: GET /api/auth/status 304 - - 2.742 ms
+[2025-08-28T19:20:11.600Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-28T19:20:39.293Z] INFO: POST /api/auth/signin 200 235 - 2382.850 ms
+[2025-08-28T19:20:39.358Z] INFO: GET /api/auth/status 200 163 - 3.757 ms
+[2025-08-28T19:20:39.363Z] INFO: GET /api/auth/status 304 - - 1.404 ms
+[2025-08-28T19:20:53.259Z] INFO: GET /api/courses 304 - - 411.071 ms
+[2025-08-28T19:20:53.433Z] INFO: GET /api/courses 304 - - 160.735 ms
+[2025-08-28T19:21:06.352Z] INFO: GET /api/courses 304 - - 304.103 ms
+[2025-08-28T19:21:06.513Z] INFO: GET /api/courses 304 - - 158.813 ms
+[2025-08-28T19:21:12.917Z] INFO: GET /api/courses 304 - - 244.382 ms
+[2025-08-28T19:21:13.071Z] INFO: GET /api/courses 304 - - 150.457 ms
+[2025-08-28T19:21:19.990Z] INFO: GET /api/module/course-productivity-mastery 200 63 - 310.163 ms
+[2025-08-28T19:21:20.140Z] INFO: GET /api/module/course-productivity-mastery 304 - - 148.399 ms
+[2025-08-28T19:21:23.134Z] INFO: GET /api/courses 304 - - 293.295 ms
+[2025-08-28T19:21:23.288Z] INFO: GET /api/courses 304 - - 151.406 ms
+[2025-08-29T03:21:02.721Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T05:15:03.356Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T05:15:26.101Z] INFO: POST /api/auth/signin 200 202 - 3163.745 ms
+[2025-08-29T05:15:26.180Z] INFO: GET /api/auth/status 304 - - 3.816 ms
+[2025-08-29T05:15:26.186Z] INFO: GET /api/auth/status 304 - - 2.154 ms
+[2025-08-29T05:15:30.924Z] INFO: GET /api/enrollments/my-courses 304 - - 874.228 ms
+[2025-08-29T05:15:31.272Z] INFO: GET /api/enrollments/my-courses 304 - - 342.667 ms
+[2025-08-29T05:15:38.197Z] INFO: GET /api/courses 304 - - 1179.795 ms
+[2025-08-29T05:15:38.657Z] INFO: GET /api/courses 304 - - 444.168 ms
+[2025-08-29T05:15:46.295Z] INFO: GET /api/courses/nextjs-14-fullstack-typescript 200 4969 - 1145.153 ms
+[2025-08-29T05:15:46.882Z] INFO: GET /api/courses/nextjs-14-fullstack-typescript 304 - - 580.312 ms
+[2025-08-29T05:15:53.467Z] INFO: POST /api/enrollments/enroll 200 153 - 2672.977 ms
+[2025-08-29T05:16:50.923Z] INFO: POST /api/enrollments/verify 200 58 - 2394.307 ms
+[2025-08-29T05:16:58.323Z] INFO: GET /api/auth/status 304 - - 3.410 ms
+[2025-08-29T05:16:58.330Z] INFO: GET /api/auth/status 304 - - 2.972 ms
+[2025-08-29T05:17:02.665Z] INFO: GET /api/enrollments/my-courses 200 2140 - 586.026 ms
+[2025-08-29T05:17:02.903Z] INFO: GET /api/enrollments/my-courses 304 - - 232.171 ms
+[2025-08-29T05:17:08.677Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 304 - - 1066.790 ms
+[2025-08-29T05:17:09.539Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 304 - - 857.602 ms
+[2025-08-29T05:17:12.224Z] INFO: GET /api/progress/course/cce8c496-975b-4235-82f4-42dfdc610712 304 - - 3535.554 ms
+[2025-08-29T05:17:13.321Z] INFO: GET /api/progress/course/cce8c496-975b-4235-82f4-42dfdc610712 304 - - 1092.760 ms
+[2025-08-29T05:17:29.965Z] INFO: GET /api/auth/status 304 - - 2.039 ms
+[2025-08-29T05:17:29.972Z] INFO: GET /api/auth/status 304 - - 2.769 ms
+[2025-08-29T05:17:31.175Z] INFO: GET /api/enrollments/my-courses 304 - - 1097.359 ms
+[2025-08-29T05:17:31.842Z] INFO: GET /api/enrollments/my-courses 304 - - 662.669 ms
+[2025-08-29T05:17:36.567Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 1708.438 ms
+[2025-08-29T05:17:37.241Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 658.789 ms
+[2025-08-29T05:17:37.587Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 998.539 ms
+[2025-08-29T05:17:38.723Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 1130.818 ms
+[2025-08-29T05:18:24.328Z] INFO: GET /api/auth/status 304 - - 2.779 ms
+[2025-08-29T05:18:24.334Z] INFO: GET /api/auth/status 304 - - 1.259 ms
+[2025-08-29T05:18:25.502Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 1033.060 ms
+[2025-08-29T05:18:25.988Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 481.006 ms
+[2025-08-29T05:18:26.626Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 1108.813 ms
+[2025-08-29T05:18:27.403Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 771.270 ms
+[2025-08-29T05:18:32.248Z] INFO: GET /api/auth/status 304 - - 2.029 ms
+[2025-08-29T05:18:32.263Z] INFO: GET /api/auth/status 304 - - 3.527 ms
+[2025-08-29T05:18:33.211Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 879.834 ms
+[2025-08-29T05:18:33.902Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 685.409 ms
+[2025-08-29T05:18:33.904Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 679.936 ms
+[2025-08-29T05:18:34.629Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 709.288 ms
+[2025-08-29T05:19:33.903Z] INFO: GET /api/enrollments/my-courses 304 - - 504.263 ms
+[2025-08-29T05:19:34.160Z] INFO: GET /api/enrollments/my-courses 304 - - 249.402 ms
+[2025-08-29T05:19:41.050Z] INFO: GET /api/courses 304 - - 937.630 ms
+[2025-08-29T05:19:41.322Z] INFO: GET /api/courses 304 - - 266.747 ms
+[2025-08-29T05:19:55.585Z] INFO: GET /api/auth/status 304 - - 2.959 ms
+[2025-08-29T05:19:55.592Z] INFO: GET /api/auth/status 304 - - 2.057 ms
+[2025-08-29T05:19:59.100Z] INFO: GET /api/courses 304 - - 966.165 ms
+[2025-08-29T05:19:59.577Z] INFO: GET /api/courses 304 - - 471.985 ms
+[2025-08-29T05:20:12.220Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 304 - - 1117.179 ms
+[2025-08-29T05:20:13.446Z] INFO: GET /api/courses/mastering-javascript-from-beginner-to-advanced 304 - - 1217.188 ms
+[2025-08-29T05:20:35.479Z] INFO: GET /api/courses 304 - - 2346.929 ms
+[2025-08-29T05:20:35.776Z] INFO: GET /api/courses 304 - - 293.289 ms
+[2025-08-29T05:20:37.109Z] INFO: GET /api/enrollments/my-courses 304 - - 856.315 ms
+[2025-08-29T05:20:37.392Z] INFO: GET /api/enrollments/my-courses 304 - - 278.300 ms
+[2025-08-29T06:40:11.844Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T06:41:20.588Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T06:44:39.119Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T06:44:48.767Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
+[2025-08-29T06:45:18.129Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T06:45:50.986Z] INFO: POST /api/auth/signin 200 202 - 3132.109 ms
+[2025-08-29T06:45:51.055Z] INFO: GET /api/auth/status 200 149 - 4.792 ms
+[2025-08-29T06:45:51.064Z] INFO: GET /api/auth/status 304 - - 3.376 ms
+[2025-08-29T06:47:06.103Z] INFO: GET /api/auth/status 304 - - 1.420 ms
+[2025-08-29T06:47:06.109Z] INFO: GET /api/auth/status 304 - - 2.182 ms
+[2025-08-29T06:47:46.100Z] INFO: GET /api/auth/status 304 - - 1.313 ms
+[2025-08-29T06:47:46.104Z] INFO: GET /api/auth/status 304 - - 0.986 ms
+[2025-08-29T06:48:01.166Z] INFO: GET /api/auth/status 304 - - 1.258 ms
+[2025-08-29T06:48:01.172Z] INFO: GET /api/auth/status 304 - - 1.370 ms
+[2025-08-29T06:55:47.573Z] INFO: GET /api/auth/status 304 - - 1.590 ms
+[2025-08-29T06:55:47.578Z] INFO: GET /api/auth/status 304 - - 2.021 ms
+[2025-08-29T07:04:20.806Z] INFO: GET /api/auth/status 304 - - 1.432 ms
+[2025-08-29T07:04:20.811Z] INFO: GET /api/auth/status 304 - - 1.307 ms
+[2025-08-29T07:15:50.665Z] INFO: GET /api/auth/status 304 - - 0.875 ms
+[2025-08-29T07:15:50.668Z] INFO: GET /api/auth/status 304 - - 1.256 ms
+[2025-08-29T07:16:10.189Z] INFO: GET /api/auth/status 304 - - 1.233 ms
+[2025-08-29T07:16:10.193Z] INFO: GET /api/auth/status 304 - - 1.166 ms
+[2025-08-29T07:19:59.314Z] INFO: GET /api/auth/status 304 - - 1.011 ms
+[2025-08-29T07:19:59.319Z] INFO: GET /api/auth/status 304 - - 2.537 ms
+[2025-08-29T07:21:19.560Z] INFO: GET /api/auth/status 304 - - 1.364 ms
+[2025-08-29T07:21:19.565Z] INFO: GET /api/auth/status 304 - - 1.198 ms
+[2025-08-29T07:23:03.755Z] INFO: GET /api/auth/status 304 - - 1.721 ms
+[2025-08-29T07:23:03.762Z] INFO: GET /api/auth/status 304 - - 1.788 ms
+[2025-08-29T08:54:09.894Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T08:54:30.345Z] INFO: POST /api/auth/signin 200 202 - 3130.737 ms
+[2025-08-29T08:54:30.399Z] INFO: GET /api/auth/status 304 - - 4.023 ms
+[2025-08-29T08:54:30.405Z] INFO: GET /api/auth/status 304 - - 2.946 ms
+[2025-08-29T09:10:41.885Z] INFO: GET /api/auth/status 304 - - 1.732 ms
+[2025-08-29T09:10:41.890Z] INFO: GET /api/auth/status 304 - - 1.598 ms
+[2025-08-29T09:31:52.286Z] INFO: GET /api/auth/status 304 - - 1.170 ms
+[2025-08-29T09:31:52.295Z] INFO: GET /api/auth/status 304 - - 1.436 ms
+[2025-08-29T09:35:17.237Z] INFO: GET /api/enrollments/my-courses 200 2140 - 3623.530 ms
+[2025-08-29T09:35:17.502Z] INFO: GET /api/enrollments/my-courses 304 - - 263.031 ms
+[2025-08-29T09:35:23.523Z] INFO: GET /api/courses 200 50953 - 4128.670 ms
+[2025-08-29T09:35:24.164Z] INFO: GET /api/courses 304 - - 639.109 ms
+[2025-08-29T09:35:25.905Z] INFO: GET /api/auth/status 304 - - 1.666 ms
+[2025-08-29T09:35:25.909Z] INFO: GET /api/auth/status 304 - - 2.155 ms
+[2025-08-29T09:35:27.077Z] INFO: GET /api/courses 304 - - 1116.253 ms
+[2025-08-29T09:35:27.630Z] INFO: GET /api/courses 304 - - 550.277 ms
+[2025-08-29T09:35:56.692Z] INFO: GET /api/enrollments/my-courses 304 - - 989.943 ms
+[2025-08-29T09:35:57.181Z] INFO: GET /api/enrollments/my-courses 304 - - 483.905 ms
+[2025-08-29T10:41:31.772Z] INFO: GET /api/auth/status 304 - - 1.451 ms
+[2025-08-29T10:41:31.777Z] INFO: GET /api/auth/status 304 - - 1.277 ms
+[2025-08-29T10:43:30.642Z] INFO: GET /api/auth/status 304 - - 1.542 ms
+[2025-08-29T10:43:30.653Z] INFO: GET /api/auth/status 304 - - 3.400 ms
+[2025-08-29T12:08:19.830Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:43:11.427Z] INFO: POST /api/auth/signin 200 202 - 3669.762 ms
+[2025-08-29T12:43:11.496Z] INFO: GET /api/auth/status 304 - - 7.458 ms
+[2025-08-29T12:43:11.508Z] INFO: GET /api/auth/status 304 - - 4.977 ms
+[2025-08-29T12:48:08.466Z] INFO: GET /api/auth/protected 404 157 - 2.327 ms
+[2025-08-29T12:49:59.109Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:50:23.290Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:50:28.158Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:50:38.224Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:51:16.410Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:51:21.886Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-08-29T12:52:42.336Z] INFO: GET /api/auth/status 304 - - 12.548 ms
+[2025-08-29T12:52:44.221Z] INFO: GET /api/auth/user 200 416 - 1880.441 ms
+[2025-08-29T12:53:06.329Z] INFO: GET /api/auth/status 304 - - 1.983 ms
+[2025-08-29T12:53:06.336Z] INFO: GET /api/auth/status 304 - - 1.903 ms
+[2025-08-29T12:53:06.775Z] INFO: GET /api/auth/user 304 - - 444.499 ms
+[2025-08-29T12:53:06.978Z] INFO: GET /api/auth/user 304 - - 198.872 ms
+[2025-08-29T12:54:08.170Z] INFO: POST /api/auth/signin 200 202 - 1223.294 ms
+[2025-08-29T12:58:31.515Z] INFO: GET /api/auth/status 304 - - 3.898 ms
+[2025-08-29T12:58:31.523Z] INFO: GET /api/auth/status 304 - - 3.626 ms
+[2025-08-29T13:11:09.599Z] INFO: POST /api/auth/user 404 153 - 1.571 ms
+[2025-08-29T13:11:17.956Z] INFO: GET /api/auth/user 200 416 - 2581.149 ms
+[2025-08-29T13:35:50.479Z] INFO: GET /api/auth/status 304 - - 1.068 ms
+[2025-08-29T13:35:50.483Z] INFO: GET /api/auth/status 304 - - 1.354 ms
+[2025-08-29T13:35:51.938Z] INFO: GET /api/auth/user 304 - - 1458.462 ms
+[2025-08-29T13:35:52.197Z] INFO: GET /api/auth/user 304 - - 255.562 ms
+[2025-08-29T13:36:43.818Z] INFO: GET /api/auth/user 304 - - 370.032 ms
+[2025-08-29T13:36:44.016Z] INFO: GET /api/auth/user 304 - - 192.677 ms
+[2025-08-29T13:37:20.725Z] INFO: GET /api/auth/status 304 - - 1.885 ms
+[2025-08-29T13:37:20.729Z] INFO: GET /api/auth/status 304 - - 1.324 ms
+[2025-08-29T13:37:27.847Z] INFO: GET /api/auth/user 304 - - 394.795 ms
+[2025-08-29T13:37:27.937Z] INFO: GET /api/auth/user - - - - ms
+[2025-08-29T13:37:28.983Z] INFO: GET /api/auth/user 200 416 - 179.150 ms
+[2025-08-29T13:37:29.184Z] INFO: GET /api/auth/user 304 - - 197.104 ms
+[2025-08-29T13:46:49.507Z] INFO: GET /api/auth/user 304 - - 1522.617 ms
+[2025-08-29T13:46:49.766Z] INFO: GET /api/auth/user 304 - - 254.587 ms
+[2025-08-29T13:49:28.234Z] INFO: GET /api/auth/user 304 - - 296.867 ms
+[2025-08-29T13:49:28.393Z] INFO: GET /api/auth/user 304 - - 155.620 ms
+[2025-08-30T04:25:22.539Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
