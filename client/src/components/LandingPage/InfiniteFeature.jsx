@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
@@ -67,7 +68,7 @@ const TestimonialCard = ({ name, role, quote, avatar }) => (
   </div>
 );
 
-export default function InfiniteTestimonialScroll() {
+export default function InfiniteTestimonialScroll({ darkMode }) {
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   const marqueeVariants = {
@@ -85,31 +86,45 @@ export default function InfiniteTestimonialScroll() {
   };
 
   return (
-    <section className="w-full py-28 bg-background">
-      <div className="max-w-7xl mx-auto text-center mb-20">
-        <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4">
-          Loved by Learners & Professionals
-        </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          See how Edgenius is empowering individuals and teams to achieve their
-          learning goals faster.
-        </p>
-      </div>
-      <div className="relative w-full overflow-hidden">
-        <motion.div
-          className="flex py-4"
-          variants={marqueeVariants}
-          animate="animate"
-          whileHover={{ paused: true }}
-        >
-          {duplicatedTestimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} {...testimonial} />
-          ))}
-        </motion.div>
-
-        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-background to-transparent pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
-      </div>
-    </section>
+    <div
+      className={` transition-colors duration-300 ${
+        darkMode ? "bg-gray-900" : ""
+      }`}
+    >
+      <section className="w-full py-28">
+        <div className="max-w-7xl mx-auto text-center mb-20">
+          <h2
+            className={`text-4xl md:text-5xl font-black mb-4 transition-colors ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            Loved by Learners & Professionals
+          </h2>
+          <p
+            className={`text-lg max-w-2xl mx-auto transition-colors ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            See how Edgenius is empowering individuals and teams to achieve
+            their learning goals faster.
+          </p>
+        </div>
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex py-4"
+            variants={marqueeVariants}
+            animate="animate"
+          >
+            {duplicatedTestimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={index}
+                {...testimonial}
+                darkMode={darkMode}
+              />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </div>
   );
 }
