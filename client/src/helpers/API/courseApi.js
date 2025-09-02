@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_BASE = "http://localhost:8000/api/courses";
-const API = "http://localhost:8000/api/instructor/courses";
+const API_BASE = "http://localhost:5000/api/courses";
+const API = "http://localhost:5000/api/instructor/courses";
 
 export const createCourse = async (courseData) => {
   const formData = new FormData();

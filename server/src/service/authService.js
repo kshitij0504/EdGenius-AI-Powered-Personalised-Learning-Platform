@@ -80,7 +80,7 @@ const verifyEmail = async (token) => {
   }
 
   const verificationRecord = await prisma.verificationToken.findUnique({
-    where: { token },
+    where: { token },token
   });
 
   if (!verificationRecord) {
