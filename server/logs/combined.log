@@ -2400,6 +2400,7 @@
 [2025-08-29T11:51:22.993Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1902.461 ms
 <<<<<<< Updated upstream
 >>>>>>> 81e5b6fdfe0bf3ce7146c462b185431a88927638
+<<<<<<< Updated upstream
 =======
 [2025-08-29T12:16:36.903Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
 [2025-08-29T12:39:20.727Z] INFO: 🚀 Edgenius backend running at http://localhost:8000
@@ -2546,4 +2547,33 @@
 [2025-08-29T13:44:46.958Z] INFO: GET /api/instructor/courses/f3d85ac7-3a4c-4e22-bcdd-d42708dfa885 304 - - 615.613 ms
 [2025-08-29T13:45:04.157Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1949.081 ms
 [2025-08-29T13:45:05.742Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1580.425 ms
+>>>>>>> Stashed changes
+=======
+[2025-09-02T04:19:09.266Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-02T04:21:46.477Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-02T04:21:57.835Z] INFO: POST /api/auth/signin 200 508 - 2268.635 ms
+[2025-09-02T04:21:57.897Z] INFO: GET /api/auth/status 200 152 - 4.149 ms
+[2025-09-02T04:21:57.903Z] INFO: GET /api/auth/status 304 - - 2.726 ms
+[2025-09-02T04:28:37.898Z] INFO: GET /api/auth/status 304 - - 1.234 ms
+[2025-09-02T04:28:37.901Z] INFO: GET /api/auth/status 304 - - 1.038 ms
+[2025-09-02T04:31:42.251Z] INFO: GET /api/auth/status 304 - - 2.677 ms
+[2025-09-02T04:31:42.255Z] INFO: GET /api/auth/status 304 - - 1.825 ms
+[2025-09-02T04:40:19.867Z] INFO: GET /api/auth/status 304 - - 1.416 ms
+[2025-09-02T04:40:19.872Z] INFO: GET /api/auth/status 304 - - 1.812 ms
+[2025-09-02T04:40:45.496Z] INFO: GET /api/auth/status 304 - - 1.796 ms
+[2025-09-02T04:40:45.500Z] INFO: GET /api/auth/status 304 - - 1.204 ms
+[2025-09-02T04:45:39.633Z] INFO: GET /api/auth/status 304 - - 0.853 ms
+[2025-09-02T04:45:39.639Z] INFO: GET /api/auth/status 304 - - 3.039 ms
+[2025-09-02T04:46:43.090Z] INFO: GET /api/auth/status 304 - - 1.403 ms
+[2025-09-02T04:46:43.094Z] INFO: GET /api/auth/status 304 - - 0.869 ms
+[2025-09-02T04:47:37.159Z] INFO: GET /api/auth/status 304 - - 1.029 ms
+[2025-09-02T04:47:37.163Z] INFO: GET /api/auth/status 304 - - 1.638 ms
+[2025-09-02T04:48:00.209Z] INFO: GET /api/auth/status 304 - - 1.210 ms
+[2025-09-02T04:48:00.213Z] INFO: GET /api/auth/status 304 - - 1.029 ms
+[2025-09-02T04:48:43.184Z] INFO: GET /api/enrollments/my-courses 200 2 - 1412.072 ms
+[2025-09-02T04:48:43.305Z] INFO: GET /api/enrollments/my-courses 304 - - 115.981 ms
+[2025-09-02T04:48:54.562Z] INFO: GET /api/courses 200 51829 - 525.928 ms
+[2025-09-02T04:48:54.753Z] INFO: GET /api/courses 304 - - 188.677 ms
+[2025-09-02T04:48:59.531Z] INFO: GET /api/courses/operating-system-1756475077095 200 883 - 1069.007 ms
+[2025-09-02T04:48:59.848Z] INFO: GET /api/courses/operating-system-1756475077095 304 - - 313.238 ms
 >>>>>>> Stashed changes
