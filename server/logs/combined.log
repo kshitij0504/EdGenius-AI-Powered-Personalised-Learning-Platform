@@ -2741,3 +2741,34 @@
 [2025-09-01T11:25:59.164Z] INFO: GET /api/courses/react-mastery-complete-guide-2025 304 - - 388.718 ms
 [2025-09-01T11:26:01.611Z] INFO: GET /api/progress/course/course-react-mastery 200 748 - 2832.269 ms
 [2025-09-01T11:26:02.644Z] INFO: GET /api/progress/course/course-react-mastery 304 - - 1027.655 ms
+[2025-09-20T05:42:53.006Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-20T05:44:42.869Z] INFO: GET /api/auth/user 401 1340 - 2.405 ms
+[2025-09-20T05:44:42.874Z] INFO: GET /api/auth/user 401 1340 - 1.736 ms
+[2025-09-20T05:44:52.241Z] INFO: POST /api/auth/signin 500 1509 - 5076.964 ms
+[2025-09-20T05:45:03.725Z] INFO: POST /api/auth/signin 500 1509 - 5044.333 ms
+[2025-09-20T05:45:21.660Z] INFO: POST /api/auth/signin 500 1509 - 5045.850 ms
+[2025-09-20T05:47:19.539Z] INFO: POST /api/auth/signin 500 1509 - 5039.951 ms
+[2025-09-20T05:47:57.906Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-20T05:48:04.168Z] INFO: POST /api/auth/signin 200 235 - 2825.657 ms
+[2025-09-20T05:48:04.229Z] INFO: GET /api/auth/status 200 163 - 4.433 ms
+[2025-09-20T05:48:04.235Z] INFO: GET /api/auth/status 304 - - 2.196 ms
+[2025-09-20T05:48:19.440Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 1670 - 5758.362 ms
+[2025-09-20T05:48:23.229Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 3786.382 ms
+[2025-09-20T05:49:01.357Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1938.846 ms
+[2025-09-20T05:49:03.116Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 1756.852 ms
+[2025-09-20T05:49:37.829Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-20T05:49:40.986Z] INFO: GET /api/auth/status 304 - - 6.043 ms
+[2025-09-20T05:49:40.990Z] INFO: GET /api/auth/status 304 - - 1.465 ms
+[2025-09-20T05:49:46.064Z] INFO: GET /api/instructor/courses?page=1&limit=10 500 500 - 2398.266 ms
+[2025-09-20T05:49:46.065Z] INFO: GET /api/auth/user 500 1498 - 5070.516 ms
+[2025-09-20T05:49:50.683Z] INFO: GET /api/auth/user 200 505 - 4608.925 ms
+[2025-09-20T05:49:52.730Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 1670 - 6661.925 ms
+[2025-09-20T05:49:58.320Z] INFO: GET /api/auth/user 304 - - 354.450 ms
+[2025-09-20T05:49:58.472Z] INFO: GET /api/auth/user 304 - - 150.167 ms
+[2025-09-20T05:50:00.716Z] INFO: GET /api/auth/user 304 - - 432.001 ms
+[2025-09-20T05:50:00.921Z] INFO: GET /api/auth/user 304 - - 202.014 ms
+[2025-09-20T05:50:13.170Z] INFO: POST /api/auth/signin 200 202 - 935.566 ms
+[2025-09-20T05:50:13.212Z] INFO: GET /api/auth/status 200 149 - 1.324 ms
+[2025-09-20T05:50:13.218Z] INFO: GET /api/auth/status 304 - - 1.703 ms
+[2025-09-20T05:50:18.023Z] INFO: GET /api/enrollments/my-courses 200 2749 - 708.754 ms
+[2025-09-20T05:50:18.299Z] INFO: GET /api/enrollments/my-courses 304 - - 272.403 ms
