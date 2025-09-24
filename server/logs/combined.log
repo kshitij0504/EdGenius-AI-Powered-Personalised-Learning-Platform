@@ -2772,3 +2772,14 @@
 [2025-09-20T05:50:13.218Z] INFO: GET /api/auth/status 304 - - 1.703 ms
 [2025-09-20T05:50:18.023Z] INFO: GET /api/enrollments/my-courses 200 2749 - 708.754 ms
 [2025-09-20T05:50:18.299Z] INFO: GET /api/enrollments/my-courses 304 - - 272.403 ms
+[2025-09-24T12:36:35.367Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-24T12:36:36.820Z] INFO: 🚀 Edgenius backend running at http://localhost:5000
+[2025-09-24T12:36:57.981Z] INFO: GET /api/auth/user 401 1138 - 5.259 ms
+[2025-09-24T12:36:57.984Z] INFO: GET /api/auth/user 401 1138 - 1.187 ms
+[2025-09-24T12:37:04.777Z] INFO: GET /api/auth/user 401 1138 - 0.982 ms
+[2025-09-24T12:37:04.798Z] INFO: GET /api/auth/user 401 1138 - 5.116 ms
+[2025-09-24T12:37:17.351Z] INFO: POST /api/auth/signin 200 235 - 1659.301 ms
+[2025-09-24T12:37:17.401Z] INFO: GET /api/auth/status 200 163 - 2.381 ms
+[2025-09-24T12:37:17.415Z] INFO: GET /api/auth/status 304 - - 1.264 ms
+[2025-09-24T12:37:21.529Z] INFO: GET /api/instructor/courses?page=1&limit=10 200 1670 - 1356.264 ms
+[2025-09-24T12:37:22.251Z] INFO: GET /api/instructor/courses?page=1&limit=10 304 - - 720.487 ms

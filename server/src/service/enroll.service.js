@@ -6,13 +6,12 @@ const prisma = require('../config/prisma');
 console.log("Razorpay Key ID:", process.env.RAZORPAY_KEY_ID ? "Set" : "Not set");
 console.log("Razorpay Secret:", process.env.RAZORPAY_KEY_SECRET ? "Set" : "Not set");
 
-// Add debugging to see actual values
 console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
 console.log("RAZORPAY_SECRET present:", !!process.env.RAZORPAY_KEY_SECRET);
 
 const razorpayInstance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET, // ✅ Fixed variable name
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 const enrollCourse = async (userId, courseId, res) => {

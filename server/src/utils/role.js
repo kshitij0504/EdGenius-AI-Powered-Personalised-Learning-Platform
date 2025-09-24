@@ -1,9 +1,10 @@
-import { ApiError } from "./ApiError.js";
+const { ApiError } = require("../utils/ApiError");
 
-
-export const isInstructor = (req, res, next) => {
+const isInstructor = (req, res, next) => {
   if (req.user.role !== "INSTRUCTOR") {
-    return res.status(403).json(new ApiError(403, "Unautorized request"));
+    return res.status(403).json(new ApiError(403, "Unauthorized request"));
   }
   next();
 };
+
+module.exports = { isInstructor };

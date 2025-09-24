@@ -1,7 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const dotenv = require("dotenv");
 const httpLogger = require("./config/morgan");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
@@ -13,7 +14,6 @@ const progressRoutes = require("./routes/progress.route");
 const searchRoutes = require("./routes/search.route");
 const enrollRoutes = require("./routes/enroll.route");
 const instructorRoutes = require("./routes/instructor.route");
-dotenv.config();
 
 const app = express();
 
