@@ -4,7 +4,7 @@ from app.services.mentor_agent import mentor_agent
 from app.services.content_curator import ContentCuratorAgent
 from app.services.skill_evaluator_agent import SkillEvaluatorAgent  # Add this import
 from app.services.evaluator_agent import EvaluatorAgent            # Add this import
-from app.services.lesson_generator import LessonGeneratorAgent          # Add this import
+from app.services.lesson_generator import LessonGenerator          # Add this import
 
 
 class OrchestratorAgent:
@@ -13,7 +13,7 @@ class OrchestratorAgent:
         self.content_curator = ContentCuratorAgent()
         self.skill_evaluator = SkillEvaluatorAgent()  # Initialize skill evaluator
         self.evaluator = EvaluatorAgent()             # Initialize evaluator
-        self.lesson_generator = LessonGeneratorAgent()     # Initialize lesson generator
+        self.lesson_generator = LessonGenerator()     # Initialize lesson generator
 
 
     def route(self, action: str, payload: dict):

@@ -5,15 +5,19 @@ from pydantic import BaseModel
 import sqlite3
 import json
 from datetime import datetime
+import logging
 import google.generativeai as genai
 import os
 from app.services.quiz_generator import generate_quiz
 from app.services.quiz_analysis import analyze_quiz
 from app.services.mentor_agent import mentor_agent
 from app.services.orchestrator_agent import OrchestratorAgent
+from app.services.lesson_generator import LessonGenerator
 
 app = FastAPI()
 orchestrator = OrchestratorAgent()
+lesson_generator = LessonGenerator()
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure Gemini API
 genai.configure(api_key=os.environ.get('GEMINI_API_KEY'))
@@ -25,6 +29,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class LessonRequest(BaseModel):
+    user_id: str
+    weak_areas: list[str]
+    skill_level: str
+    topic: str
 
 # Chatbot Models
 class ChatMessage(BaseModel):
@@ -46,7 +56,7 @@ class ChatResponse(BaseModel):
 # Chatbot Service Class
 class EdgeniusChatbotService:
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         self.init_database()
         
     def init_database(self):
@@ -310,7 +320,6 @@ def orchestrate(req: OrchestratorRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# New Chatbot Endpoints
 @app.post("/chat", response_model=ChatResponse)
 def chat_endpoint(chat_message: ChatMessage):
     """Main chat endpoint for the AI tutor"""
@@ -320,6 +329,7 @@ def chat_endpoint(chat_message: ChatMessage):
             chat_message.message, 
             chat_message.context
         )
+        print(f"Chat response: {result}")
         return ChatResponse(**result)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -437,3 +447,25 @@ def orchestrate_chat(req: OrchestratorRequest):
         return {"status": "success", "data": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generate-lessons")
+async def generate_lessons_endpoint(request: LessonRequest):
+    try:
+        result = lesson_generator.generate_lessons(
+            weak_areas=request.weak_areas,
+            skill_level=request.skill_level,
+            user_id=request.user_id,
+            topic=request.topic
+        )
+        print(f"Generated lessons: {result}")
+
+        # ✅ Handle both dict (errors) and string (success)
+        if isinstance(result, dict) and "error" in result:
+            raise HTTPException(status_code=400, detail=result["error"])
+
+        # ✅ Return the raw Gemini response as a JSON-safe string
+        return {"response": result}
+
+    except Exception as e:
+        logging.error(f"Error in generate_lessons_endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
