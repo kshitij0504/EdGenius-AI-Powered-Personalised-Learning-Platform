@@ -1,249 +1,218 @@
 // components/learning/LessonSection.jsx
 import React, { useState } from 'react';
 
-const LessonSection = ({ lessons }) => {
-  const [selectedLesson, setSelectedLesson] = useState(0);
-  const [expandedSection, setExpandedSection] = useState('introduction');
+const LessonSection = ({ lessons, darkMode = false }) => {
+  console.log('Lesson Data:', lessons);
+  
+  const [expandedSection, setExpandedSection] = useState(0);
 
-  const currentLesson = lessons.lesson_modules[selectedLesson];
+  // Theme classes
+  const bgMain = darkMode ? 'bg-black' : 'bg-white';
+  const textMain = darkMode ? 'text-gray-100' : 'text-gray-900';
+  const textSub = darkMode ? 'text-gray-400' : 'text-gray-600';
+  const borderMain = darkMode ? 'border-gray-800' : 'border-gray-100';
+  const cardBg = darkMode ? 'bg-gray-900' : 'bg-gray-50';
+  const cardBorder = darkMode ? 'border-gray-700' : 'border-gray-200';
 
-  const sectionIcons = {
-    introduction: '📚',
-    theory: '🧠',
-    implementation: '⚙️',
-    examples: '💡',
-    exercises: '🏋️',
-    summary: '📋'
+  // Section icons
+  const getSectionIcon = (sectionTitle) => {
+    const title = sectionTitle.toLowerCase();
+    
+    if (title.includes('introduction')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+      );
+    }
+    if (title.includes('concept') || title.includes('core')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+      );
+    }
+    if (title.includes('weak') || title.includes('addressing')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="11" cy="11" r="9" />
+          <circle cx="11" cy="11" r="5" />
+          <circle cx="11" cy="11" r="2" />
+        </svg>
+      );
+    }
+    if (title.includes('advanced')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      );
+    }
+    if (title.includes('exercise') || title.includes('practical') || title.includes('project')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+          <path d="M22 4L12 14.01l-3-3" />
+        </svg>
+      );
+    }
+    if (title.includes('best') || title.includes('tip')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" />
+        </svg>
+      );
+    }
+    if (title.includes('conclusion') || title.includes('summary')) {
+      return (
+        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+          <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+        </svg>
+      );
+    }
+    // Default icon
+    return (
+      <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M9 9h6M9 13h6M9 17h6" />
+      </svg>
+    );
+  };
+
+  const renderContent = (content) => {
+    if (typeof content === 'string') {
+      return <p className={`${textSub} leading-relaxed whitespace-pre-line`}>{content}</p>;
+    }
+    return null;
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border border-gray-100">
+    <div className={`${bgMain} rounded-3xl shadow-2xl border ${borderMain} transition-colors duration-300`}>
       {/* Header */}
-      <div className="p-8 border-b border-gray-100">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-          🚀 Nova's Personalized Lessons
+      <div className={`p-8 border-b ${borderMain}`}>
+        <h2 className={`text-2xl font-extrabold ${textMain} mb-4 flex items-center gap-3`}>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="12" fill="#2563eb" />
+            <text x="6" y="19" fill="#fff" fontSize="12" fontWeight="bold">AI</text>
+          </svg>
+          {lessons.doc_name || "Nova's Personalized Lessons"}
         </h2>
-        
-        {/* Lesson Tabs */}
-        <div className="flex space-x-4 overflow-x-auto">
-          {lessons.lesson_modules.map((lesson, index) => (
-            <button
-              key={lesson.lesson_id}
-              onClick={() => setSelectedLesson(index)}
-              className={`flex-shrink-0 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-                selectedLesson === index
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Lesson {lesson.lesson_number}: {lesson.concept}
-            </button>
-          ))}
-        </div>
+        {lessons.doc_desc && (
+          <p className={`${textSub} text-sm`}>{lessons.doc_desc}</p>
+        )}
       </div>
 
+      {/* Content */}
       <div className="p-8">
-        {/* Lesson Info */}
-        <div className="mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-bold text-gray-900">
-              {currentLesson.content.introduction.title}
-            </h3>
-            <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-              {currentLesson.estimated_duration}
-            </span>
-          </div>
-          <p className="text-gray-700 mb-4">{currentLesson.content.introduction.overview}</p>
-          <div className="flex items-center space-x-4 text-sm text-gray-600">
-            <span className="flex items-center">
-              📊 Difficulty: {currentLesson.difficulty_score}/5
-            </span>
-            <span className="flex items-center">
-              🎯 Priority: {currentLesson.priority}
-            </span>
-          </div>
-        </div>
-
         {/* Section Navigation */}
         <div className="mb-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {Object.keys(sectionIcons).map((section) => (
+          <h3 className={`text-lg font-semibold ${textMain} mb-4`}>Sections</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {lessons.doc_body.map((section, index) => (
               <button
-                key={section}
-                onClick={() => setExpandedSection(section)}
-                className={`p-4 rounded-xl border-2 transition-all duration-200 text-center ${
-                  expandedSection === section
-                    ? 'border-blue-500 bg-blue-50 transform scale-105'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                key={index}
+                onClick={() => setExpandedSection(index)}
+                className={`p-4 rounded-xl border-2 transition-all duration-200 text-left flex items-center gap-3 ${
+                  expandedSection === index
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 scale-105 shadow-md'
+                    : `${cardBorder} hover:border-blue-300 hover:${cardBg}`
                 }`}
               >
-                <div className="text-2xl mb-1">{sectionIcons[section]}</div>
-                <div className="text-xs font-medium capitalize">{section}</div>
+                <div className={expandedSection === index ? 'text-blue-600' : textSub}>
+                  {getSectionIcon(section.section)}
+                </div>
+                <div className="flex-1">
+                  <div className={`text-sm font-medium ${expandedSection === index ? 'text-blue-600' : textSub}`}>
+                    {section.section}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
         </div>
 
         {/* Section Content */}
-        <div className="mb-8">
-          {expandedSection === 'introduction' && (
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Why This Matters</h4>
-                <p className="text-gray-700">{currentLesson.content.introduction.importance}</p>
+        <div className="space-y-6">
+          {lessons.doc_body[expandedSection] && (
+            <>
+              <div className={`p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-2xl shadow-md border ${borderMain}`}>
+                <h3 className={`text-2xl font-bold ${textMain} mb-4`}>
+                  {lessons.doc_body[expandedSection].section}
+                </h3>
               </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Real-World Applications</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {currentLesson.content.introduction.real_world_applications.map((app, index) => (
-                    <div key={index} className="p-4 bg-green-50 border border-green-200 rounded-xl">
-                      <h5 className="font-semibold text-green-900 mb-2">{app.application}</h5>
-                      <p className="text-sm text-green-700">{app.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
 
-          {expandedSection === 'theory' && (
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Definition</h4>
-                <p className="text-gray-700 p-4 bg-gray-50 rounded-xl">{currentLesson.content.theory.definition}</p>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Concepts</h4>
-                <div className="space-y-4">
-                  {currentLesson.content.theory.key_concepts.map((concept, index) => (
-                    <div key={index} className="p-4 border border-gray-200 rounded-xl">
-                      <h5 className="font-semibold text-gray-900 mb-2">{concept.title}</h5>
-                      <p className="text-gray-700 mb-2">{concept.description}</p>
-                      <span className="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
-                        {concept.importance}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {expandedSection === 'examples' && (
-            <div className="space-y-6">
-              {['basic', 'intermediate', 'advanced'].map((level) => (
-                <div key={level}>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-3 capitalize">{level} Examples</h4>
-                  <div className="space-y-4">
-                    {currentLesson.content.examples[level].map((example, index) => (
-                      <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
-                        <div className="p-4 bg-gray-50 border-b border-gray-200">
-                          <h5 className="font-semibold text-gray-900">{example.title}</h5>
-                          <p className="text-sm text-gray-600 mt-1">{example.description}</p>
+              {/* Render subsections */}
+              {Array.isArray(lessons.doc_body[expandedSection].content) ? (
+                <div className="space-y-6">
+                  {lessons.doc_body[expandedSection].content.map((item, idx) => {
+                    // Handle different content structures
+                    if (typeof item === 'string') {
+                      return (
+                        <div key={idx} className={`p-6 ${cardBg} border ${cardBorder} rounded-xl`}>
+                          {renderContent(item)}
                         </div>
-                        <div className="p-4">
-                          <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm">
-                            <code>{example.code}</code>
-                          </pre>
-                          <div className="mt-4 p-3 bg-blue-50 border-l-4 border-blue-500">
-                            <p className="text-sm text-blue-800">{example.explanation}</p>
+                      );
+                    }
+                    
+                    if (item.subsection) {
+                      return (
+                        <div key={idx} className={`border ${cardBorder} rounded-xl overflow-hidden`}>
+                          <div className={`p-4 ${cardBg} border-b ${cardBorder}`}>
+                            <h4 className={`text-lg font-semibold ${textMain} flex items-center gap-2`}>
+                              <svg width="18" height="18" fill="currentColor" className="text-blue-500">
+                                <circle cx="9" cy="9" r="8" />
+                              </svg>
+                              {item.subsection}
+                            </h4>
+                          </div>
+                          <div className="p-6">
+                            {renderContent(item.content)}
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                      );
+                    }
 
-          {expandedSection === 'exercises' && (
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Practice Problems</h4>
-                <div className="space-y-4">
-                  {currentLesson.content.exercises.practice_problems.map((problem, index) => (
-                    <div key={problem.problem_id} className="border border-gray-200 rounded-xl p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h5 className="text-lg font-semibold text-gray-900">{problem.title}</h5>
-                        <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                          {problem.difficulty}
-                        </span>
-                      </div>
-                      <p className="text-gray-700 mb-4">{problem.description}</p>
-                      
-                      <button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-200">
-                        🚀 Start Practice Problem
-                      </button>
-                    </div>
-                  ))}
+                    return null;
+                  })}
                 </div>
-              </div>
-
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Mini Projects</h4>
-                <div className="space-y-4">
-                  {currentLesson.content.exercises.mini_projects.map((project, index) => (
-                    <div key={project.project_id} className="border border-gray-200 rounded-xl p-6 bg-gradient-to-r from-purple-50 to-pink-50">
-                      <h5 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h5>
-                      <p className="text-gray-700 mb-4">{project.description}</p>
-                      
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div>
-                          <h6 className="font-medium text-gray-900 mb-2">Requirements:</h6>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {project.requirements.map((req, i) => (
-                              <li key={i} className="flex items-center">
-                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                                {req}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <h6 className="font-medium text-gray-900 mb-2">Learning Goals:</h6>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {project.learning_goals.map((goal, i) => (
-                              <li key={i} className="flex items-center">
-                                <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                {goal}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      
-                      <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200">
-                        🎯 Start Mini Project ({project.estimated_time})
-                      </button>
-                    </div>
-                  ))}
+              ) : (
+                <div className={`p-6 ${cardBg} border ${cardBorder} rounded-xl`}>
+                  {renderContent(lessons.doc_body[expandedSection].content)}
                 </div>
-              </div>
-            </div>
+              )}
+            </>
           )}
         </div>
 
-        {/* Interactive Elements */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="p-6 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-xl hover:shadow-md transition-all duration-200">
-            <div className="text-3xl mb-2">💻</div>
-            <h4 className="font-semibold text-gray-900 mb-1">Code Playground</h4>
-            <p className="text-sm text-gray-600">Try examples interactively</p>
+        {/* Navigation Footer */}
+        <div className="mt-10 flex justify-between items-center">
+          <button
+            onClick={() => setExpandedSection(prev => Math.max(0, prev - 1))}
+            disabled={expandedSection === 0}
+            className={`px-6 py-3 border ${borderMain} rounded-xl font-medium ${textMain} hover:${cardBg} disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2`}
+          >
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 6l-6 6 6 6" />
+            </svg>
+            Previous Section
           </button>
-          
-          <button className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl hover:shadow-md transition-all duration-200">
-            <div className="text-3xl mb-2">❓</div>
-            <h4 className="font-semibold text-gray-900 mb-1">Quick Quiz</h4>
-            <p className="text-sm text-gray-600">{currentLesson.interactive_elements.quiz.questions_count} questions</p>
-          </button>
-          
-          <button className="p-6 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl hover:shadow-md transition-all duration-200">
-            <div className="text-3xl mb-2">🎮</div>
-            <h4 className="font-semibold text-gray-900 mb-1">Live Examples</h4>
-            <p className="text-sm text-gray-600">{currentLesson.interactive_elements.live_examples.count} interactive demos</p>
+
+          <span className={`${textSub} text-sm font-medium`}>
+            {expandedSection + 1} of {lessons.doc_body.length}
+          </span>
+
+          <button
+            onClick={() => setExpandedSection(prev => Math.min(lessons.doc_body.length - 1, prev + 1))}
+            disabled={expandedSection === lessons.doc_body.length - 1}
+            className={`px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2`}
+          >
+            Next Section
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M8 6l6 6-6 6" />
+            </svg>
           </button>
         </div>
       </div>

@@ -47,18 +47,20 @@ const NovaLearning = () => {
         quiz: learningData.quiz,
         user_answers: answers
       });
-      console.log(analysisResponse);
       
       setLearningData(prev => ({ ...prev, analysis: analysisResponse }));
       
       // Generate lessons based on weak areas
       const lessonsResponse = await orchestrateAction('generate_lessons', {
-        user_id: 'current_user', // Replace with actual user ID
+        user_id: 'current_user',
         weak_areas: analysisResponse.weak_areas,
         skill_level: skillLevel,
         topic: selectedTopic
       });
       setLearningData(prev => ({ ...prev, lessons: lessonsResponse }));
+
+      console.log('Generated Lessons:', lessonsResponse);
+      
       
       // Fetch curated content
       const resourcesResponse = await orchestrateAction('curate_content', {
@@ -157,7 +159,7 @@ const NovaLearning = () => {
             <div className="space-y-8">
               <AnalysisSection analysis={learningData.analysis} />
               
-              {currentStep === 4 && learningData.lessons && (
+              {currentStep === 4 && learningData && (
                 <>
                   <LessonSection lessons={learningData.lessons} />
                   {learningData.resources && (
