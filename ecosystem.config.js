@@ -13,8 +13,8 @@ module.exports = {
       args: "run dev",
     },
     {
-      name: "aiml_server",
-      cwd: "./aiml_server",
+      name: "aiml_server_updated",
+      cwd: "./aiml_server_updated",
       script: "./venv/bin/python",  // use the venv python directly
       args: ["-m", "uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
       interpreter: "none",          // prevents PM2 from wrapping it with Node
