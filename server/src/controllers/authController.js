@@ -69,7 +69,7 @@ const signin = async (req, res) => {
 
   return res.status(200).json({
     message: "Login successful",
-    token: token,
+    token: result.token,
     user: result.user,
     success: true,
   });
