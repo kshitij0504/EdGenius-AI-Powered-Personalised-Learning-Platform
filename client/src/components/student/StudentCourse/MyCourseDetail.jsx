@@ -7,8 +7,6 @@ import {
   IoTimeOutline,
   IoCheckmarkCircleOutline,
   IoPersonOutline,
-  IoCalendarOutline,
-  IoPricetagOutline,
   IoTrophyOutline,
   IoSpeedometerOutline,
   IoStarOutline,
@@ -20,11 +18,12 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import StudentLayout from '../StudentLayout';
 import { useCourses } from '../../../context/MyCourseContextProvider';
+import progressAPI from './progressApi';
 
 const MyCourseDetailPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { getCourseBySlug, getCourseProgress, loading } = useCourses();
+  const { getCourseBySlug, loading } = useCourses();
   
   const [course, setCourse] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -34,6 +33,8 @@ const MyCourseDetailPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [completedLessons, setCompletedLessons] = useState(new Set());
   const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [videoProgress, setVideoProgress] = useState({});
+  const [isMarkingComplete, setIsMarkingComplete] = useState(false);
 
   useEffect(() => {
     const theme = localStorage.getItem('theme');
@@ -55,21 +56,32 @@ const MyCourseDetailPage = () => {
               const firstLesson = firstModule.lessons[0];
               setCurrentLesson(firstLesson);
               setActiveModule(firstModule.id);
+              
+              // Load video progress for first lesson
+              await loadVideoProgress(firstLesson.id);
             }
           }
           
           // Fetch progress
           try {
-            const progressResult = await getCourseProgress(courseData.id);
-            if (progressResult.success) {
-              setProgress(progressResult.data);
-              // Set completed lessons from progress data
-              if (progressResult.data.completedLessons) {
-                setCompletedLessons(new Set(progressResult.data.completedLessons));
-              }
+            const progressResult = await progressAPI.getCourseProgress(courseData.id);
+            console.log('Course progress:', progressResult);
+            setProgress(progressResult);
+            
+            // Extract completed lessons from progress data
+            if (progressResult.modules) {
+              const completed = new Set();
+              progressResult.modules.forEach(module => {
+                module.lessons.forEach(lesson => {
+                  if (lesson.completed) {
+                    completed.add(lesson.id);
+                  }
+                });
+              });
+              setCompletedLessons(completed);
             }
           } catch (progressError) {
-            console.log('Progress data not available');
+            console.log('Progress data not available:', progressError);
           }
         }
       } catch (error) {
@@ -78,13 +90,29 @@ const MyCourseDetailPage = () => {
     };
 
     fetchCourseData();
-  }, [slug, getCourseBySlug, getCourseProgress]);
+  }, [slug, getCourseBySlug]);
 
-  const handleLessonSelect = (lesson, moduleId) => {
+  // Load video progress for a lesson
+  const loadVideoProgress = async (lessonId) => {
+    try {
+      const progress = await progressAPI.getVideoProgress(lessonId);
+      setVideoProgress(prev => ({
+        ...prev,
+        [lessonId]: progress
+      }));
+    } catch (error) {
+      console.error('Error loading video progress:', error);
+    }
+  };
+
+  const handleLessonSelect = async (lesson, moduleId) => {
     setIsVideoLoading(true);
     setCurrentLesson(lesson);
     setActiveModule(moduleId);
     setActiveTab('overview');
+    
+    // Load video progress for selected lesson
+    await loadVideoProgress(lesson.id);
     
     // Simulate video loading delay
     setTimeout(() => {
@@ -92,9 +120,59 @@ const MyCourseDetailPage = () => {
     }, 500);
   };
 
-  const markLessonComplete = (lessonId) => {
-    setCompletedLessons(prev => new Set(prev.add(lessonId)));
-    // Here you would typically call an API to save progress
+  // Handle video time update
+  const handleVideoTimeUpdate = async (e) => {
+    if (!currentLesson) return;
+    
+    const video = e.target;
+    const currentTime = video.currentTime;
+    const duration = video.duration;
+    const progress = (currentTime / duration) * 100;
+
+    // Update progress every 5 seconds
+    if (Math.floor(currentTime) % 5 === 0) {
+      try {
+        await progressAPI.updateVideoProgress(currentLesson.id, {
+          currentTime,
+          duration,
+          videoProgress: progress,
+          watchedSegments: [] // You can track segments if needed
+        });
+      } catch (error) {
+        console.error('Error updating video progress:', error);
+      }
+    }
+  };
+
+  // Mark lesson complete
+  const markLessonComplete = async (lessonId) => {
+    if (isMarkingComplete) return;
+    
+    setIsMarkingComplete(true);
+    try {
+      await progressAPI.markLessonComplete(lessonId, true);
+      setCompletedLessons(prev => new Set(prev.add(lessonId)));
+      
+      // Refresh progress data
+      if (course) {
+        const progressResult = await progressAPI.getCourseProgress(course.id);
+        setProgress(progressResult);
+      }
+      
+      // Show success message
+      console.log('Lesson marked as complete');
+    } catch (error) {
+      console.error('Error marking lesson complete:', error);
+    } finally {
+      setIsMarkingComplete(false);
+    }
+  };
+
+  // Handle video ended - auto mark complete
+  const handleVideoEnded = async () => {
+    if (currentLesson && !completedLessons.has(currentLesson.id)) {
+      await markLessonComplete(currentLesson.id);
+    }
   };
 
   const getTotalLessons = () => {
@@ -103,9 +181,26 @@ const MyCourseDetailPage = () => {
   };
 
   const getProgressPercentage = () => {
+    if (progress && progress.progressPercentage !== undefined) {
+      return progress.progressPercentage;
+    }
+    
     const total = getTotalLessons();
     if (total === 0) return 0;
     return Math.round((completedLessons.size / total) * 100);
+  };
+
+  const getEstimatedTimeLeft = () => {
+    const remainingLessons = getTotalLessons() - completedLessons.size;
+    const minutes = remainingLessons * 15; // Assuming 15 min per lesson
+    
+    if (minutes < 60) {
+      return `${minutes} min`;
+    } else {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${hours}h ${mins}m`;
+    }
   };
 
   if (loading) {
@@ -167,7 +262,7 @@ const MyCourseDetailPage = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <button
-                  onClick={() => navigate('/my-courses')}
+                  onClick={() => navigate('/mycourse')}
                   className={`mr-6 p-3 rounded-xl transition-all duration-300 group ${
                     isDarkMode 
                       ? 'hover:bg-gray-700 text-gray-300 hover:text-white' 
@@ -246,11 +341,25 @@ const MyCourseDetailPage = () => {
                       controls
                       onLoadStart={() => setIsVideoLoading(true)}
                       onLoadedData={() => setIsVideoLoading(false)}
-                      onEnded={() => markLessonComplete(currentLesson.id)}
+                      onTimeUpdate={handleVideoTimeUpdate}
+                      onEnded={handleVideoEnded}
+                      {...(videoProgress[currentLesson.id]?.currentTime && {
+                        currentTime: videoProgress[currentLesson.id].currentTime
+                      })}
                     >
                       <source src={currentLesson.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+                    
+                    {/* Progress indicator on video */}
+                    {videoProgress[currentLesson.id] && videoProgress[currentLesson.id].videoProgress > 0 && (
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">
+                        <div 
+                          className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300"
+                          style={{ width: `${videoProgress[currentLesson.id].videoProgress}%` }}
+                        />
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
@@ -280,15 +389,23 @@ const MyCourseDetailPage = () => {
                             <IoSpeedometerOutline className="mr-1" />
                             <span>Beginner</span>
                           </div>
+                          {videoProgress[currentLesson.id]?.videoProgress > 0 && (
+                            <div className="flex items-center text-sm text-blue-500 font-medium">
+                              <span>{Math.round(videoProgress[currentLesson.id].videoProgress)}% watched</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
                         {!completedLessons.has(currentLesson.id) ? (
                           <button
                             onClick={() => markLessonComplete(currentLesson.id)}
-                            className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                            disabled={isMarkingComplete}
+                            className={`px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
+                              isMarkingComplete ? 'opacity-50 cursor-not-allowed' : ''
+                            }`}
                           >
-                            Mark Complete
+                            {isMarkingComplete ? 'Marking...' : 'Mark Complete'}
                           </button>
                         ) : (
                           <div className="flex items-center px-6 py-3 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-xl">
@@ -391,18 +508,18 @@ const MyCourseDetailPage = () => {
                         }`}>
                           <div className="flex items-center mb-3">
                             <div className="p-2 bg-green-500 rounded-lg mr-3">
-                              <IoPricetagOutline className="text-white text-xl" />
+                              <IoCheckmarkCircleOutline className="text-white text-xl" />
                             </div>
                             <span className={`font-bold text-lg ${
                               isDarkMode ? 'text-white' : 'text-gray-900'
                             }`}>
-                              Category
+                              Completed
                             </span>
                           </div>
-                          <span className={`text-lg font-semibold ${
+                          <span className={`text-2xl font-bold ${
                             isDarkMode ? 'text-green-400' : 'text-green-600'
                           }`}>
-                            {course.category}
+                            {completedLessons.size}
                           </span>
                         </div>
                       </div>
@@ -517,7 +634,7 @@ const MyCourseDetailPage = () => {
                     <span className={`font-semibold ${
                       isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}>
-                      {Math.max(0, getTotalLessons() - completedLessons.size) * 15} min
+                      {getEstimatedTimeLeft()}
                     </span>
                   </div>
                 </div>
@@ -641,6 +758,17 @@ const MyCourseDetailPage = () => {
                                       15 min
                                     </span>
                                   </div>
+                                  {/* Show video progress percentage */}
+                                  {videoProgress[lesson.id]?.videoProgress > 0 && videoProgress[lesson.id].videoProgress < 100 && (
+                                    <div className="mt-2">
+                                      <div className="w-32 h-1 bg-gray-300 dark:bg-gray-600 rounded-full overflow-hidden">
+                                        <div 
+                                          className="h-full bg-blue-500 transition-all duration-300"
+                                          style={{ width: `${videoProgress[lesson.id].videoProgress}%` }}
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                               {completedLessons.has(lesson.id) && (

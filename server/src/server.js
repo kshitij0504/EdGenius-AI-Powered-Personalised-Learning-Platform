@@ -14,6 +14,7 @@ const progressRoutes = require("./routes/progress.route");
 const searchRoutes = require("./routes/search.route");
 const enrollRoutes = require("./routes/enroll.route");
 const instructorRoutes = require("./routes/instructor.route");
+const progressRoutesNew = require("./routes/progressRoute");
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use("/api/courses", courseRoutes);
 app.use("/api/module", moduleRoutes);
 app.use("/api/lesson", lessonRoutes);
 app.use("/api/payment", paymentRoutes);
-app.use("/api/progress", progressRoutes);
+app.use("/api/progress", progressRoutesNew);
 app.use("/api/search", searchRoutes);
 app.use("/api/instructor", instructorRoutes);
 app.use("/api/enrollments", enrollRoutes);
